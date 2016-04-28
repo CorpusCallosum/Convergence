@@ -61,16 +61,13 @@ void ofApp::update(){
         
     }
     
-    //uni1 = testImage.getPixels();
-    
     //list nodes for sending
     //with subnet / universe
-    artnet.sendDmx("192.168.0.50", 0xf, 0xf, testImage.getPixels(), 512);
-    //artnet.sendDmx("10.0.0.149", testImage.getPixels(), 512);
+    artnet.sendDmx("192.168.0.50", 0, 0, testImage.getPixels(), 512);//strip 1 is universes 0 and 1
+    artnet.sendDmx("192.168.0.50", 0, 2, testImage.getPixels(), 512);//strip 2 is universes 2 and 3
 
-    
-    //artnet.sendDmx("2.0.0.10",0,0, uni1, 512);
-    //artnet.sendDmx("2.0.0.10",0,1, uni2, 512);
+    //artnet.sendDmx("2.0.0.10", 0, 0, uni1, 512);
+    //artnet.sendDmx("2.0.0.10", 0, 1, uni2, 512);
 
     
 

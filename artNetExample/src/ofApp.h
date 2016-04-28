@@ -26,8 +26,6 @@ class ofApp : public ofBaseApp{
         ofColor color_array[ 512 ];
     
         bool rainbow;
-    
-        //unsigned char uni1[ 512 ];
-        //unsigned char uni2[ 512 ];
+
 		
 };
