@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#define NBOARDS 2
+#define NBOARDS 3
 #define NPINS 12
 
 class ofApp : public ofBaseApp{
@@ -25,17 +25,12 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-        /*ofSerial serial1;
-        ofSerial serial2;
-        ofSerial serial3;
-        ofSerial serial4;*/
-    
         ofSerial serial;
     
         bool pos_touched[ NBOARDS * NPINS ];
         bool touched[ NBOARDS * NPINS ];
         bool lastTouched[ NBOARDS * NPINS ];
-        int nPins[ NBOARDS ];
+        //int nPins[ NBOARDS ];
         ofColor color[ NBOARDS * NPINS ];
     
         int boxX, boxY;
