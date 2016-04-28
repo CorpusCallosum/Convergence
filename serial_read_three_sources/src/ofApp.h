@@ -1,0 +1,49 @@
+#pragma once
+
+#include "ofMain.h"
+#define NBOARDS 2
+#define NPINS 12
+
+class ofApp : public ofBaseApp{
+
+	public:
+		void setup();
+		void update();
+		void draw();
+        void serialFunction();
+
+
+		void keyPressed(int key);
+		void keyReleased(int key);
+		void mouseMoved(int x, int y );
+		void mouseDragged(int x, int y, int button);
+		void mousePressed(int x, int y, int button);
+		void mouseReleased(int x, int y, int button);
+		void mouseEntered(int x, int y);
+		void mouseExited(int x, int y);
+		void windowResized(int w, int h);
+		void dragEvent(ofDragInfo dragInfo);
+		void gotMessage(ofMessage msg);
+    
+        /*ofSerial serial1;
+        ofSerial serial2;
+        ofSerial serial3;
+        ofSerial serial4;*/
+    
+        ofSerial serial;
+    
+        bool pos_touched[ NBOARDS * NPINS ];
+        bool touched[ NBOARDS * NPINS ];
+        bool lastTouched[ NBOARDS * NPINS ];
+        int nPins[ NBOARDS ];
+        ofColor color[ NBOARDS * NPINS ];
+    
+        int boxX, boxY;
+    
+        int touch_time[ NBOARDS * NPINS ];
+        int current_time;
+        int false_touch_timeout;
+
+
+
+};
