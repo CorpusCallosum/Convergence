@@ -204,11 +204,12 @@ ofVec2f visualSystem::getField(ofVec2f position) {
 	float normx = ofNormalize(position.x, 0, width);
 	float normy = ofNormalize(position.y, 0, height);
     
-	float u = -ofNoise(t + phase, normx * complexity + phase, normy * complexity + phase);
+	float h = -ofNoise(t + phase, normx * complexity + phase, normy * complexity + phase);
 	float v = .5-ofNoise(t - phase, normx * complexity - phase, normy * complexity + phase);
-    u*=hForce;
-    v*=vForce;
     
-	return ofVec2f(u, v);
+    h*=hForce;
+    v+=vForce;
+    
+	return ofVec2f(h, v);
 }
 

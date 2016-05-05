@@ -7,13 +7,13 @@
 	</Display_System>
 	<Visual_System>
 		<turbulence>0.0321429</turbulence>
-		<particle_speed>0.0204082</particle_speed>
+		<particle_speed>0.0102041</particle_speed>
 		<density>1.93878</density>
-		<H_force>0.0918367</H_force>
-		<V_force>0.479592</V_force>
-		<fade_amount>9</fade_amount>
-		<p_neighborhood>8.67347</p_neighborhood>
-		<p_repulsion>1</p_repulsion>
+		<H_force>0</H_force>
+		<V_force>0.102041</V_force>
+		<fade_amount>31</fade_amount>
+		<p_neighborhood>5.2551</p_neighborhood>
+		<p_repulsion>0.0816326</p_repulsion>
 		<blur>1</blur>
 		<Particle_Brightness>100</Particle_Brightness>
 	</Visual_System>

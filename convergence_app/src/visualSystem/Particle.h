@@ -67,7 +67,7 @@ public:
 		//bool collision = false;
         
 		if (x > right){
-			x = right;
+			x = left;
 			//xv *= -1;
 			//collision = true;
 		} else if (x < left){
@@ -79,15 +79,15 @@ public:
         
 		if (y > bottom){
 			//y = top;
-			yv = 0;
-            x = right;
-            y=ofRandom(bottom);
+		//	yv = 0;
+           // x = right;
+            y=top;
 			//collision = true;
 		} else if (y < top){
-			//y = bottom;
-			yv = 0;
+			y = bottom;
+			/*yv = 0;
             x = right;
-            y=ofRandom(bottom);
+            y=ofRandom(bottom);*/
 			//collision = true;
 		}
         
