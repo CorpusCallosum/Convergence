@@ -2,6 +2,9 @@
 
 #include "ofMain.h"
 #include "ofxArtNet.h"
+#include "visualSystem.h"
+#include "displaySystem.h"
+#include "gui.hpp"
 
 class ofApp : public ofBaseApp{
     
@@ -26,5 +29,13 @@ public:
     ofColor color_array[ 512 ];
     
     bool rainbow;
+    
+    displaySystem ds;
+    visualSystem  vs;
+    ofFbo * frame;
+    
+    gui gui;
+    
+    int visualSystemWidth;
 
 };

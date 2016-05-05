@@ -3,18 +3,42 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     //at first you must specify the Ip address of this machine
-    artnet.setup("192.168.0.1"); //make sure the firewall is deactivated at this point
+  //  artnet.setup("192.168.0.1"); //make sure the firewall is deactivated at this point
     
     ofSetFrameRate( 40 );
     fbo.allocate(512, 1, GL_RGB);
     
     rainbow = false;
     
+    visualSystemWidth = 500;
+    vs.init(visualSystemWidth, 500, 10);
+    ds.init();
+    gui.setup(visualSystemWidth+20);
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     ofSetWindowTitle(ofToString(ofGetFrameRate(), 2));
+    
+    //UPDATE GUI
+    gui.update();
+    vs.timeSpeed = gui.flowSpeed;
+    vs.timeStep = gui.timeSpeed;
+    vs.hForce = gui.horizontalForce;
+    vs.vForce = gui.verticalForce;
+    vs.fadeAmt = gui.fadeAmt;
+    vs.complexity = gui.flowComplexity;
+    vs.particleNeighborhood = gui.particleNeighborhood;
+    vs.particleRepulsion = gui.particleRepulsion;
+    vs.update();
+    vs.blurAmount = gui.blur;
+    vs.particleBrightnessShift = gui.particleBrightnessShift;
+    
+    
+    vs.update();
+    frame = vs.getFrame();
+    ds.updateDisplay(frame);
     
     //create send buffer by ofFbo
     {
@@ -58,8 +82,8 @@ void ofApp::update(){
     //list nodes for sending
     //with subnet / universe
     //first half of alphapix 1, subnet 0, universes 0-15
-    artnet.sendDmx("192.168.0.50", 0, 0, testImage.getPixels(), 512);//strip 1 is universes 0 and 1
-    artnet.sendDmx("192.168.0.50", 0, 2, testImage.getPixels(), 512);//strip 2 is universes 2 and 3
+    //artnet.sendDmx("192.168.0.50", 0, 0, testImage.getPixels(), 512);//strip 1 is universes 0 and 1
+    //artnet.sendDmx("192.168.0.50", 0, 2, testImage.getPixels(), 512);//strip 2 is universes 2 and 3
     //artnet.sendDmx("192.168.0.50", 0, 4, testImage.getPixels(), 512);//strip 3 is universes 4 and 5
     //artnet.sendDmx("192.168.0.50", 0, 6, testImage.getPixels(), 512);//strip 4 is universes 6 and 7
     //artnet.sendDmx("192.168.0.50", 0, 8, testImage.getPixels(), 512);//strip 5 is universes 8 and 9
@@ -109,10 +133,16 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(0);
-    float scalex = ofGetWidth() / fbo.getWidth();
+    /*float scalex = ofGetWidth() / fbo.getWidth();
     float scaley = ofGetHeight() / fbo.getHeight();
     ofScale(scalex, scaley);
-    fbo.draw(0, 0);
+    fbo.draw(0, 0);*/
+    
+
+    ofSetColor(255,255,255,255);
+    ds.draw();
+    
+    gui.draw();
     
 }
 
