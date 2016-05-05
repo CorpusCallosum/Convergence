@@ -1,9 +1,7 @@
 *.app
 *xcuserstate
-JRHMemorialWall/build/
-Lumigeek_LEDTest/build/
-BinnedParticleSystemVectors/build/
-Text_Layout_noLineBreaks/build/
 *.DS_STORE
 *.DS_Store
-!launch_kiosk.app
+convergence_app/build/
+artNetExample/build/
+serial_read_three_sources/build/

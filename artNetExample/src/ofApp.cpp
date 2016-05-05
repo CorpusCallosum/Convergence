@@ -20,7 +20,6 @@ void ofApp::update(){
     {
         fbo.begin();
         
-        
         ofClear(0);
         float colorR = (sin(ofGetElapsedTimeMillis() / 1000.f) / 2.f + 0.5f) * 255.f;
         float colorG = (sin((ofGetElapsedTimeMillis() / 1000.f) + PI / 3.f) / 2.f + 0.5f) * 255.f;
