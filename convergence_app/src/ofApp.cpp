@@ -10,11 +10,34 @@ void ofApp::setup(){
     
     rainbow = false;
     
+    visualSystemWidth = 500;
+    vs.init(visualSystemWidth, 500, 10);
+    gui.setup(visualSystemWidth+20);
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     ofSetWindowTitle(ofToString(ofGetFrameRate(), 2));
+    
+    //UPDATE GUI
+    gui.update();
+    vs.timeSpeed = gui.flowSpeed;
+    vs.timeStep = gui.timeSpeed;
+    vs.hForce = gui.horizontalForce;
+    vs.vForce = gui.verticalForce;
+    vs.fadeAmt = gui.fadeAmt;
+    vs.complexity = gui.flowComplexity;
+    vs.particleNeighborhood = gui.particleNeighborhood;
+    vs.particleRepulsion = gui.particleRepulsion;
+    vs.update();
+    vs.blurAmount = gui.blur;
+    vs.particleBrightnessShift = gui.particleBrightnessShift;
+    
+    
+    vs.update();
+    frame = vs.getFrame();
+    ds.updateDisplay(frame);
     
     //create send buffer by ofFbo
     {
@@ -109,10 +132,16 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(0);
-    float scalex = ofGetWidth() / fbo.getWidth();
+    /*float scalex = ofGetWidth() / fbo.getWidth();
     float scaley = ofGetHeight() / fbo.getHeight();
     ofScale(scalex, scaley);
-    fbo.draw(0, 0);
+    fbo.draw(0, 0);*/
+    
+
+    ofSetColor(255,255,255,255);
+    ds.draw();
+    
+    gui.draw();
     
 }
 
