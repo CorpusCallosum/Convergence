@@ -11,8 +11,9 @@ void ofApp::setup(){
     rainbow = false;
     
     visualSystemWidth = 500;
-    vs.init(visualSystemWidth, 500, 10);
-    ds.init();
+    int visualSystemHeight = 400;
+    vs.init(visualSystemWidth, visualSystemHeight, 10);
+    ds.init(visualSystemWidth, visualSystemHeight);
     gui.setup(visualSystemWidth+20);
     
 }

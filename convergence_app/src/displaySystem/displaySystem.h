@@ -15,17 +15,22 @@ class displaySystem{
     public:
     
     displaySystem();
-    void init();
+    void init(int w, int h);
     void draw();
     void updateDisplay(ofFbo * frame);
     void clear();
     
-    int width, height;
+    int width, height, numRodsOuter, numRodsInner;
     
     private:
-    ofFbo * _frame;
+    ofFbo * _frame;\
+    ofFbo strip;
     ofxArtnet artnet;
-    ofImage testImage;
-
+    ofImage testImage, stripImage;
+    
+    vector <ofFbo> stripFBOs;
+    vector <ofImage> stripImages;
+    
+    int rodSpacing;
 
 };
