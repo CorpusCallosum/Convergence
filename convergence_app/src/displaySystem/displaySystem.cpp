@@ -23,6 +23,8 @@ void displaySystem::init(){
 void displaySystem::updateDisplay(ofFbo * frame){
     _frame = frame;
     
+    _frame->readToPixels(testImage.getPixels());
+    
     //draw to LEDs
     artnet.sendDmx("192.168.0.50", 0, 0, testImage.getPixels(), 512);//strip 1 is universes 0 and 1
     artnet.sendDmx("192.168.0.50", 0, 2, testImage.getPixels(), 512);//strip 2 is universes 2 and 3

@@ -8,6 +8,8 @@
 
 #pragma once
 #include "ofMain.h"
+#include "ofxArtNet.h"
+
 
 class displaySystem{
     public:
@@ -22,5 +24,8 @@ class displaySystem{
     
     private:
     ofFbo * _frame;
+    ofxArtnet artnet;
+    ofImage testImage;
+
 
 };
