@@ -10,14 +10,22 @@ void ofApp::setup(){
     
     rainbow = false;
     
+    //calculate rodspacing
+    
     visualSystemWidth = 500;
     visualSystemHeight = 400;
+    
+    numRods = 27;
+    rodSpacing = round(visualSystemWidth/numRods);
+    cout<<"rod spacing"<<rodSpacing<<endl;
+
+    
     vs.init(visualSystemWidth, visualSystemHeight, 10);
-    ds.init(visualSystemWidth, visualSystemHeight);
+    vs.numRods = numRods;
+    vs.rodSpacing = rodSpacing;
+    ds.init(visualSystemWidth, visualSystemHeight, numRods, rodSpacing);
     gui.setup(visualSystemWidth+20);
-    serialReceiver.setup(10);
-    
-    
+    serialReceiver.setup(10, numRods, rodSpacing);
     
 }
 
@@ -37,53 +45,12 @@ void ofApp::update(){
     vs.complexity = gui.flowComplexity;
     vs.particleNeighborhood = gui.particleNeighborhood;
     vs.particleRepulsion = gui.particleRepulsion;
-    vs.update();
+    vs.update(serialReceiver.touched);
     vs.blurAmount = gui.blur;
     vs.particleBrightnessShift = gui.particleBrightnessShift;
     
-    
-    vs.update();
     frame = vs.getFrame();
     ds.updateDisplay(frame);
-    
-    //create send buffer by ofFbo
-    {
-        fbo.begin();
-        
-        ofClear(0);
-        float colorR = (sin(ofGetElapsedTimeMillis() / 1000.f) / 2.f + 0.5f) * 255.f;
-        float colorG = (sin((ofGetElapsedTimeMillis() / 1000.f) + PI / 3.f) / 2.f + 0.5f) * 255.f;
-        float colorB = (sin((ofGetElapsedTimeMillis() / 1000.f)  + PI * 2.f / 3.f) / 2.f + 0.5f) * 255.f;
-        ofColor currentColor = ofColor( colorR, colorG, colorB );
-        
-        
-        if ( !rainbow ){
-            //solid rectangle
-            for ( int i = 0; i < 512; i ++ ) {
-                color_array[ i ] = currentColor;
-            }
-            ofSetColor( currentColor );
-            ofDrawRectangle(0, 0, 512, 1);
-        }
-        
-        else {
-            //rainbow rectangle
-            for ( int i = 512; i > 0; i -- ) {
-                color_array[ i ] = color_array[ i - 1 ];
-            }
-            color_array[ 0 ] = currentColor;
-            
-            for ( int i = 0; i < 512; i ++ ) {
-                ofSetColor( color_array[ i ] );
-                ofDrawRectangle( i, 0, 1, 1 );
-            }
-        }
-        
-        fbo.end();
-        fbo.readToPixels(testImage.getPixels());
-        
-        
-    }
     
     //list nodes for sending
     //with subnet / universe
@@ -144,14 +111,12 @@ void ofApp::draw(){
     ofScale(scalex, scaley);
     fbo.draw(0, 0);*/
     
-
     ofSetColor(255,255,255,255);
     ds.draw();
     
     gui.draw();
     
     serialReceiver.draw(10, visualSystemHeight);
-    
 }
 
 //--------------------------------------------------------------

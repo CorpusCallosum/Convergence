@@ -6,6 +6,7 @@
 #include "displaySystem.h"
 #include "gui.hpp"
 #include "serialReceiver.h"
+#include "currentColor.h"
 
 class ofApp : public ofBaseApp{
     
@@ -37,7 +38,7 @@ public:
     
     gui gui;
     
-    int visualSystemWidth, visualSystemHeight;
+    int visualSystemWidth, visualSystemHeight, rodSpacing, numRods;
     
     serialReceiver serialReceiver;
 

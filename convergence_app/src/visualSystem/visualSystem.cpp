@@ -17,7 +17,7 @@ void visualSystem::init(int w, int h, int kParticles){
     height=h;
     particleBrightnessShift = 10;
     
-    displayPixels.allocate(w, h, OF_IMAGE_COLOR);
+    //displayPixels.allocate(w, h, OF_IMAGE_COLOR);
     
     //mouseX = -100;
     //mouseY = -100;
@@ -40,7 +40,7 @@ void visualSystem::init(int w, int h, int kParticles){
 	//kParticles = 15;
 	float padding = 0;
 	float maxVelocity = 5;
-	for(int i = 0; i < kParticles * 1024; i++) {
+	/*for(int i = 0; i < kParticles * 1024; i++) {
 		float x = ofRandom(padding, width - padding);
 		float y = ofRandom(padding, height - padding);
 		//float xv = ofRandom(-maxVelocity, 0);
@@ -48,7 +48,7 @@ void visualSystem::init(int w, int h, int kParticles){
         
 		Particle particle(x, y);
 		particleSystem.add(particle);
-	}
+	}*/
     
 	ofBackground(0, 0, 0);
     
@@ -71,42 +71,56 @@ void visualSystem::init(int w, int h, int kParticles){
     hForce = .2;
     vForce = .2;
     
+    currentColor.setup();
+    
 }
 
 void visualSystem::reset(){
     
 }
 
-void visualSystem::update(){
+void visualSystem::update(bool touched[36]){
+    
+    currentColor.update();
+    
+    ofColor c;
+    c.r = 255;
+    c.g = 100;
+    c.b = 50;
+    
+    for(int i=0; i < numRods; i++){
+        if(touched[i] == true){
+            //emit a particle
+            Particle particle(i*rodSpacing, 0);
+            particle.setColor(currentColor.getCurrentColor());
+            particleSystem.add(particle);
+        }
+    }
     
     particleSystem.setTimeStep(timeStep);
     t = ofGetFrameNum() * timeSpeed;
     
-    display->readToPixels(displayPixels);
-    
+    // display->readToPixels(displayPixels);
     
     //draw to FBO
     display->begin();
 
     //ofEnableAlphaBlending();
     //ofBackground(0,0,0,100);
-   
     ofFill();
     
     //fade out BG by drawing a rectangle
-
     ofSetColor(0, 0, 0, fadeAmt);
     ofRect(0,0,width,height);
 
     //PARTICLE SYSTEM DRAWING STARTS HERE
-   // if(isOn){
+    // if(isOn){
 	ofSetColor(lineOpacity, lineOpacity, lineOpacity, 255);
 	particleSystem.setupForces();
     
 	// apply per-particle forces
 	glBegin(GL_LINES);
     ofVec2f pos;
-    
     
 	for(int i = 0; i < particleSystem.size(); i++) {
 		Particle& cur = particleSystem[i];
@@ -153,9 +167,9 @@ void visualSystem::update(){
     display->begin();
         
         //need to enable these special blame functions in order to properly blend apha PNGs
-        glPushAttrib(GL_ALL_ATTRIB_BITS);
+      /*  glPushAttrib(GL_ALL_ATTRIB_BITS);
         glEnable(GL_BLEND);
-        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);*/
         
         ofClearAlpha();
         ofSetColor(255,255,255,255);
@@ -164,9 +178,9 @@ void visualSystem::update(){
    // blur.draw(0,0);
     
        // ofDisableAlphaBlending();
-        glDisable(GL_BLEND);
-        glPopAttrib();
-        display->end();
+       /* glDisable(GL_BLEND);
+        glPopAttrib();*/
+    display->end();
     //}
     
     resetB = false;
@@ -175,22 +189,6 @@ void visualSystem::update(){
 ofFbo * visualSystem::getFrame(){    
     return display;
 }
-
-/*void visualSystem::mousePressed(int x, int y){
-    isMousePressed = true;
-    mouseX = x;
-    mouseY = y;
-}
-
-void visualSystem::mouseReleased(int x, int y, int button){
-    isMousePressed = false;
-}
-
-void visualSystem::mouseMoved(int x, int y){
-   // isMouseMoved = true;
-    mouseX = x;
-    mouseY = y;
-}*/
 
 /*
  This is the magic method that samples a 2d slice of the 3d noise field. When

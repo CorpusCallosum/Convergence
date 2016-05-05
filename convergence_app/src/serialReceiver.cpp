@@ -9,7 +9,9 @@
 #include "serialReceiver.h"
 
 //--------------------------------------------------------------
-void serialReceiver::setup( int t ) {
+void serialReceiver::setup( int t , int numRods, int rodSpacing) {
+    
+    _rodSpacing = rodSpacing;
     
     serial.listDevices();
     vector <ofSerialDeviceInfo> deviceList = serial.getDeviceList();
@@ -80,7 +82,7 @@ void serialReceiver::update(){
 void serialReceiver::draw(int x, int y){
     //ofBackground( 0 );
     
-    for ( int i = 0; i < NBOARDS * NPINS; i ++ ) {
+    for ( int i = 0; i < 27; i ++ ) {
         int j;
         if ( i >= 0 && i < 12 ) {
             j = 0;
@@ -92,7 +94,7 @@ void serialReceiver::draw(int x, int y){
             j = 2;
         }
         ofSetColor( color[ i ] );
-        ofDrawRectangle(( i ) * 10 + x , y, 5, 10 );
+        ofDrawRectangle(( i ) * _rodSpacing + x , y, 5, 10 );
     }
     
 }

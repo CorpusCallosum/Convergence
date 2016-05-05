@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofGraphics.h"
+#include "ofMain.h"
+
 
 class Particle {
 public:
@@ -9,6 +11,7 @@ public:
 	float xf, yf;
     float _particleBrightnessShift;
     bool wasRepeled;
+    ofColor color;
     
 	Particle(float _x = 0, float _y = 0,
 		float _xv = 0, float _yv = 0) :
@@ -64,33 +67,18 @@ public:
     
     //when particle reaches edge of particle field, loop is around to the other side
     void loopAround(float left, float top, float right, float bottom, float damping = .3) {
-		//bool collision = false;
         
 		if (x > right){
 			x = left;
-			//xv *= -1;
-			//collision = true;
 		} else if (x < left){
 			x = right;
-          //  y=ofRandom(bottom);
-			//xv *= -1;
-			//collision = true;
 		}
         
 		if (y > bottom){
-			//y = top;
-		//	yv = 0;
-           // x = right;
             y=top;
-			//collision = true;
 		} else if (y < top){
 			y = bottom;
-			/*yv = 0;
-            x = right;
-            y=ofRandom(bottom);*/
-			//collision = true;
 		}
-        
 	}
     
 	void addDampingForce(float damping = .01) {
@@ -99,13 +87,19 @@ public:
 	}
 	void draw() {
         //set color of particle based on it's speed?
-      //  ofSetColor(255-(abs(yv)*abs(xv))*10);
-       // cout<<"xv: "<<xv<<" yv: "<<yv<<endl;
+        //  ofSetColor(255-(abs(yv)*abs(xv))*10);
+        // cout<<"xv: "<<xv<<" yv: "<<yv<<endl;
         //ofSetColor(xf,255,yf);
     
-        float b = ofClamp(1-(abs(yv)+abs(xv))/_particleBrightnessShift, 0, 1);
-       // cout<<"b: "<<b<<endl;
-        glColor3f(b, b, b);
+        //float b = ofClamp(1-(abs(yv)+abs(xv))/_particleBrightnessShift, 0, 1);
+        // cout<<"b: "<<b<<endl;
+      //  glColor3f(255,255,255);
+        
+        float r = (float)(color.r) / 255;
+        float g = (float)(color.g) / 255;
+        float b = (float)(color.b) / 255;
+        
+        glColor3f(r,g,b);
 		glVertex2f(x, y);
 	}
     
@@ -139,5 +133,11 @@ public:
         xv *= -damp;
         yv = 0;
         resetForce();
+    }
+    
+    void setColor(ofColor c){
+        cout<<"set particle color: "<<c<<endl;
+        color = c;
+        //color.b = 0;
     }
 };

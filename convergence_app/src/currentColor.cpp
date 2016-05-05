@@ -77,7 +77,6 @@ void currentColor::update() {
 }
 //--------------------------------------------------------------
 ofColor currentColor::getCurrentColor() {
-
     
     return currentColor;
     

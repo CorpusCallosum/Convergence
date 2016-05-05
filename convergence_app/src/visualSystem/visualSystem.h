@@ -9,6 +9,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ParticleSystem.h"
+#include "currentColor.h"
 
 class visualSystem{
     
@@ -17,7 +18,7 @@ class visualSystem{
     void reset();
     ofFbo * getFrame();
     void loadTestMovie(string path);
-    void update();
+    void update(bool touched[36]);
     void mousePressed(int x, int y);
     void mouseReleased(int x, int y, int button);
     void mouseMoved(int x, int y);
@@ -33,7 +34,7 @@ class visualSystem{
     
     //particle system
     float timeStep, particleBrightnessShift;
-	int lineOpacity, pointOpacity;
+    int lineOpacity, pointOpacity, numRods, rodSpacing;
 	float particleNeighborhood, particleRepulsion;
 	float centerAttraction;
     
@@ -44,11 +45,12 @@ class visualSystem{
     float phase, hForce, vForce, repForce;
     bool resetB;
     
-    
     //fx
    //ofxGaussianBlur blur;
     
     float blurAmount, depthCutoff, depthForce;
+    
+    currentColor currentColor;
     
     
 private:

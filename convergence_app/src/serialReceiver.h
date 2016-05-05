@@ -20,7 +20,7 @@ class serialReceiver : public ofBaseApp{
 public:
     
     //methods
-    void setup( int t );
+    void setup( int t , int numRods, int rodSpacing);
     void update();
     void draw(int x, int y);
     void serialFunction();
@@ -33,6 +33,7 @@ public:
     bool pos_touched[ NBOARDS * NPINS ];
     bool touched[ NBOARDS * NPINS ];
     bool lastTouched[ NBOARDS * NPINS ];
+    
     //int nPins[ NBOARDS ];
     ofColor color[ NBOARDS * NPINS ];
     
@@ -41,11 +42,9 @@ public:
     int touch_time[ NBOARDS * NPINS ];
     int current_time;
     int false_touch_timeout;
-
     
-	
-	
-};
+    int _rodSpacing;
 
+};
 
 #endif

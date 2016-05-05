@@ -14,14 +14,17 @@ displaySystem::displaySystem(){
     width = height = 0;
     numRodsOuter = 36;
     numRodsInner = 9;
-    rodSpacing = 10;
 }
 
-void displaySystem::init(int w, int h){
+void displaySystem::init(int w, int h, int numRods, int rodSpacing){
     //at first you must specify the Ip address of this machine
     artnet.setup("192.168.0.1"); //make sure the firewall is deactivated at this point
     width = w;
     height = h;
+    
+    _numRods = numRods;
+    _rodSpacing = rodSpacing;
+    numRodsOuter = numRods;
     
     /*for(int i=0; i< numRodsOuter; i++){
         stripFBOs[i].allocate(1, height, GL_RGB);
@@ -37,14 +40,16 @@ void displaySystem::updateDisplay(ofFbo * frame){
    // _frame->readToPixels(testImage.getPixels());
     
    // strip.allocate(1,height,GL_RGB);
+    ofSetColor(255);
     
     for(int i=0; i< numRodsOuter; i++){
     
         strip.begin();
-        _frame->getTexture().drawSubsection(0,0,1,height,i*rodSpacing,0);
+        _frame->getTexture().drawSubsection(0,0,1,height,i*_rodSpacing,0);
         strip.end();
         
         strip.readToPixels(stripImage.getPixels());
+        
         
         //draw to LEDs
         artnet.sendDmx("192.168.0.50", 0, i*2, stripImage.getPixels(), 500);//strip 1 is universes 0 and 1
@@ -61,9 +66,9 @@ void displaySystem::draw(){
     
     for(int i=0; i< numRodsOuter; i++){
         strip.begin();
-        _frame->getTexture().drawSubsection(0,0,1,height,i*rodSpacing,0);
+        _frame->getTexture().drawSubsection(0,0,1,height,i*_rodSpacing,0);
         strip.end();
-        strip.draw(10+rodSpacing*i, 10+height);
+        strip.draw(10+_rodSpacing*i, 10+height);
     }
     
 }
