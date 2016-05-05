@@ -18,6 +18,7 @@
 		23BE465A1CDACB1900758CA0 /* receive.c in Sources */ = {isa = PBXBuildFile; fileRef = 23BE46531CDACB1900758CA0 /* receive.c */; };
 		23BE465B1CDACB1900758CA0 /* tod.c in Sources */ = {isa = PBXBuildFile; fileRef = 23BE46541CDACB1900758CA0 /* tod.c */; };
 		23BE465C1CDACB1900758CA0 /* transmit.c in Sources */ = {isa = PBXBuildFile; fileRef = 23BE46551CDACB1900758CA0 /* transmit.c */; };
+		23D5D7F71CDBD3E500756E05 /* serialReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23D5D7F51CDBD3E500756E05 /* serialReceiver.cpp */; };
 		23E1D20A1CDBA170002D4AF0 /* gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E1D2081CDBA170002D4AF0 /* gui.cpp */; };
 		483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78D67A00EB899FAC09430597 /* ofxLabel.cpp */; };
 		5A4349E9754D6FA14C0F2A3A /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5DA1C87211D4F6377DA719 /* tinyxmlparser.cpp */; };
@@ -93,6 +94,8 @@
 		23BE46531CDACB1900758CA0 /* receive.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = receive.c; sourceTree = "<group>"; };
 		23BE46541CDACB1900758CA0 /* tod.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tod.c; sourceTree = "<group>"; };
 		23BE46551CDACB1900758CA0 /* transmit.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = transmit.c; sourceTree = "<group>"; };
+		23D5D7F51CDBD3E500756E05 /* serialReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = serialReceiver.cpp; sourceTree = "<group>"; };
+		23D5D7F61CDBD3E500756E05 /* serialReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = serialReceiver.h; sourceTree = "<group>"; };
 		23E1D2081CDBA170002D4AF0 /* gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gui.cpp; sourceTree = "<group>"; };
 		23E1D2091CDBA170002D4AF0 /* gui.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gui.hpp; sourceTree = "<group>"; };
 		2834D88A62CD23F3DE2C47D1 /* ofxButton.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxButton.h; path = ../../../addons/ofxGui/src/ofxButton.h; sourceTree = SOURCE_ROOT; };
@@ -230,6 +233,15 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		23D5D7F41CDBD36D00756E05 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				23D5D7F51CDBD3E500756E05 /* serialReceiver.cpp */,
+				23D5D7F61CDBD3E500756E05 /* serialReceiver.h */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
 		480A780D8D0308AE4A368801 /* ofxGui */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,6 +335,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				23D5D7F41CDBD36D00756E05 /* utils */,
 				234BB2571CDAE0BA00F71A14 /* displaySystem */,
 				234BB2561CDAE0B000F71A14 /* visualSystem */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
@@ -442,6 +455,7 @@
 				23BE465A1CDACB1900758CA0 /* receive.c in Sources */,
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
 				234BB2611CDAE28E00F71A14 /* visualSystem.cpp in Sources */,
+				23D5D7F71CDBD3E500756E05 /* serialReceiver.cpp in Sources */,
 				23BE46571CDACB1900758CA0 /* artnet.c in Sources */,
 				23BE465C1CDACB1900758CA0 /* transmit.c in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,

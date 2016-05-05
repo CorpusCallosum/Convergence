@@ -22,7 +22,7 @@ public:
     //methods
     void setup( int t );
     void update();
-    void draw();
+    void draw(int x, int y);
     void serialFunction();
     void keyPressed  (int key);
     void keyReleased(int key);

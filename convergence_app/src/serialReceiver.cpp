@@ -77,8 +77,8 @@ void serialReceiver::update(){
 }
 
 //--------------------------------------------------------------
-void serialReceiver::draw(){
-    ofBackground( 0 );
+void serialReceiver::draw(int x, int y){
+    //ofBackground( 0 );
     
     for ( int i = 0; i < NBOARDS * NPINS; i ++ ) {
         int j;
@@ -92,7 +92,7 @@ void serialReceiver::draw(){
             j = 2;
         }
         ofSetColor( color[ i ] );
-        ofDrawRectangle(( i % 12 ) * boxX + 10, boxY * j + 10, 75, 200 );
+        ofDrawRectangle(( i ) * 10 + x , y, 5, 10 );
     }
     
 }

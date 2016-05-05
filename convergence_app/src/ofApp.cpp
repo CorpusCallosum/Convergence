@@ -11,16 +11,21 @@ void ofApp::setup(){
     rainbow = false;
     
     visualSystemWidth = 500;
-    int visualSystemHeight = 400;
+    visualSystemHeight = 400;
     vs.init(visualSystemWidth, visualSystemHeight, 10);
     ds.init(visualSystemWidth, visualSystemHeight);
     gui.setup(visualSystemWidth+20);
+    serialReceiver.setup(10);
+    
+    
     
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     ofSetWindowTitle(ofToString(ofGetFrameRate(), 2));
+    
+    serialReceiver.update();
     
     //UPDATE GUI
     gui.update();
@@ -145,6 +150,8 @@ void ofApp::draw(){
     
     gui.draw();
     
+    serialReceiver.draw(10, visualSystemHeight);
+    
 }
 
 //--------------------------------------------------------------
@@ -154,11 +161,14 @@ void ofApp::keyPressed(int key){
         rainbow = !rainbow;
     }
     
+    serialReceiver.keyPressed(key);
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    
+    serialReceiver.keyReleased(key);
+
 }
 
 //--------------------------------------------------------------

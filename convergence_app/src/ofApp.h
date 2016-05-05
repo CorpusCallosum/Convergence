@@ -5,6 +5,7 @@
 #include "visualSystem.h"
 #include "displaySystem.h"
 #include "gui.hpp"
+#include "serialReceiver.h"
 
 class ofApp : public ofBaseApp{
     
@@ -36,6 +37,8 @@ public:
     
     gui gui;
     
-    int visualSystemWidth;
+    int visualSystemWidth, visualSystemHeight;
+    
+    serialReceiver serialReceiver;
 
 };
