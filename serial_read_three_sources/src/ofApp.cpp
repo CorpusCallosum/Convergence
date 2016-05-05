@@ -8,21 +8,17 @@ void ofApp::setup(){
     ofBackground( 0 );
     ofSetLogLevel(OF_LOG_NOTICE);
     
-    serial.listDevices();
+    /*serial.listDevices();
     vector <ofSerialDeviceInfo> deviceList = serial.getDeviceList();
     
     
-    serial.setup("/dev/tty.usbmodem1411", 9600); // serial port of board 1
-    
-    //nPins[ 0 ] = 12;
-    //nPins[ 1 ] = 12;
-    //nPins[ 2 ] = 10;
-    //nPins[ 3 ] = 9;
+    serial.setup("/dev/tty.usbmodem1411", 9600); // serial port of arduino
+    serial.flush( true, true );*/
+
     
     boxX = ofGetWindowWidth() / NPINS;
     boxY = ofGetWindowHeight() / 3;
 
-    serial.flush( true, true );
 
     for( int i = 0; i < NBOARDS * NPINS; i ++ ) {
         touched[ i ] = false;
@@ -34,7 +30,7 @@ void ofApp::setup(){
     }
     
     current_time = ofGetElapsedTimeMillis();
-    false_touch_timeout = 10;
+    false_touch_timeout = 10; //in milliseconds
     
 
 }
@@ -42,7 +38,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    serialFunction();
+    //serialFunction();
 
     for ( int i = 0; i < NBOARDS * NPINS; i ++ ) {
         
@@ -100,7 +96,7 @@ void ofApp::draw(){
             j = 2;
         }
         ofSetColor( color[ i ] );
-        ofDrawRectangle(( i % 12 ) * boxX + 10, boxY * j, 75, 200 );
+        ofDrawRectangle(( i % 12 ) * boxX + 10, boxY * j + 10, 75, 200 );
     }
 
 }
