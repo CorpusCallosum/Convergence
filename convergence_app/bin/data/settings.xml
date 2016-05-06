@@ -1,15 +1,45 @@
-<visualSystem width="560" height="341" kparticles="10" />
-<panel width="32" height="16" />
-<testVideoPath>../../../media/test2.mp4</testVideoPath>
-<ledStrips>
-    <port>4445</port>
-</ledStrips>
-<waves>
-    <wave id="1" type="panels" width="320" height="16" x="216" y="4" />
-    <wave id="2" type="panels" width="448" height="32" x="86" y="25" />
-    <wave id="3" type="strips" width="468" height="38" x="77" y="63" numLeds="0" host="192.168.4.5" />
-    <wave id="4" type="panels" width="480" height="48" x="42" y="106" />
-    <wave id="5" type="strips" width="441" height="51" x="50" y="157" numLeds="0" host="192.168.4.3" />
-    <wave id="6" type="panels" width="320" height="48" x="58" y="213" />
-    <wave id="7" type="strips" width="371" height="46" x="89" y="268" numLeds="0" host="192.168.4.7" />
-</waves>
+<visualSystem width="400" height="400" kparticles="10" />
+
+<rodsOuter>
+	<!-- AlphaPix 1 -->
+    <strip length="4" alphaPixSubnet="50" port="1"/>
+    <strip length="4" alphaPixSubnet="50" port="2"/>
+    <strip length="4" alphaPixSubnet="50" port="3"/>
+    <strip length="4" alphaPixSubnet="50" port="4"/>
+    <strip length="4" alphaPixSubnet="50" port="5"/>
+    <strip length="4" alphaPixSubnet="50" port="6"/>
+    <strip length="4" alphaPixSubnet="50" port="7"/>
+    <strip length="4" alphaPixSubnet="50" port="8"/>
+    <strip length="4" alphaPixSubnet="50" port="9"/>
+    <strip length="4" alphaPixSubnet="50" port="10"/>
+    <strip length="4" alphaPixSubnet="50" port="11"/>
+    <strip length="4" alphaPixSubnet="50" port="12"/>
+    <strip length="4" alphaPixSubnet="50" port="13"/>
+
+    <!-- AlphaPix 2 -->
+    <strip length="4" alphaPixSubnet="51" port="1"/>
+    <strip length="4" alphaPixSubnet="51" port="2"/>
+    <strip length="4" alphaPixSubnet="51" port="3"/>
+    <strip length="4" alphaPixSubnet="51" port="4"/>
+    <strip length="4" alphaPixSubnet="51" port="5"/>
+    <strip length="4" alphaPixSubnet="51" port="6"/>
+    <strip length="4" alphaPixSubnet="51" port="7"/>
+    <strip length="4" alphaPixSubnet="51" port="8"/>
+    <strip length="4" alphaPixSubnet="51" port="9"/>
+    <strip length="4" alphaPixSubnet="51" port="10"/>
+    <strip length="4" alphaPixSubnet="51" port="11"/>
+    <strip length="4" alphaPixSubnet="51" port="12"/>
+</rodsOuter>
+
+<rodsInner>
+	<!-- AlphaPix 3 -->
+    <strip length="4" alphaPixSubnet="52" port="1"/>
+    <strip length="4" alphaPixSubnet="52" port="2"/>
+    <strip length="4" alphaPixSubnet="52" port="3"/>
+    <strip length="4" alphaPixSubnet="52" port="4"/>
+    <strip length="4" alphaPixSubnet="52" port="5"/>
+    <strip length="4" alphaPixSubnet="52" port="6"/>
+    <strip length="4" alphaPixSubnet="52" port="7"/>
+    <strip length="4" alphaPixSubnet="52" port="8"/>
+    <strip length="4" alphaPixSubnet="52" port="9"/>
+</rodsInner>

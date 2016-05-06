@@ -1,12 +1,12 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxArtNet.h"
 #include "visualSystem.h"
 #include "displaySystem.h"
 #include "gui.hpp"
 #include "serialReceiver.h"
-#include "currentColor.h"
+#include "ofxXmlSettings.h"
+
 
 class ofApp : public ofBaseApp{
     
@@ -37,6 +37,7 @@ public:
     ofFbo * frame;
     
     gui gui;
+    ofxXmlSettings settings;
     
     int visualSystemWidth, visualSystemHeight, rodSpacing, numRods;
     

@@ -2,8 +2,9 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    //at first you must specify the Ip address of this machine
-  //  artnet.setup("192.168.0.1"); //make sure the firewall is deactivated at this point
+    //load XML settings
+    settings.loadFile("settings.xml");
+    //parse the XML
     
     ofSetFrameRate( 40 );
     fbo.allocate(512, 1, GL_RGB);
@@ -13,7 +14,7 @@ void ofApp::setup(){
     //calculate rodspacing
     
     visualSystemWidth = 300;
-    visualSystemHeight = 400;
+    visualSystemHeight = 300;
     
     numRods = 27;
     rodSpacing = round(visualSystemWidth/numRods);
@@ -99,8 +100,6 @@ void ofApp::update(){
     //artnet.sendDmx("192.168.0.52", 0, 2, testImage.getPixels(), 512);//strip 34 is universes 2 and 3
     //artnet.sendDmx("192.168.0.52", 0, 4, testImage.getPixels(), 512);//strip 35 is universes 4 and 5
     //artnet.sendDmx("192.168.0.52", 0, 6, testImage.getPixels(), 512);//strip 36 is universes 6 and 7
-    
-    
 }
 
 //--------------------------------------------------------------

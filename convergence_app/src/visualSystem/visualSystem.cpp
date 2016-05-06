@@ -16,11 +16,8 @@ void visualSystem::init(int w, int h, int kParticles){
     width=w;
     height=h;
     particleBrightnessShift = 10;
-    
-    //displayPixels.allocate(w, h, OF_IMAGE_COLOR);
-    
-    //mouseX = -100;
-    //mouseY = -100;
+    mixColor = false;
+
     
     //blur.allocate(width, height);
     display = new ofFbo();
@@ -95,7 +92,7 @@ void visualSystem::update(bool touched[36]){
             //emit a particle
             Particle particle(i*rodSpacing, height);
             particle.setColor(currentColor.getCurrentColor());
-            particle.yv = -10;
+            particle.yv = -20;
             particleSystem.add(particle);
         }
     }
@@ -144,7 +141,7 @@ void visualSystem::update(bool touched[36]){
         cur.applyForce(getField(pos));
         cur.updateColor(particleBrightnessShift);
         
-        
+        if(mixColor){
         //particle color mix!
         vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood/10);
         
@@ -155,9 +152,16 @@ void visualSystem::update(bool touched[36]){
             c.g = ((neighbors[n]->green + cur.green)/2)*255;
             c.b = ((neighbors[n]->blue + cur.blue)/2)*255;
             
+            float r = round(random());
+            
+            /*if(r)
+               neighbors[n]->setColor(cur.color);
+            else
+               cur.setColor(neighbors[n]->color);*/
+            
             neighbors[n]->setColor(c);
         }
-        
+        }
         
 	}
 	glEnd();

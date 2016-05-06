@@ -43,7 +43,7 @@ class visualSystem{
     
     float complexity, pollenMass, timeSpeed;
     float phase, hForce, vForce, repForce;
-    bool resetB;
+    bool resetB, mixColor;
     
     //fx
    //ofxGaussianBlur blur;

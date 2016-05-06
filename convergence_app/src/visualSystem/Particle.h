@@ -120,7 +120,6 @@ public:
         if(wasRepeled)
             f*=-1;
         
-        
         xv *= f;
         yv *= f;
         
