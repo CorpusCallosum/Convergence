@@ -39,6 +39,7 @@ void gui::setup(int x){
     visualSystemParams.add(particleNeighborhood.set("p neighborhood",4,0,50));
     visualSystemParams.add(particleRepulsion.set("p repulsion",1,-1,10));
     visualSystemParams.add(blur.set("blur",1,0,10));
+    visualSystemParams.add(colorMixing.set("mix colors", false));
     
     //create the gui
     guiPanel.setup("GUI",xmlFile, x, 10);

@@ -31,5 +31,7 @@ public:
     ofParameter<int> fadeAmt, blur, ledStripHue, ledStripBrightness, ledStripSaturation;
     ofParameter<ofColor> ledStripsColor;
     
+    ofParameter<bool> colorMixing;
+    
     string xmlFile;
 };

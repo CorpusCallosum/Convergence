@@ -8,7 +8,6 @@
 4. That's it, now just run the software!
 
 ##TODO
-- shoot particles 2 meters from the top
 - setup ofxWatchdog
 - test autolaunch
 - set up daily reset

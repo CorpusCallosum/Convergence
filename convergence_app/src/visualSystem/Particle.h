@@ -41,31 +41,46 @@ public:
     //when particle reaches edge of particle field, loop is around to the other side
     void loopAround(float left, float top, float right, float bottom, float bounce = .3) {
         
+        bool rando = false;
+        
 		if (x > right){
             xv *= -bounce;
 			x = right-1;
+            
+            rando = true;
+            
 		} else if (x < left){
 			x = left+1;
             xv *= -bounce;
+            rando = true;
 		}
         
 		if (y > bottom){
             //BOTTOM
             y=bottom;
             yv *= -.9;
+            rando = true;
 		} else if (y < top){
             //TOP
             //loop around
 			y = top+1;
             //bounce off top?
             yv *= -bounce;
+            rando = true;
             
             if(ofGetFrameRate()<30)
                 remove = true;
             //delete particle if there's too many
             //delete this;
 		}
+        
+        if(rando){
+          //  x = ofRandom(right);
+           // y = ofRandom(bottom);
+        }
+        
 	}
+    
     
 	void addDampingForce(float damping = .01) {
 		xf = xf - xv * damping;

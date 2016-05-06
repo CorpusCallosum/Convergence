@@ -16,7 +16,7 @@ void visualSystem::init(int w, int h, int kParticles){
     width=w;
     height=h;
     particleBrightnessShift = 10;
-    mixColor = false;
+    mixColor = true;
     pCounter = 0;
 
     
@@ -154,7 +154,7 @@ void visualSystem::update(bool touched[36]){
         //apply noise field force to the particle
         pos.set(cur.x,cur.y);
         cur.applyForce(getField(pos));
-        cur.updateColor(particleBrightnessShift);
+        //cur.updateColor(particleBrightnessShift);
         
         if(mixColor){
         //particle color mix!
