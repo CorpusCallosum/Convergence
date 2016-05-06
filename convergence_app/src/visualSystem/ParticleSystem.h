@@ -2,7 +2,7 @@
 
 #include "Particle.h"
 
-#define DRAW_FORCES
+//#define DRAW_FORCES
 #define USE_INVSQRT
 
 class ParticleSystem {

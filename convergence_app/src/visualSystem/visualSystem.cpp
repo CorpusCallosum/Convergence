@@ -144,6 +144,21 @@ void visualSystem::update(bool touched[36]){
         cur.applyForce(getField(pos));
         cur.updateColor(particleBrightnessShift);
         
+        
+        //particle color mix!
+        vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood/10);
+        
+        for(int n = 0; n < neighbors.size(); n++) {
+            //average colors
+            ofColor c;
+            c.r = ((neighbors[n]->red + cur.red)/2)*255;
+            c.g = ((neighbors[n]->green + cur.green)/2)*255;
+            c.b = ((neighbors[n]->blue + cur.blue)/2)*255;
+            
+            neighbors[n]->setColor(c);
+        }
+        
+        
 	}
 	glEnd();
 	

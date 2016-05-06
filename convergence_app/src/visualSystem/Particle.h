@@ -23,12 +23,10 @@ public:
             remove = false;
 	}
 	void updatePosition(float timeStep) {
-		// f = ma, m = 1, f = a, v = int(a)
 		xv += xf;
 		yv += yf;
 		x += xv * timeStep;
 		y += yv * timeStep;
-       // wasRepeled = false;
 	}
     
     void updateColor(float particleBrightnessShift){
@@ -57,6 +55,7 @@ public:
 			yv *= -1;
 			collision = true;
 		} else if (y < top){
+            //TOP
 			y = top;
 			yv *= -1;
 			collision = true;
@@ -78,11 +77,13 @@ public:
 		}
         
 		if (y > bottom){
-            //y=bottom;
+            //BOTTOM
+            y=bottom;
             yv *= -.9;
 		} else if (y < top){
+            //TOP
             //loop around
-			//y = bottom;
+			y = top+1;
             //bounce off top?
             yv *= -.9;
             remove = true;

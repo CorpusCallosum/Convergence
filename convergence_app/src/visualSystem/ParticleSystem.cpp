@@ -30,6 +30,7 @@ Particle& ParticleSystem::operator[](unsigned i) {
 	return particles[i];
 }
 
+
 vector<Particle*> ParticleSystem::getNeighbors(Particle& particle, float radius) {
 	return getNeighbors(particle.x, particle.y, radius);
 }
@@ -198,8 +199,6 @@ void ParticleSystem::update() {
         }
         
     }
-    
-
         
 }
 
