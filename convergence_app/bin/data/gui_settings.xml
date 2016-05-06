@@ -9,11 +9,11 @@
 		<turbulence>0.0321429</turbulence>
 		<particle_speed>0.0102041</particle_speed>
 		<density>1.93878</density>
-		<H_force>0.0306122</H_force>
+		<H_force>-0.0918368</H_force>
 		<V_force>-0.408163</V_force>
 		<fade_amount>31</fade_amount>
-		<p_neighborhood>5.2551</p_neighborhood>
-		<p_repulsion>0.0816326</p_repulsion>
+		<p_neighborhood>10</p_neighborhood>
+		<p_repulsion>1</p_repulsion>
 		<blur>1</blur>
 		<Particle_Brightness>100</Particle_Brightness>
 	</Visual_System>

@@ -88,11 +88,14 @@ void visualSystem::update(bool touched[36]){
     c.g = 100;
     c.b = 50;
     
+    
+    //PARTICLE EMITER
     for(int i=0; i < numRods; i++){
         if(touched[i] == true){
             //emit a particle
-            Particle particle(i*rodSpacing, 0);
+            Particle particle(i*rodSpacing, height);
             particle.setColor(currentColor.getCurrentColor());
+            particle.yv = -10;
             particleSystem.add(particle);
         }
     }

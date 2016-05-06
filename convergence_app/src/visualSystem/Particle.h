@@ -10,14 +10,17 @@ public:
 	float xv, yv;
 	float xf, yf;
     float _particleBrightnessShift;
-    bool wasRepeled;
+    bool wasRepeled, remove;
     ofColor color;
+    float red, green, blue;
     
 	Particle(float _x = 0, float _y = 0,
 		float _xv = 0, float _yv = 0) :
 		x(_x), y(_y),
 		xv(_xv), yv(_yv) {
+            
             wasRepeled = false;
+            remove = false;
 	}
 	void updatePosition(float timeStep) {
 		// f = ma, m = 1, f = a, v = int(a)
@@ -75,9 +78,16 @@ public:
 		}
         
 		if (y > bottom){
-            y=top;
+            //y=bottom;
+            yv *= -.9;
 		} else if (y < top){
-			y = bottom;
+            //loop around
+			//y = bottom;
+            //bounce off top?
+            yv *= -.9;
+            remove = true;
+            //delete particle if there's too many
+            //delete this;
 		}
 	}
     
@@ -85,21 +95,14 @@ public:
 		xf = xf - xv * damping;
         yf = yf - yv * damping;
 	}
-	void draw() {
-        //set color of particle based on it's speed?
-        //  ofSetColor(255-(abs(yv)*abs(xv))*10);
-        // cout<<"xv: "<<xv<<" yv: "<<yv<<endl;
-        //ofSetColor(xf,255,yf);
     
-        //float b = ofClamp(1-(abs(yv)+abs(xv))/_particleBrightnessShift, 0, 1);
-        // cout<<"b: "<<b<<endl;
-      //  glColor3f(255,255,255);
+	void draw() {
         
-        float r = (float)(color.r) / 255;
+        /*float r = (float)(color.r) / 255;
         float g = (float)(color.g) / 255;
-        float b = (float)(color.b) / 255;
+        float b = (float)(color.b) / 255;*/
         
-        glColor3f(r,g,b);
+        glColor3f(red,green,blue);
 		glVertex2f(x, y);
 	}
     
@@ -136,8 +139,11 @@ public:
     }
     
     void setColor(ofColor c){
-        cout<<"set particle color: "<<c<<endl;
+        //cout<<"set particle color: "<<c<<endl;
         color = c;
+        red = (float)(color.r) / 255;
+        green = (float)(color.g) / 255;
+        blue = (float)(color.b) / 255;
         //color.b = 0;
     }
 };

@@ -153,6 +153,8 @@ void ParticleSystem::addForce(float targetX, float targetY, float radius, float 
 				length = xd * xd + yd * yd;
 				if(length > 0 && length < maxrsq) {
 					#ifdef DRAW_FORCES
+                        //set vertex color using particle color
+                        glColor3f(curParticle.red, curParticle.green, curParticle.blue);
 						glVertex2f(targetX, targetY);
 						glVertex2f(curParticle.x, curParticle.y);
 					#endif
@@ -188,8 +190,17 @@ void ParticleSystem::addForce(float targetX, float targetY, float radius, float 
 
 void ParticleSystem::update() {
 	int n = particles.size();
-	for(int i = 0; i < n; i++)
+    for(int i = 0; i < n; i++){
 		particles[i].updatePosition(timeStep);
+        
+        if(particles[i].remove){
+            //particles.erase(particles.begin()+i);
+        }
+        
+    }
+    
+
+        
 }
 
 void ParticleSystem::draw() {
