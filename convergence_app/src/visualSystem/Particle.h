@@ -57,7 +57,9 @@ public:
 			y = top+1;
             //bounce off top?
             yv *= -bounce;
-            remove = true;
+            
+            if(ofGetFrameRate()<30)
+                remove = true;
             //delete particle if there's too many
             //delete this;
 		}

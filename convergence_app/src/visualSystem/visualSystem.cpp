@@ -89,19 +89,22 @@ void visualSystem::update(bool touched[36]){
     c.b = 50;
     
     
-    //PARTICLE EMITER*******************************************
+    //PARTICLE EMITER*******************************************************
     for(int i=0; i < numRods; i++){
         if(touched[i] == true){
-            //emit a particle
-            //This method takes a partiicle we already have and moves them around, rather than creating new particles
-            Particle& particle = particleSystem[pCounter];
-            //iterate the particle counter
-            pCounter ++;
-            if(pCounter >= kParticles*1024)
-                pCounter = 0;
             
+                //emit a particle
+                //This method takes a partiicle we already have and moves them around, rather than creating new particles
+              /*  Particle& particle = particleSystem[pCounter];
+                //iterate the particle counter
+                pCounter ++;
+                if(pCounter >= particleSystem.size())
+                    pCounter = 0;
+                }*/
+
             //This method creates a new particle, but this is problematic, because it needs to be deleted, which I'm not sure how to do...
-            //Particle particle(i*rodSpacing, height); //CREATE NEW PARTICLE
+                Particle particle(i*rodSpacing, height); //CREATE NEW PARTICLE
+        
             
             particle.setColor(currentColor.getCurrentColor());
             particle.x = i*rodSpacing;
@@ -142,12 +145,7 @@ void visualSystem::update(bool touched[36]){
 	for(int i = 0; i < particleSystem.size(); i++) {
 		Particle& cur = particleSystem[i];
         
-        if(resetB){
-            cur.stop();
-            cur.x = width;
-        }
-        
-		// global force on other particles
+		// particle force on other particles
 		particleSystem.addRepulsionForce(cur, particleNeighborhood, particleRepulsion);
         
         cur.loopAround(0,0,width,height, pBounce);
@@ -179,7 +177,9 @@ void visualSystem::update(bool touched[36]){
             neighbors[n]->setColor(c);
         }
         }
-        
+        //delete particles?
+        if(cur.remove)
+            particleSystem.erase(i);
 	}
 	glEnd();
 	

@@ -2,7 +2,7 @@
 
 #include "Particle.h"
 
-#define DRAW_FORCES
+//#define DRAW_FORCES
 #define USE_INVSQRT
 
 class ParticleSystem {
@@ -35,6 +35,8 @@ public:
 	void update();
 
 	void draw();
+    
+    void erase(int i);
 };
 
 inline float InvSqrt(float x){
