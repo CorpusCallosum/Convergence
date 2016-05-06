@@ -15,8 +15,8 @@ class displaySystem{
     public:
     
     displaySystem();
-    void init(int w, int h, int numRods, int rodSpacing);
-    void draw();
+    void init(int w, int h, int numRods, int rodSpacing, int rodMargins);
+    void draw(int x, int y);
     void updateDisplay(ofFbo * frame);
     void clear();
     
@@ -31,6 +31,6 @@ class displaySystem{
     vector <ofFbo> stripFBOs;
     vector <ofImage> stripImages;
     
-    int _rodSpacing, _numRods;
+    int _rodSpacing, _numRods, _rodMargins;
 
 };

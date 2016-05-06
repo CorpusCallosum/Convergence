@@ -102,13 +102,12 @@ void visualSystem::update(bool touched[36]){
                     pCounter = 0;
                 }*/
 
-            //This method creates a new particle, but this is problematic, because it needs to be deleted, which I'm not sure how to do...
-                Particle particle(i*rodSpacing, height); //CREATE NEW PARTICLE
-        
+            //This method creates a new particle
+            Particle particle(i*rodSpacing, height); //CREATE NEW PARTICLE
             
             particle.setColor(currentColor.getCurrentColor());
             particle.x = i*rodSpacing;
-            particle.y = height;
+            particle.y = height - 2*64; //2 meters from the top
             particle.yv = pStartVel; //initial velocity
             particle.xv = 0;
             particleSystem.add(particle);

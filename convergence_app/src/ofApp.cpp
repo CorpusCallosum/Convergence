@@ -16,15 +16,16 @@ void ofApp::setup(){
     visualSystemWidth = 300;
     visualSystemHeight = 300;
     
-    numRods = 27;
+    rodMargins = 10;
+    numRods = 36;
     rodSpacing = round(visualSystemWidth/numRods);
+    
     cout<<"rod spacing"<<rodSpacing<<endl;
-
     
     vs.init(visualSystemWidth, visualSystemHeight, 1); //K particles
     vs.numRods = numRods;
     vs.rodSpacing = rodSpacing;
-    ds.init(visualSystemWidth, visualSystemHeight, numRods, rodSpacing);
+    ds.init(visualSystemWidth, visualSystemHeight, numRods, rodSpacing, rodMargins);
     gui.setup(visualSystemWidth+20);
     serialReceiver.setup(10, numRods, rodSpacing);
     
@@ -107,14 +108,14 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofBackground(0);
+    ofBackground(20);
     /*float scalex = ofGetWidth() / fbo.getWidth();
     float scaley = ofGetHeight() / fbo.getHeight();
     ofScale(scalex, scaley);
     fbo.draw(0, 0);*/
     
     ofSetColor(255,255,255,255);
-    ds.draw();
+    ds.draw(10,10);
     
     gui.draw();
     

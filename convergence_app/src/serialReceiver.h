@@ -43,7 +43,7 @@ public:
     int current_time;
     int false_touch_timeout;
     
-    int _rodSpacing;
+    int _rodSpacing, _numRods;
 
 };
 

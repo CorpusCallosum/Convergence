@@ -16,19 +16,16 @@ displaySystem::displaySystem(){
     numRodsInner = 9;
 }
 
-void displaySystem::init(int w, int h, int numRods, int rodSpacing){
+void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargins){
     //at first you must specify the Ip address of this machine
     artnet.setup("192.168.0.1"); //make sure the firewall is deactivated at this point
     width = w;
     height = h;
     
     _numRods = numRods;
-    _rodSpacing = rodSpacing;
+    _rodSpacing = (width - rodMargins)/numRods;
+    _rodMargins = rodMargins;
     numRodsOuter = numRods;
-    
-    /*for(int i=0; i< numRodsOuter; i++){
-        stripFBOs[i].allocate(1, height, GL_RGB);
-    }*/
     
     strip.allocate(1, height, GL_RGB);
 }
@@ -44,21 +41,25 @@ void displaySystem::updateDisplay(ofFbo * frame){
     
     for(int i=0; i< numRodsOuter; i++){
     
+        //crop the LED strip
         strip.begin();
-        _frame->getTexture().drawSubsection(0,0,1,height,i*_rodSpacing,0);
+            //float x, float y, float w, float h, float sx, float sy
+            _frame->getTexture().drawSubsection(0,0,1,height,i*_rodSpacing + _rodMargins, 0);
         strip.end();
         
         strip.readToPixels(stripImage.getPixels());
         
-        
         //draw to LEDs
+        
         ////IP address
         string ipStart = "192.168.0.";
         int ipEnd = (50+floor(i/16));
         char *ip = new char[12];
         sprintf(ip, "192.168.0.%d", ipEnd);
+        
         ////subnet
         int subnet = (int)floor(i/8)%2;
+        
         ////universe
         int universe = (i%8)*2;
         //cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
@@ -72,17 +73,16 @@ void displaySystem::updateDisplay(ofFbo * frame){
 }
 
 //draw to screen
-void displaySystem::draw(){
-    ofSetColor(255);
+void displaySystem::draw(int x, int y){
     //render test mode
     ofSetColor(255);
-    _frame->draw(10,0);
+    _frame->draw(x,y);
     
     for(int i=0; i< numRodsOuter; i++){
         strip.begin();
-        _frame->getTexture().drawSubsection(0,0,1,height,i*_rodSpacing,0);
+        _frame->getTexture().drawSubsection(0,0,1,height,i*_rodSpacing+_rodMargins,0);
         strip.end();
-        strip.draw(10+_rodSpacing*i, 10+height);
+        strip.draw(x+_rodSpacing*i+_rodMargins, y+10+height);
     }
     
 }
