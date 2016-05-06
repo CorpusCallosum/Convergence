@@ -12,8 +12,8 @@
 		<H_force>0</H_force>
 		<V_force>-0.826531</V_force>
 		<fade_amount>31</fade_amount>
-		<p_neighborhood>21.6837</p_neighborhood>
-		<p_repulsion>0.852041</p_repulsion>
+		<p_neighborhood>22.9592</p_neighborhood>
+		<p_repulsion>0.234694</p_repulsion>
 		<blur>1</blur>
 		<Particle_Brightness>100</Particle_Brightness>
 	<p_start_Velocity>-19.898</p_start_Velocity>

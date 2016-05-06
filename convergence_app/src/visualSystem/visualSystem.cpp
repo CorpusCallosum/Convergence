@@ -103,10 +103,10 @@ void visualSystem::update(bool touched[36]){
                 }*/
 
             //This method creates a new particle
-            Particle particle(i*rodSpacing, height); //CREATE NEW PARTICLE
+            Particle particle(0,0); //CREATE NEW PARTICLE
             
             particle.setColor(currentColor.getCurrentColor());
-            particle.x = i*rodSpacing;
+            particle.x = i*rodSpacing+rodMargins;
             particle.y = height - 2*64; //2 meters from the top
             particle.yv = pStartVel; //initial velocity
             particle.xv = 0;
@@ -145,7 +145,8 @@ void visualSystem::update(bool touched[36]){
 		Particle& cur = particleSystem[i];
         
 		// particle force on other particles
-		particleSystem.addRepulsionForce(cur, particleNeighborhood, particleRepulsion);
+        float f = 1-cur.y/height;
+		particleSystem.addRepulsionForce(cur, particleNeighborhood*f, particleRepulsion*f);
         
         cur.loopAround(0,0,width,height, pBounce);
 		cur.addDampingForce(pDampening); //slows the particle down

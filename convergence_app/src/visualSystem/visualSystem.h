@@ -34,7 +34,7 @@ class visualSystem{
     
     //particle system
     float timeStep, particleBrightnessShift;
-    int lineOpacity, pointOpacity, numRods, rodSpacing;
+    int lineOpacity, pointOpacity, numRods, rodSpacing, rodMargins;
 	float centerAttraction;
     
 	int kParticles, fadeAmt, pCounter;

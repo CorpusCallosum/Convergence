@@ -18,13 +18,15 @@ void ofApp::setup(){
     
     rodMargins = 10;
     numRods = 36;
-    rodSpacing = round(visualSystemWidth/numRods);
+    rodSpacing = (visualSystemWidth-rodMargins*2)/numRods;
     
     cout<<"rod spacing"<<rodSpacing<<endl;
     
     vs.init(visualSystemWidth, visualSystemHeight, 1); //K particles
     vs.numRods = numRods;
     vs.rodSpacing = rodSpacing;
+    vs.rodMargins = rodMargins;
+    
     ds.init(visualSystemWidth, visualSystemHeight, numRods, rodSpacing, rodMargins);
     gui.setup(visualSystemWidth+20);
     serialReceiver.setup(10, numRods, rodSpacing);

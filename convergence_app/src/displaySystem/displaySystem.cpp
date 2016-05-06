@@ -23,7 +23,7 @@ void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargi
     height = h;
     
     _numRods = numRods;
-    _rodSpacing = (width - rodMargins)/numRods;
+    _rodSpacing = rodSpacing;
     _rodMargins = rodMargins;
     numRodsOuter = numRods;
     
