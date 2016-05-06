@@ -35,11 +35,13 @@ class visualSystem{
     //particle system
     float timeStep, particleBrightnessShift;
     int lineOpacity, pointOpacity, numRods, rodSpacing;
-	float particleNeighborhood, particleRepulsion;
 	float centerAttraction;
     
-	int kParticles, fadeAmt;
+	int kParticles, fadeAmt, pCounter;
 	ParticleSystem particleSystem;
+    
+    //params
+    float particleNeighborhood, particleRepulsion, pDampening, pStartVel, pBounce;
     
     float complexity, pollenMass, timeSpeed;
     float phase, hForce, vForce, repForce;

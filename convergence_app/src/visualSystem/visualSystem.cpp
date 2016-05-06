@@ -17,6 +17,7 @@ void visualSystem::init(int w, int h, int kParticles){
     height=h;
     particleBrightnessShift = 10;
     mixColor = false;
+    pCounter = 0;
 
     
     //blur.allocate(width, height);
@@ -37,15 +38,17 @@ void visualSystem::init(int w, int h, int kParticles){
 	//kParticles = 15;
 	float padding = 0;
 	float maxVelocity = 5;
-	/*for(int i = 0; i < kParticles * 1024; i++) {
+	for(int i = 0; i < kParticles * 1024; i++) {
 		float x = ofRandom(padding, width - padding);
 		float y = ofRandom(padding, height - padding);
 		//float xv = ofRandom(-maxVelocity, 0);
 		//float yv = ofRandom(-maxVelocity, maxVelocity);
         
 		Particle particle(x, y);
+        ofColor c;
+        particle.setColor(c);
 		particleSystem.add(particle);
-	}*/
+	}
     
 	ofBackground(0, 0, 0);
     
@@ -86,14 +89,28 @@ void visualSystem::update(bool touched[36]){
     c.b = 50;
     
     
-    //PARTICLE EMITER
+    //PARTICLE EMITER*******************************************
     for(int i=0; i < numRods; i++){
         if(touched[i] == true){
             //emit a particle
-            Particle particle(i*rodSpacing, height);
+            //This method takes a partiicle we already have and moves them around, rather than creating new particles
+            Particle& particle = particleSystem[pCounter];
+            //iterate the particle counter
+            pCounter ++;
+            if(pCounter >= kParticles*1024)
+                pCounter = 0;
+            
+            //This method creates a new particle, but this is problematic, because it needs to be deleted, which I'm not sure how to do...
+            //Particle particle(i*rodSpacing, height); //CREATE NEW PARTICLE
+            
             particle.setColor(currentColor.getCurrentColor());
-            particle.yv = -20;
+            particle.x = i*rodSpacing;
+            particle.y = height;
+            particle.yv = pStartVel; //initial velocity
+            particle.xv = 0;
             particleSystem.add(particle);
+            
+            
         }
     }
     
@@ -132,9 +149,9 @@ void visualSystem::update(bool touched[36]){
         
 		// global force on other particles
 		particleSystem.addRepulsionForce(cur, particleNeighborhood, particleRepulsion);
-		// forces on this particle
-        cur.loopAround(0,0,width,height);
-		cur.addDampingForce(); //slows the particle down
+        
+        cur.loopAround(0,0,width,height, pBounce);
+		cur.addDampingForce(pDampening); //slows the particle down
         
         //apply noise field force to the particle
         pos.set(cur.x,cur.y);

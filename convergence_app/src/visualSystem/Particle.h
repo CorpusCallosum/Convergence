@@ -37,38 +37,9 @@ public:
 		xf = 0;
 		yf = 0;
 	}
-	void bounceOffWalls(float left, float top, float right, float bottom, float damping = .3) {
-		bool collision = false;
-
-		if (x > right){
-			x = right;
-			xv *= -1;
-			collision = true;
-		} else if (x < left){
-			x = left;
-			xv *= -1;
-			collision = true;
-		}
-
-		if (y > bottom){
-			y = bottom;
-			yv *= -1;
-			collision = true;
-		} else if (y < top){
-            //TOP
-			y = top;
-			yv *= -1;
-			collision = true;
-		}
-
-		if (collision == true){
-			xv *= damping;
-			yv *= damping;
-		}
-	}
     
     //when particle reaches edge of particle field, loop is around to the other side
-    void loopAround(float left, float top, float right, float bottom, float damping = .3) {
+    void loopAround(float left, float top, float right, float bottom, float bounce = .3) {
         
 		if (x > right){
 			x = left;
@@ -85,7 +56,7 @@ public:
             //loop around
 			y = top+1;
             //bounce off top?
-            yv *= -.9;
+            yv *= -bounce;
             remove = true;
             //delete particle if there's too many
             //delete this;
