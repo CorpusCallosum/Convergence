@@ -42,9 +42,11 @@ public:
     void loopAround(float left, float top, float right, float bottom, float bounce = .3) {
         
 		if (x > right){
-			x = left;
+            xv *= -bounce;
+			x = right-1;
 		} else if (x < left){
-			x = right;
+			x = left+1;
+            xv *= -bounce;
 		}
         
 		if (y > bottom){

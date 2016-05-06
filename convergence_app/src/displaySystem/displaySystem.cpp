@@ -61,7 +61,7 @@ void displaySystem::updateDisplay(ofFbo * frame){
         int subnet = (int)floor(i/8)%2;
         ////universe
         int universe = (i%8)*2;
-        cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
+        //cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
         artnet.sendDmx(ip, subnet, universe, stripImage.getPixels(), 500);
         //strip 1 is universes 0 and 1
         
