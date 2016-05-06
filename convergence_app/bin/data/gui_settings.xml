@@ -6,14 +6,14 @@
 		<Strip_Saturation>0</Strip_Saturation>
 	</Display_System>
 	<Visual_System>
-		<turbulence>0.0321429</turbulence>
+		<turbulence>0.0372449</turbulence>
 		<particle_speed>0.0102041</particle_speed>
 		<density>1.93878</density>
-		<H_force>-0.0918368</H_force>
-		<V_force>-0.408163</V_force>
+		<H_force>1</H_force>
+		<V_force>-0.826531</V_force>
 		<fade_amount>31</fade_amount>
-		<p_neighborhood>10</p_neighborhood>
-		<p_repulsion>1</p_repulsion>
+		<p_neighborhood>21.6837</p_neighborhood>
+		<p_repulsion>0.852041</p_repulsion>
 		<blur>1</blur>
 		<Particle_Brightness>100</Particle_Brightness>
 	</Visual_System>

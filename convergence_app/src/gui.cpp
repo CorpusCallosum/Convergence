@@ -32,8 +32,8 @@ void gui::setup(int x){
     visualSystemParams.add(horizontalForce.set("H force",.2,-1,1));
     visualSystemParams.add(verticalForce.set("V force",.2,-1,1));
     visualSystemParams.add(fadeAmt.set("fade amount",100,0,255));
-    visualSystemParams.add(particleNeighborhood.set("p neighborhood",4,0,10));
-    visualSystemParams.add(particleRepulsion.set("p repulsion",1,-1,1));
+    visualSystemParams.add(particleNeighborhood.set("p neighborhood",4,0,50));
+    visualSystemParams.add(particleRepulsion.set("p repulsion",1,-1,10));
     visualSystemParams.add(blur.set("blur",1,0,10));
     visualSystemParams.add(particleBrightnessShift.set("Particle Brightness",10,0,100));
     

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "FB7385A568A092EDB8FBF061C1757D666DEF5231",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "FB7385A568A092EDB8FBF061C1757D666DEF5231" : 0,
+    "3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "75458486-8034-46D3-967B-CB24257B9C5C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "FB7385A568A092EDB8FBF061C1757D666DEF5231" : "Convergence",
+    "3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A" : "addons\/ofxArtnet"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "artNetExample",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "artNetExample\/artNetExample.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/hiroyuki\/ofxArtnet.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/FloatingPointCollective\/Convergence.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FB7385A568A092EDB8FBF061C1757D666DEF5231"
+    }
+  ]
+}

@@ -12,7 +12,7 @@ void ofApp::setup(){
     
     //calculate rodspacing
     
-    visualSystemWidth = 500;
+    visualSystemWidth = 300;
     visualSystemHeight = 400;
     
     numRods = 27;
