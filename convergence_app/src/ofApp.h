@@ -1,9 +1,12 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxArtNet.h"
+#include "visualSystem.h"
+#include "displaySystem.h"
+#include "gui.hpp"
 #include "serialReceiver.h"
-#include "currentColor.h"
+#include "ofxXmlSettings.h"
+
 
 class ofApp : public ofBaseApp{
     
@@ -27,11 +30,17 @@ public:
     ofFbo fbo;
     ofColor color_array[ 512 ];
     
-    serialReceiver serial_receiver;
-    int false_touch_time; //in ms
-    
-    currentColor current_color;
-    
     bool rainbow;
-    bool touch_debug;
+    
+    displaySystem ds;
+    visualSystem  vs;
+    ofFbo * frame;
+    
+    gui gui;
+    ofxXmlSettings settings;
+    
+    int visualSystemWidth, visualSystemHeight, rodSpacing, numRods, rodMargins;
+    
+    serialReceiver serialReceiver;
+
 };

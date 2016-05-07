@@ -1,0 +1,45 @@
+<visualSystem width="400" height="400" kparticles="10" />
+
+<rodsOuter>
+	<!-- AlphaPix 1 -->
+    <strip length="4" alphaPixSubnet="50" port="1"/>
+    <strip length="4" alphaPixSubnet="50" port="2"/>
+    <strip length="4" alphaPixSubnet="50" port="3"/>
+    <strip length="4" alphaPixSubnet="50" port="4"/>
+    <strip length="4" alphaPixSubnet="50" port="5"/>
+    <strip length="4" alphaPixSubnet="50" port="6"/>
+    <strip length="4" alphaPixSubnet="50" port="7"/>
+    <strip length="4" alphaPixSubnet="50" port="8"/>
+    <strip length="4" alphaPixSubnet="50" port="9"/>
+    <strip length="4" alphaPixSubnet="50" port="10"/>
+    <strip length="4" alphaPixSubnet="50" port="11"/>
+    <strip length="4" alphaPixSubnet="50" port="12"/>
+    <strip length="4" alphaPixSubnet="50" port="13"/>
+
+    <!-- AlphaPix 2 -->
+    <strip length="4" alphaPixSubnet="51" port="1"/>
+    <strip length="4" alphaPixSubnet="51" port="2"/>
+    <strip length="4" alphaPixSubnet="51" port="3"/>
+    <strip length="4" alphaPixSubnet="51" port="4"/>
+    <strip length="4" alphaPixSubnet="51" port="5"/>
+    <strip length="4" alphaPixSubnet="51" port="6"/>
+    <strip length="4" alphaPixSubnet="51" port="7"/>
+    <strip length="4" alphaPixSubnet="51" port="8"/>
+    <strip length="4" alphaPixSubnet="51" port="9"/>
+    <strip length="4" alphaPixSubnet="51" port="10"/>
+    <strip length="4" alphaPixSubnet="51" port="11"/>
+    <strip length="4" alphaPixSubnet="51" port="12"/>
+</rodsOuter>
+
+<rodsInner>
+	<!-- AlphaPix 3 -->
+    <strip length="4" alphaPixSubnet="52" port="1"/>
+    <strip length="4" alphaPixSubnet="52" port="2"/>
+    <strip length="4" alphaPixSubnet="52" port="3"/>
+    <strip length="4" alphaPixSubnet="52" port="4"/>
+    <strip length="4" alphaPixSubnet="52" port="5"/>
+    <strip length="4" alphaPixSubnet="52" port="6"/>
+    <strip length="4" alphaPixSubnet="52" port="7"/>
+    <strip length="4" alphaPixSubnet="52" port="8"/>
+    <strip length="4" alphaPixSubnet="52" port="9"/>
+</rodsInner>

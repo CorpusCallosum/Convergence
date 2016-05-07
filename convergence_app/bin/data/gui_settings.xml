@@ -1,0 +1,25 @@
+<GUI>
+	<Display_System>
+		<Strip_Color>0, 0, 0, 43</Strip_Color>
+		<Strip_Hue>0</Strip_Hue>
+		<Strip_Brightness>0</Strip_Brightness>
+		<Strip_Saturation>0</Strip_Saturation>
+	</Display_System>
+	<Visual_System>
+		<turbulence>0.00306122</turbulence>
+		<particle_speed>0.0918367</particle_speed>
+		<density>2.2449</density>
+		<H_force>0</H_force>
+		<V_force>-0.826531</V_force>
+		<fade_amount>0</fade_amount>
+		<p_neighborhood>22.9592</p_neighborhood>
+		<p_repulsion>0.234694</p_repulsion>
+		<blur>1</blur>
+		<Particle_Brightness>100</Particle_Brightness>
+	<p_start_Velocity>-19.898</p_start_Velocity>
+		<p_bounce>0.5</p_bounce>
+		<p_damp>0.1</p_damp>
+	<mix_colors>0</mix_colors>
+	</Visual_System>
+<GUI/>
+</GUI>

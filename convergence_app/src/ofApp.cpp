@@ -2,18 +2,34 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    //at first you must specify the Ip address of this machine
-    artnet.setup("192.168.0.1"); //make sure the firewall is deactivated at this point
+    //load XML settings
+    settings.loadFile("settings.xml");
+    //parse the XML
     
     ofSetFrameRate( 40 );
     fbo.allocate(512, 1, GL_RGB);
     
-    rainbow = true;
-    touch_debug = false;
+    rainbow = false;
     
-    false_touch_time = 10;
-    serial_receiver.setup( false_touch_time );
-    current_color.setup();
+    //calculate rodspacing
+    
+    visualSystemWidth = 300;
+    visualSystemHeight = 300;
+    
+    rodMargins = 10;
+    numRods = 36;
+    rodSpacing = (visualSystemWidth-rodMargins*2)/numRods;
+    
+    cout<<"rod spacing"<<rodSpacing<<endl;
+    
+    vs.init(visualSystemWidth, visualSystemHeight, 5); //K particles
+    vs.numRods = numRods;
+    vs.rodSpacing = rodSpacing;
+    vs.rodMargins = rodMargins;
+    
+    ds.init(visualSystemWidth, visualSystemHeight, numRods, rodSpacing, rodMargins);
+    gui.setup(visualSystemWidth+20);
+    serialReceiver.setup(10, numRods, rodSpacing);
     
 }
 
@@ -21,58 +37,34 @@ void ofApp::setup(){
 void ofApp::update(){
     ofSetWindowTitle(ofToString(ofGetFrameRate(), 2));
     
-    //create send buffer by ofFbo
-    {
-        fbo.begin();
-        
-        ofClear(0);
-        float colorR = (sin(ofGetElapsedTimeMillis() / 1000.f) / 2.f + 0.5f) * 255.f;
-        float colorG = (sin((ofGetElapsedTimeMillis() / 1000.f) + PI / 3.f) / 2.f + 0.5f) * 255.f;
-        float colorB = (sin((ofGetElapsedTimeMillis() / 1000.f)  + PI * 2.f / 3.f) / 2.f + 0.5f) * 255.f;
-        ofColor currentColor = ofColor( colorR, colorG, colorB );
-        
-        
-        if ( !rainbow ){
-            //solid rectangle
-            for ( int i = 0; i < 512; i ++ ) {
-                //color_array[ i ] = currentColor;
-                color_array[ i ] = current_color.getCurrentColor();
-
-            }
-            //ofSetColor( currentColor );
-            ofSetColor( current_color.getCurrentColor());
-
-            ofDrawRectangle(0, 0, 512, 1);
-        }
-        
-        else {
-            //rainbow rectangle
-            for ( int i = 512; i > 0; i -- ) {
-                color_array[ i ] = color_array[ i - 1 ];
-                
-            }
-            //color_array[ 0 ] = currentColor;
-            color_array[ 0 ] = current_color.getCurrentColor();
-            
-            for ( int i = 0; i < 512; i ++ ) {
-                ofSetColor( color_array[ i ] );
-                ofDrawRectangle( i, 0, 1, 1 );
-            }
-        }
-        
-        fbo.end();
-        fbo.readToPixels(testImage.getPixels());
-        
-    }
+    serialReceiver.update();
     
-    serial_receiver.update();
-    current_color.update();
+    //UPDATE GUI
+    gui.update();
+    vs.timeSpeed = gui.flowSpeed;
+    vs.timeStep = gui.timeSpeed;
+    vs.hForce = gui.horizontalForce;
+    vs.vForce = gui.verticalForce;
+    vs.fadeAmt = gui.fadeAmt;
+    vs.complexity = gui.flowComplexity;
+    vs.particleNeighborhood = gui.particleNeighborhood;
+    vs.particleRepulsion = gui.particleRepulsion;
+    vs.update(serialReceiver.touched);
+    vs.blurAmount = gui.blur;
+    vs.pStartVel = gui.pStartVel;
+    vs.pBounce = gui.pBounce;
+    vs.pDampening = gui.pDampening;
+    vs.mixColor = gui.colorMixing;
+    //vs.particleBrightnessShift = gui.particleBrightnessShift;
+    
+    frame = vs.getFrame();
+    ds.updateDisplay(frame);
     
     //list nodes for sending
     //with subnet / universe
     //first half of alphapix 1, subnet 0, universes 0-15
-    artnet.sendDmx("192.168.0.50", 0, 0, testImage.getPixels(), 512);//strip 1 is universes 0 and 1
-    artnet.sendDmx("192.168.0.50", 0, 2, testImage.getPixels(), 512);//strip 2 is universes 2 and 3
+    //artnet.sendDmx("192.168.0.50", 0, 0, testImage.getPixels(), 512);//strip 1 is universes 0 and 1
+    //artnet.sendDmx("192.168.0.50", 0, 2, testImage.getPixels(), 512);//strip 2 is universes 2 and 3
     //artnet.sendDmx("192.168.0.50", 0, 4, testImage.getPixels(), 512);//strip 3 is universes 4 and 5
     //artnet.sendDmx("192.168.0.50", 0, 6, testImage.getPixels(), 512);//strip 4 is universes 6 and 7
     //artnet.sendDmx("192.168.0.50", 0, 8, testImage.getPixels(), 512);//strip 5 is universes 8 and 9
@@ -115,46 +107,39 @@ void ofApp::update(){
     //artnet.sendDmx("192.168.0.52", 0, 2, testImage.getPixels(), 512);//strip 34 is universes 2 and 3
     //artnet.sendDmx("192.168.0.52", 0, 4, testImage.getPixels(), 512);//strip 35 is universes 4 and 5
     //artnet.sendDmx("192.168.0.52", 0, 6, testImage.getPixels(), 512);//strip 36 is universes 6 and 7
-    
-    
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-    ofBackground(0);
-    if (!touch_debug ) {
-        float scalex = ofGetWidth() / fbo.getWidth();
-        float scaley = ofGetHeight() / fbo.getHeight();
-        ofScale(scalex, scaley);
-        fbo.draw(0, 0);
-    }
+    ofBackground(20);
+    /*float scalex = ofGetWidth() / fbo.getWidth();
+    float scaley = ofGetHeight() / fbo.getHeight();
+    ofScale(scalex, scaley);
+    fbo.draw(0, 0);*/
     
-    else {
-        serial_receiver.draw();
-        ofSetColor( 255, 255, 255 );
-    }
+    ofSetColor(255,255,255,255);
+    ds.draw(10,10);
     
+    gui.draw();
+    
+    serialReceiver.draw(10, visualSystemHeight);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    serial_receiver.keyPressed( key );
     
-    if ( key == '.' ) {
+    if ( key == 'a') {
         rainbow = !rainbow;
     }
     
-    if ( key == ',' ) {
-        touch_debug = !touch_debug;
-    }
+    serialReceiver.keyPressed(key);
     
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    serial_receiver.keyReleased( key );
-    
+    serialReceiver.keyReleased(key);
+
 }
 
 //--------------------------------------------------------------
