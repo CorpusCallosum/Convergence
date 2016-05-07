@@ -136,4 +136,9 @@ public:
         blue = (float)(color.b) / 255;
         //color.b = 0;
     }
+    
+    void deleteSelf(){
+       // delete this;
+    }
+    
 };

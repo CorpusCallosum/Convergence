@@ -202,6 +202,7 @@ void ParticleSystem::update() {
 }
 
 void ParticleSystem::erase(int i){
+    
     particles.erase(particles.begin()+i);
 }
 

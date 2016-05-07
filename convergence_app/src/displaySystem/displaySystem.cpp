@@ -19,6 +19,7 @@ displaySystem::displaySystem(){
 void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargins){
     //at first you must specify the Ip address of this machine
     artnet.setup("192.168.0.1"); //make sure the firewall is deactivated at this point
+    artnet.verbose = false;
     width = w;
     height = h;
     
@@ -54,6 +55,9 @@ void displaySystem::updateDisplay(ofFbo * frame){
         ////IP address
         string ipStart = "192.168.0.";
         int ipEnd = (50+floor(i/16));
+        
+        if(ipEnd == 50){
+        
         char *ip = new char[12];
         sprintf(ip, "192.168.0.%d", ipEnd);
         
@@ -63,11 +67,13 @@ void displaySystem::updateDisplay(ofFbo * frame){
         ////universe
         int universe = (i%8)*2;
         //cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
+        
         artnet.sendDmx(ip, subnet, universe, stripImage.getPixels(), 500);
         //strip 1 is universes 0 and 1
         
         //cleanup!
         delete[] ip;
+        }
     }
         
 }
