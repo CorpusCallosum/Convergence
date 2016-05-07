@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxArtNet.h"
+#include "serialReceiver.h"
+#include "currentColor.h"
 
 class ofApp : public ofBaseApp{
     
@@ -25,6 +27,11 @@ public:
     ofFbo fbo;
     ofColor color_array[ 512 ];
     
+    serialReceiver serial_receiver;
+    int false_touch_time; //in ms
+    
+    currentColor current_color;
+    
     bool rainbow;
-
+    bool touch_debug;
 };

@@ -8,7 +8,12 @@ void ofApp::setup(){
     ofSetFrameRate( 40 );
     fbo.allocate(512, 1, GL_RGB);
     
-    rainbow = false;
+    rainbow = true;
+    touch_debug = false;
+    
+    false_touch_time = 10;
+    serial_receiver.setup( false_touch_time );
+    current_color.setup();
     
 }
 
@@ -30,9 +35,13 @@ void ofApp::update(){
         if ( !rainbow ){
             //solid rectangle
             for ( int i = 0; i < 512; i ++ ) {
-                color_array[ i ] = currentColor;
+                //color_array[ i ] = currentColor;
+                color_array[ i ] = current_color.getCurrentColor();
+
             }
-            ofSetColor( currentColor );
+            //ofSetColor( currentColor );
+            ofSetColor( current_color.getCurrentColor());
+
             ofDrawRectangle(0, 0, 512, 1);
         }
         
@@ -40,8 +49,10 @@ void ofApp::update(){
             //rainbow rectangle
             for ( int i = 512; i > 0; i -- ) {
                 color_array[ i ] = color_array[ i - 1 ];
+                
             }
-            color_array[ 0 ] = currentColor;
+            //color_array[ 0 ] = currentColor;
+            color_array[ 0 ] = current_color.getCurrentColor();
             
             for ( int i = 0; i < 512; i ++ ) {
                 ofSetColor( color_array[ i ] );
@@ -52,8 +63,10 @@ void ofApp::update(){
         fbo.end();
         fbo.readToPixels(testImage.getPixels());
         
-        
     }
+    
+    serial_receiver.update();
+    current_color.update();
     
     //list nodes for sending
     //with subnet / universe
@@ -87,7 +100,7 @@ void ofApp::update(){
     //artnet.sendDmx("192.168.0.51", 0, 12, testImage.getPixels(), 512);//strip 23 is universes 12 and 13
     //artnet.sendDmx("192.168.0.51", 0, 14, testImage.getPixels(), 512);//strip 24 is universes 14 and 15
     
-    //second half of alphapix 2, subnet 1, universed 0-15
+    //second half of alphapix 2, subnet 1, universes 0-15
     //artnet.sendDmx("192.168.0.51", 1, 0, testImage.getPixels(), 512);//strip 25 is universes 0 and 1
     //artnet.sendDmx("192.168.0.51", 1, 2, testImage.getPixels(), 512);//strip 26 is universes 2 and 3
     //artnet.sendDmx("192.168.0.51", 1, 4, testImage.getPixels(), 512);//strip 27 is universes 4 and 5
@@ -108,25 +121,39 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+
     ofBackground(0);
-    float scalex = ofGetWidth() / fbo.getWidth();
-    float scaley = ofGetHeight() / fbo.getHeight();
-    ofScale(scalex, scaley);
-    fbo.draw(0, 0);
+    if (!touch_debug ) {
+        float scalex = ofGetWidth() / fbo.getWidth();
+        float scaley = ofGetHeight() / fbo.getHeight();
+        ofScale(scalex, scaley);
+        fbo.draw(0, 0);
+    }
+    
+    else {
+        serial_receiver.draw();
+        ofSetColor( 255, 255, 255 );
+    }
     
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    serial_receiver.keyPressed( key );
     
-    if ( key == 'a') {
+    if ( key == '.' ) {
         rainbow = !rainbow;
+    }
+    
+    if ( key == ',' ) {
+        touch_debug = !touch_debug;
     }
     
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
+    serial_receiver.keyReleased( key );
     
 }
 
