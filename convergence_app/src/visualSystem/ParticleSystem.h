@@ -30,13 +30,18 @@ public:
 	void addRepulsionForce(float x, float y, float radius, float scale);
 	void addAttractionForce(const Particle& particle, float radius, float scale);
 	void addAttractionForce(float x, float y, float radius, float scale);
+    
+    void addVacuumForce(float x, float y, float radius, float scale, ofColor color = NULL);
+    
 	void addForce(const Particle& particle, float radius, float scale);
-	void addForce(float x, float y, float radius, float scale);
+	void addForce(float x, float y, float radius, float scale, bool vacuum = false, ofColor color = NULL);
 	void update();
 
 	void draw();
     
     void erase(int i);
+    
+    int midline;
 };
 
 inline float InvSqrt(float x){

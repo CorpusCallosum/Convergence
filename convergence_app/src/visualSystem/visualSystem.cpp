@@ -36,6 +36,7 @@ void visualSystem::init(int w, int h, int kParticles){
 	int binPower = 2;
     
 	particleSystem.setup(width, height, binPower);
+    particleSystem.midline = midline;
     
     //INSTANTIATE PARTICLES AT START
 	//kParticles = 15;
@@ -91,32 +92,7 @@ void visualSystem::update(bool touched[36]){
     
     currentColor.update();
     
-    ofColor c;
-    c.r = 255;
-    c.g = 100;
-    c.b = 50;
-    
-    
-    //PARTICLE EMITER*******************************************************
-    for(int i=0; i < numRods; i++){
-        if(touched[i] == true){
-            
-                //emit a particle
-                //This method takes a partiicle we already have and moves them around, rather than creating new particles
-              /*  Particle& particle = particleSystem[pCounter];
-                //iterate the particle counter
-                pCounter ++;
-                if(pCounter >= particleSystem.size())
-                    pCounter = 0;
-                }*/
-            
-            //one goes up
-            int y  = height - 1.828 * 60; //6' from the top
-            emitParticle(i, y,  1);
-            //one comes down
-          //  emitParticle(i, height, -1);
-        }
-    }
+   
     
     particleSystem.setTimeStep(timeStep);
     t = ofGetFrameNum() * timeSpeed;
@@ -138,6 +114,31 @@ void visualSystem::update(bool touched[36]){
     // if(isOn){
 	ofSetColor(lineOpacity, lineOpacity, lineOpacity, 255);
 	particleSystem.setupForces();
+    
+    //PARTICLE EMITER*******************************************************
+    for(int i=0; i < numRods; i++){
+        if(touched[i] == true){
+            
+            //emit a particle
+            //This method takes a partiicle we already have and moves them around, rather than creating new particles
+            /*  Particle& particle = particleSystem[pCounter];
+             //iterate the particle counter
+             pCounter ++;
+             if(pCounter >= particleSystem.size())
+             pCounter = 0;
+             }*/
+            
+            //one goes up
+            // int y  = height - 1.828 * 60; //6' from the top
+            // emitParticle(i, y,  1);
+            //one comes down
+            //  emitParticle(i, height, -1);
+            
+            int x = i*rodSpacing+rodMargins;
+            particleSystem.addVacuumForce(x, midline, 200, 3, currentColor.getCurrentColor());
+        }
+        
+    }
     
 	// apply per-particle forces
 	glBegin(GL_LINES);
