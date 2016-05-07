@@ -103,9 +103,10 @@ void visualSystem::update(bool touched[36]){
                 }*/
             
             //one goes up
-            emitParticle(i, 1);
+            int y  = height - 1.828 * 60; //6' from the top
+            emitParticle(i, y,  1);
             //one comes down
-            emitParticle(i, -5);
+            emitParticle(i, height, -1);
         }
     }
     
@@ -219,7 +220,7 @@ ofFbo * visualSystem::getFrame(){
     return display;
 }
 
-void visualSystem::emitParticle(int rod, float yVel){
+void visualSystem::emitParticle(int rod, int y, float yVel){
     //remove a particle
     particleSystem.erase(0);
     
@@ -228,7 +229,7 @@ void visualSystem::emitParticle(int rod, float yVel){
     
     particle.setColor(currentColor.getCurrentColor(rod/numRods));
     particle.x = rod*rodSpacing+rodMargins;
-    particle.y = height - 2*64; //2 meters from the top
+    particle.y = y;
     particle.yv = pStartVel*yVel; //initial velocity
     particle.xv = 0;
     particleSystem.add(particle);
