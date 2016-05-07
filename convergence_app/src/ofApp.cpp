@@ -55,6 +55,7 @@ void ofApp::update(){
     vs.pBounce = gui.pBounce;
     vs.pDampening = gui.pDampening;
     vs.mixColor = gui.colorMixing;
+    vs.vForceFactor = gui.vForceFactor;
     //vs.particleBrightnessShift = gui.particleBrightnessShift;
     
     frame = vs.getFrame();

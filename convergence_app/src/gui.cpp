@@ -34,6 +34,7 @@ void gui::setup(int x){
     visualSystemParams.add(fadeAmt.set("fade amount",100,0,255));
     
     visualSystemParams.add(pStartVel.set("p start Velocity",-10,-20,0));
+    visualSystemParams.add(vForceFactor.set("v force factor",0,-20,20));
     visualSystemParams.add(pBounce.set("p bounce",.5,0,1));
     visualSystemParams.add(pDampening.set("p damp",.1,0,1));
     visualSystemParams.add(particleNeighborhood.set("p neighborhood",4,0,50));

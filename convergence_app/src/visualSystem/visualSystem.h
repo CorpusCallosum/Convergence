@@ -29,7 +29,7 @@ class visualSystem{
     ofVideoPlayer 		testMovie;
     ofFbo *             display;
     
-    int width, height;
+    int width, height, midline;
     
     //noise field
     float t;
@@ -52,7 +52,7 @@ class visualSystem{
     //fx
    //ofxGaussianBlur blur;
     
-    float blurAmount, depthCutoff, depthForce;
+    float blurAmount, depthCutoff, depthForce, vForceFactor;
     
     currentColor currentColor;
     

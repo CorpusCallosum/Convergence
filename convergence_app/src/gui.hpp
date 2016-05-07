@@ -27,7 +27,7 @@ public:
     
     ofxPanel guiPanel;
     ofParameterGroup visualSystemParams, dsParams;
-    ofParameter<float> flowSpeed, timeSpeed, flowComplexity, horizontalForce, verticalForce, particleNeighborhood, particleRepulsion, pBounce, pStartVel, pDampening;
+    ofParameter<float> flowSpeed, timeSpeed, flowComplexity, horizontalForce, verticalForce, particleNeighborhood, particleRepulsion, pBounce, pStartVel, pDampening, vForceFactor;
     ofParameter<int> fadeAmt, blur, ledStripHue, ledStripBrightness, ledStripSaturation;
     ofParameter<ofColor> ledStripsColor;
     

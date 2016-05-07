@@ -16,8 +16,10 @@ void visualSystem::init(int w, int h, int kParticles){
     width=w;
     height=h;
     particleBrightnessShift = 10;
-    mixColor = true;
     pCounter = 0;
+    midline = height - 1.828 * 60; //6' from the top
+    
+    currentColor.setup();
 
     
     //blur.allocate(width, height);
@@ -35,18 +37,24 @@ void visualSystem::init(int w, int h, int kParticles){
     
 	particleSystem.setup(width, height, binPower);
     
+    //INSTANTIATE PARTICLES AT START
 	//kParticles = 15;
 	float padding = 0;
 	float maxVelocity = 5;
 	for(int i = 0; i < kParticles * 1024; i++) {
 		float x = ofRandom(padding, width - padding);
-		float y = ofRandom(padding, height - padding);
-		//float xv = ofRandom(-maxVelocity, 0);
-		//float yv = ofRandom(-maxVelocity, maxVelocity);
+		//float y = ofRandom(padding, height - padding);
+        float y = midline;
         
 		Particle particle(x, y);
-        ofColor c;
+        
+        //color it
+        int cNum = i % currentColor.colorPalette.size();
+        ofColor c = currentColor.colorPalette[cNum];
+        //ofColor c;
         particle.setColor(c);
+        
+        //add it
 		particleSystem.add(particle);
 	}
     
@@ -71,7 +79,7 @@ void visualSystem::init(int w, int h, int kParticles){
     hForce = .2;
     vForce = .2;
     
-    currentColor.setup();
+    
     
 }
 
@@ -106,7 +114,7 @@ void visualSystem::update(bool touched[36]){
             int y  = height - 1.828 * 60; //6' from the top
             emitParticle(i, y,  1);
             //one comes down
-            emitParticle(i, height, -1);
+          //  emitParticle(i, height, -1);
         }
     }
     
@@ -139,16 +147,20 @@ void visualSystem::update(bool touched[36]){
 		Particle& cur = particleSystem[i];
         
 		// particle force on other particles
-        float f = 1-cur.y/height;
-		particleSystem.addRepulsionForce(cur, particleNeighborhood*f, particleRepulsion*f);
+        //float f = 1-cur.y/height;
+      //  f = (vForceFactor*f) / f;
+		particleSystem.addRepulsionForce(cur, particleNeighborhood, particleRepulsion);
         
         cur.loopAround(0,0,width,height, pBounce);
 		cur.addDampingForce(pDampening); //slows the particle down
         
         //apply noise field force to the particle
         pos.set(cur.x,cur.y);
-        cur.applyForce(getField(pos));
-        //cur.updateColor(particleBrightnessShift);
+        ofVec2f fieldForce = getField(pos);
+        if(cur.y > midline)
+            fieldForce.y *= -1;
+        
+        cur.applyForce(fieldForce);
         
         if(mixColor){
         //particle color mix!
