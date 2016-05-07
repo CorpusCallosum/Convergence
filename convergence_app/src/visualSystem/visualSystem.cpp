@@ -101,6 +101,9 @@ void visualSystem::update(bool touched[36]){
                 if(pCounter >= particleSystem.size())
                     pCounter = 0;
                 }*/
+            
+            
+            particleSystem.erase(0);
 
             //This method creates a new particle
             Particle particle(0,0); //CREATE NEW PARTICLE
@@ -177,23 +180,20 @@ void visualSystem::update(bool touched[36]){
             neighbors[n]->setColor(c);
         }
         }
-        //delete particles?
+        
+        //DELETE PARTICLES
         if(cur.remove)
             particleSystem.erase(i);
+        
 	}
 	glEnd();
 	
-	
-    //mouse interaction
-    //particleSystem.addRepulsionForce(mouseX, mouseY, 50, repForce);
 	particleSystem.update();
     
     ofSetColor(pointOpacity, pointOpacity, pointOpacity, 255);
     particleSystem.draw();
     
-   // }
     display->end();
-
 
     
    // if(isOn){

@@ -22,7 +22,7 @@ void ofApp::setup(){
     
     cout<<"rod spacing"<<rodSpacing<<endl;
     
-    vs.init(visualSystemWidth, visualSystemHeight, 1); //K particles
+    vs.init(visualSystemWidth, visualSystemHeight, 5); //K particles
     vs.numRods = numRods;
     vs.rodSpacing = rodSpacing;
     vs.rodMargins = rodMargins;
