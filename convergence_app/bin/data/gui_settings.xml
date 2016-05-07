@@ -11,7 +11,7 @@
 		<density>2.2449</density>
 		<H_force>0</H_force>
 		<V_force>-0.826531</V_force>
-		<fade_amount>0</fade_amount>
+		<fade_amount>11</fade_amount>
 		<p_neighborhood>22.9592</p_neighborhood>
 		<p_repulsion>0.234694</p_repulsion>
 		<blur>1</blur>

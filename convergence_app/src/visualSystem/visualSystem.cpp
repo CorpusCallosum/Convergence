@@ -102,20 +102,10 @@ void visualSystem::update(bool touched[36]){
                     pCounter = 0;
                 }*/
             
-            
-            particleSystem.erase(0);
-
-            //This method creates a new particle
-            Particle particle(0,0); //CREATE NEW PARTICLE
-            
-            particle.setColor(currentColor.getCurrentColor());
-            particle.x = i*rodSpacing+rodMargins;
-            particle.y = height - 2*64; //2 meters from the top
-            particle.yv = pStartVel; //initial velocity
-            particle.xv = 0;
-            particleSystem.add(particle);
-            
-            
+            //one goes up
+            emitParticle(i, 1);
+            //one comes down
+            emitParticle(i, -5);
         }
     }
     
@@ -227,6 +217,21 @@ void visualSystem::update(bool touched[36]){
 
 ofFbo * visualSystem::getFrame(){    
     return display;
+}
+
+void visualSystem::emitParticle(int rod, float yVel){
+    //remove a particle
+    particleSystem.erase(0);
+    
+    //This method creates a new particle
+    Particle particle(0,0); //CREATE NEW PARTICLE
+    
+    particle.setColor(currentColor.getCurrentColor(rod/numRods));
+    particle.x = rod*rodSpacing+rodMargins;
+    particle.y = height - 2*64; //2 meters from the top
+    particle.yv = pStartVel*yVel; //initial velocity
+    particle.xv = 0;
+    particleSystem.add(particle);
 }
 
 /*

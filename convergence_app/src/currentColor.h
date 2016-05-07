@@ -22,6 +22,7 @@ public:
     //variables
     vector<ofColor> colorPalette;
     ofColor getCurrentColor();
+    ofColor getCurrentColor(float offset);
     
     ofColor fromColor;
     ofColor toColor;
