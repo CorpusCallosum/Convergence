@@ -19,12 +19,12 @@ void visualSystem::init(int w, int h, int kParticles){
     pCounter = 0;
     midline = height - 1.828 * 60; //6' from the top
     
-    currentColor.setup();
+    currentColor.setup( 2, 36 );
 
     
     //blur.allocate(width, height);
     display = new ofFbo();
-    display->allocate(width,height,GL_RGB);
+    display->allocate( width, height, GL_RGB );
     
     //particle system
     // this number describes how many bins are used
@@ -91,8 +91,6 @@ void visualSystem::update(bool touched[36]){
     
     currentColor.update();
     
-   
-    
     particleSystem.setTimeStep(timeStep);
     t = ofGetFrameNum() * timeSpeed;
     
@@ -107,7 +105,7 @@ void visualSystem::update(bool touched[36]){
     
     //fade out BG by drawing a rectangle
     ofSetColor(0, 0, 0, fadeAmt);
-    ofRect(0,0,width,height);
+    ofRect( 0, 0, width,height);
 
     //PARTICLE SYSTEM DRAWING STARTS HERE
     // if(isOn){
@@ -165,7 +163,7 @@ void visualSystem::update(bool touched[36]){
         }
         else if(cur.prevY > midline){
             //change particle color if previous y position was below midline only
-            cur.setColor(currentColor.getCurrentColor());
+            cur.setColor(currentColor.getCurrentColors()[ 0 ]);
         }
         
         cur.applyForce(fieldForce);
@@ -247,7 +245,7 @@ void visualSystem::emitParticle(int rod, int y, float yVel){
     //This method creates a new particle
     Particle particle(0,0); //CREATE NEW PARTICLE
     
-    particle.setColor(currentColor.getCurrentColor(rod/numRods));
+    particle.setColor( currentColor.getCurrentColors()[ rod ] );
     particle.x = rod*rodSpacing+rodMargins;
     particle.y = y;
     particle.yv = pStartVel*yVel; //initial velocity
