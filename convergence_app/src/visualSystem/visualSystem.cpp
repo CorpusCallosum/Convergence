@@ -157,8 +157,13 @@ void visualSystem::update(bool touched[36]){
         //apply noise field force to the particle
         pos.set(cur.x,cur.y);
         ofVec2f fieldForce = getField(pos);
-        if(cur.y > midline)
+        if(cur.y > midline){
             fieldForce.y *= -1;
+        }
+        else if(cur.prevY > midline){
+            //change particle color if previous y position was below midline only
+            cur.setColor(currentColor.getCurrentColor());
+        }
         
         cur.applyForce(fieldForce);
         
