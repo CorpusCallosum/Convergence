@@ -159,7 +159,7 @@ void ParticleSystem::addForce(float targetX, float targetY, float radius, float 
                         //cout<<"particle is above midline, abort..."<<endl;
                         break;
                     }
-                    else{
+                    else if(color != NULL){
                         //do color comparison here...
                         float beta = curParticle.color.getHueAngle();
                         float alpha = color.getHueAngle();

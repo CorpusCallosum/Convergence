@@ -45,14 +45,13 @@ void visualSystem::init(int w, int h, int kParticles){
 	for(int i = 0; i < kParticles * 1024; i++) {
 		float x = ofRandom(padding, width - padding);
 		//float y = ofRandom(padding, height - padding);
-        float y = midline;
-        
+        float y = height;
 		Particle particle(x, y);
         
         //color it
         int cNum = i % currentColor.colorPalette.size();
-        ofColor c = currentColor.colorPalette[cNum];
-        //ofColor c;
+        //ofColor c = currentColor.colorPalette[cNum];
+        ofColor c; //start color is white
         particle.setColor(c);
         
         //add it
@@ -135,7 +134,7 @@ void visualSystem::update(bool touched[36]){
             //  emitParticle(i, height, -1);
             
             int x = i*rodSpacing+rodMargins;
-            particleSystem.addVacuumForce(x, midline, 200, 3, currentColor.getCurrentColor());
+            particleSystem.addVacuumForce(x, midline, 200, 3);
         }
         
     }
