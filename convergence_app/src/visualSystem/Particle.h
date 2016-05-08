@@ -6,7 +6,7 @@
 
 class Particle {
 public:
-	float x, y;
+	float x, y, prevY;
 	float xv, yv;
 	float xf, yf;
     float _particleBrightnessShift;
@@ -23,6 +23,7 @@ public:
             remove = false;
 	}
 	void updatePosition(float timeStep) {
+        prevY = y;
 		xv += xf;
 		yv += yf;
 		x += xv * timeStep;

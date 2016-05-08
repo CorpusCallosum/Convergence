@@ -118,3 +118,9 @@ ofColor currentColor::getCurrentColor() {
     return currentColor;
     
 }
+
+ofColor currentColor::getCurrentColor(float offset) {
+    
+    return currentColor;
+    
+}

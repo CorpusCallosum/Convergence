@@ -22,12 +22,14 @@ class visualSystem{
     void mousePressed(int x, int y);
     void mouseReleased(int x, int y, int button);
     void mouseMoved(int x, int y);
+    void emitParticle(int rod, int y, float yVel);
+    
     ofVec2f getField(ofVec2f position);
     
     ofVideoPlayer 		testMovie;
     ofFbo *             display;
     
-    int width, height;
+    int width, height, midline;
     
     //noise field
     float t;
@@ -41,7 +43,7 @@ class visualSystem{
 	ParticleSystem particleSystem;
     
     //params
-    float particleNeighborhood, particleRepulsion, pDampening, pStartVel, pBounce;
+    float particleNeighborhood, particleRepulsion, pDampening, pStartVel, pBounce, vacuumRadius, vacuumPower;
     
     float complexity, pollenMass, timeSpeed;
     float phase, hForce, vForce, repForce;
@@ -50,7 +52,7 @@ class visualSystem{
     //fx
    //ofxGaussianBlur blur;
     
-    float blurAmount, depthCutoff, depthForce;
+    float blurAmount, depthCutoff, depthForce, vForceFactor;
     
     currentColor currentColor;
     

@@ -8,6 +8,3 @@
 4. That's it, now just run the software!
 
 ##TODO
-- setup ofxWatchdog
-- test autolaunch
-- set up daily reset

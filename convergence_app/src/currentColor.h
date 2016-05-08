@@ -26,6 +26,7 @@ public:
     vector <ofMesh> gradientZone;
     
     ofColor getCurrentColor();
+    ofColor getCurrentColor(float offset);
     
     ofColor fromColor;
     ofColor toColor;

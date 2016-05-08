@@ -14,7 +14,7 @@ void ofApp::setup(){
     //calculate rodspacing
     
     visualSystemWidth = 300;
-    visualSystemHeight = 300;
+    visualSystemHeight = 230;
     
     rodMargins = 10;
     numRods = 36;
@@ -22,7 +22,7 @@ void ofApp::setup(){
     
     cout<<"rod spacing"<<rodSpacing<<endl;
     
-    vs.init(visualSystemWidth, visualSystemHeight, 5); //K particles
+    vs.init(visualSystemWidth, visualSystemHeight, 10); //K particles
     vs.numRods = numRods;
     vs.rodSpacing = rodSpacing;
     vs.rodMargins = rodMargins;
@@ -55,6 +55,9 @@ void ofApp::update(){
     vs.pBounce = gui.pBounce;
     vs.pDampening = gui.pDampening;
     vs.mixColor = gui.colorMixing;
+    vs.vacuumRadius = gui.vacuumRadius;
+    vs.vacuumPower = gui.vacuumForce;
+    //vs.vForceFactor = gui.vForceFactor;
     //vs.particleBrightnessShift = gui.particleBrightnessShift;
     
     frame = vs.getFrame();
