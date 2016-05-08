@@ -51,8 +51,6 @@ void ofApp::update(){
         
         fbo.end();
         fbo.readToPixels(testImage.getPixels());
-        
-        
     }
     
     //list nodes for sending

@@ -18,9 +18,13 @@ public:
     
     void setup();
     void update();
+    void draw();
     
     //variables
     vector<ofColor> colorPalette;
+    vector <float> vertices;
+    vector <ofMesh> gradientZone;
+    
     ofColor getCurrentColor();
     
     ofColor fromColor;
