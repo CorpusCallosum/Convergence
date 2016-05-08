@@ -112,11 +112,15 @@ void ParticleSystem::addAttractionForce(float x, float y, float radius, float sc
 	addForce(x, y, radius, -scale);
 }
 
+void ParticleSystem::addVacuumForce(float x, float y, float radius, float scale, ofColor color) {
+    addForce(x, y, radius, -scale, true, color);
+}
+
 void ParticleSystem::addForce(const Particle& particle, float radius, float scale) {
 	addForce(particle.x, particle.y, radius, -scale);
 }
 
-void ParticleSystem::addForce(float targetX, float targetY, float radius, float scale) {
+void ParticleSystem::addForce(float targetX, float targetY, float radius, float scale, bool vacuum, ofColor color) {
 	float minX = targetX - radius;
 	float minY = targetY - radius;
 	float maxX = targetX + radius;
@@ -149,6 +153,27 @@ void ParticleSystem::addForce(float targetX, float targetY, float radius, float 
 			int n = curBin.size();
 			for(int i = 0; i < n; i++) {
 				Particle& curParticle = *(curBin[i]);
+                
+                if(vacuum){
+                    if(curParticle.y < midline){
+                        //cout<<"particle is above midline, abort..."<<endl;
+                        break;
+                    }
+                    else if(color != NULL){
+                        //do color comparison here...
+                        float beta = curParticle.color.getHueAngle();
+                        float alpha = color.getHueAngle();
+                        int phi = (int)abs(beta - alpha) % 360;       // This is either the distance or 360 - distance
+                        float distance = phi > 180 ? 360 - phi : phi;
+                        //cout<< "color distanc:"<<distance<<endl;
+                        float colorSimilarity = distance/180;
+                        //cout<< "color similarity:"<<colorSimilarity<<endl;
+                        if(colorSimilarity < .8)
+                            break;
+                        //scale *= colorSimilarity;
+                    }
+                }
+                
 				xd = curParticle.x - targetX;
 				yd = curParticle.y - targetY;
 				length = xd * xd + yd * yd;

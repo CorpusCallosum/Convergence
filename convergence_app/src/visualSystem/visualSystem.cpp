@@ -16,8 +16,10 @@ void visualSystem::init(int w, int h, int kParticles){
     width=w;
     height=h;
     particleBrightnessShift = 10;
-    mixColor = true;
     pCounter = 0;
+    midline = height - 1.828 * 60; //6' from the top
+    
+    currentColor.setup();
 
     
     //blur.allocate(width, height);
@@ -34,19 +36,25 @@ void visualSystem::init(int w, int h, int kParticles){
 	int binPower = 2;
     
 	particleSystem.setup(width, height, binPower);
+    particleSystem.midline = midline;
     
+    //INSTANTIATE PARTICLES AT START
 	//kParticles = 15;
 	float padding = 0;
 	float maxVelocity = 5;
 	for(int i = 0; i < kParticles * 1024; i++) {
 		float x = ofRandom(padding, width - padding);
-		float y = ofRandom(padding, height - padding);
-		//float xv = ofRandom(-maxVelocity, 0);
-		//float yv = ofRandom(-maxVelocity, maxVelocity);
-        
+		//float y = ofRandom(padding, height - padding);
+        float y = height;
 		Particle particle(x, y);
-        ofColor c;
+        
+        //color it
+        int cNum = i % currentColor.colorPalette.size();
+        //ofColor c = currentColor.colorPalette[cNum];
+        ofColor c; //start color is white
         particle.setColor(c);
+        
+        //add it
 		particleSystem.add(particle);
 	}
     
@@ -71,7 +79,7 @@ void visualSystem::init(int w, int h, int kParticles){
     hForce = .2;
     vForce = .2;
     
-    currentColor.setup();
+    
     
 }
 
@@ -83,32 +91,7 @@ void visualSystem::update(bool touched[36]){
     
     currentColor.update();
     
-    ofColor c;
-    c.r = 255;
-    c.g = 100;
-    c.b = 50;
-    
-    
-    //PARTICLE EMITER*******************************************************
-    for(int i=0; i < numRods; i++){
-        if(touched[i] == true){
-            
-                //emit a particle
-                //This method takes a partiicle we already have and moves them around, rather than creating new particles
-              /*  Particle& particle = particleSystem[pCounter];
-                //iterate the particle counter
-                pCounter ++;
-                if(pCounter >= particleSystem.size())
-                    pCounter = 0;
-                }*/
-            
-            //one goes up
-            int y  = height - 1.828 * 60; //6' from the top
-            emitParticle(i, y,  1);
-            //one comes down
-            emitParticle(i, height, -1);
-        }
-    }
+   
     
     particleSystem.setTimeStep(timeStep);
     t = ofGetFrameNum() * timeSpeed;
@@ -131,6 +114,31 @@ void visualSystem::update(bool touched[36]){
 	ofSetColor(lineOpacity, lineOpacity, lineOpacity, 255);
 	particleSystem.setupForces();
     
+    //PARTICLE EMITER*******************************************************
+    for(int i=0; i < numRods; i++){
+        if(touched[i] == true){
+            
+            //emit a particle
+            //This method takes a partiicle we already have and moves them around, rather than creating new particles
+            /*  Particle& particle = particleSystem[pCounter];
+             //iterate the particle counter
+             pCounter ++;
+             if(pCounter >= particleSystem.size())
+             pCounter = 0;
+             }*/
+            
+            //one goes up
+            // int y  = height - 1.828 * 60; //6' from the top
+            // emitParticle(i, y,  1);
+            //one comes down
+            //  emitParticle(i, height, -1);
+            
+            int x = i*rodSpacing+rodMargins;
+            particleSystem.addVacuumForce(x, midline, vacuumRadius, vacuumPower);
+        }
+        
+    }
+    
 	// apply per-particle forces
 	glBegin(GL_LINES);
     ofVec2f pos;
@@ -139,16 +147,28 @@ void visualSystem::update(bool touched[36]){
 		Particle& cur = particleSystem[i];
         
 		// particle force on other particles
-        float f = 1-cur.y/height;
-		particleSystem.addRepulsionForce(cur, particleNeighborhood*f, particleRepulsion*f);
+        //float f = 1-cur.y/height;
+      //  f = (vForceFactor*f) / f;
+		particleSystem.addRepulsionForce(cur, particleNeighborhood, particleRepulsion);
         
         cur.loopAround(0,0,width,height, pBounce);
 		cur.addDampingForce(pDampening); //slows the particle down
         
         //apply noise field force to the particle
         pos.set(cur.x,cur.y);
-        cur.applyForce(getField(pos));
-        //cur.updateColor(particleBrightnessShift);
+        ofVec2f fieldForce = getField(pos);
+        if(cur.y > midline){
+            fieldForce.y *= -1;
+            //make it white again?
+            ofColor white;
+            cur.setColor(white);
+        }
+        else if(cur.prevY > midline){
+            //change particle color if previous y position was below midline only
+            cur.setColor(currentColor.getCurrentColor());
+        }
+        
+        cur.applyForce(fieldForce);
         
         if(mixColor){
         //particle color mix!

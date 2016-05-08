@@ -11,15 +11,35 @@
 		<density>2.2449</density>
 		<H_force>0</H_force>
 		<V_force>-0.367347</V_force>
-		<fade_amount>11</fade_amount>
-		<p_neighborhood>22.9592</p_neighborhood>
-		<p_repulsion>0.739796</p_repulsion>
+		<fade_amount>98</fade_amount>
+		<p_neighborhood>9.94898</p_neighborhood>
+		<p_repulsion>0.403061</p_repulsion>
 		<blur>1</blur>
 		<Particle_Brightness>100</Particle_Brightness>
 	<p_start_Velocity>-19.898</p_start_Velocity>
 		<p_bounce>0.5</p_bounce>
 		<p_damp>0.1</p_damp>
 	<mix_colors>0</mix_colors>
+	<v_force_factor>0</v_force_factor>
 	</Visual_System>
 <GUI/>
+<Perlin_Noise_Wind>
+		<turbulence>0.0260204</turbulence>
+		<density>3.16327</density>
+		<H_force>0</H_force>
+		<V_force>-0.295918</V_force>
+	</Perlin_Noise_Wind>
+	<Particles>
+		<particle_speed>0.214286</particle_speed>
+		<p_start_Velocity>-10</p_start_Velocity>
+		<p_bounce>0.5</p_bounce>
+		<p_damp>0.112245</p_damp>
+		<p_neighborhood>4.59184</p_neighborhood>
+		<p_repulsion>3.26531</p_repulsion>
+		<mix_colors>0</mix_colors>
+	</Particles>
+	<Vacuum>
+		<radius>100</radius>
+		<strength>2</strength>
+	</Vacuum>
 </GUI>
