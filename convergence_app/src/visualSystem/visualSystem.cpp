@@ -143,6 +143,8 @@ void visualSystem::update(bool touched[36]){
 	glBegin(GL_LINES);
     ofVec2f pos;
     
+    int numAbove = 0;
+    
 	for(int i = 0; i < particleSystem.size(); i++) {
 		Particle& cur = particleSystem[i];
         
@@ -163,9 +165,26 @@ void visualSystem::update(bool touched[36]){
             ofColor white;
             cur.setColor(white);
         }
-        else if(cur.prevY > midline){
-            //change particle color if previous y position was below midline only
-            cur.setColor(currentColor.getCurrentColor());
+        else {
+            
+            if(cur.prevY > midline){
+                //change particle color if previous y position was below midline only
+                cur.setColor(currentColor.getCurrentColor());
+            }
+            numAbove ++;
+            if(numAbove > particleSystem.size()/2){
+                //remove a particle
+                particleSystem.erase(0);
+                
+                //This method creates a new particle
+                Particle particle(0,0); //CREATE NEW PARTICLE
+                
+                ofColor white;
+                particle.setColor(white);
+                particle.x = ofRandom(width);
+                particle.y = height;
+                particleSystem.add(particle);
+            }
         }
         
         cur.applyForce(fieldForce);
