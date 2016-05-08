@@ -29,6 +29,7 @@ public:
 	void addRepulsionForce(const Particle& particle, float radius, float scale);
 	void addRepulsionForce(float x, float y, float radius, float scale);
 	void addAttractionForce(const Particle& particle, float radius, float scale);
+    void addColorAttractionForce(const Particle& particle, float radius, float scale);
 	void addAttractionForce(float x, float y, float radius, float scale);
     
     void addVacuumForce(float x, float y, float radius, float scale, ofColor color = NULL);

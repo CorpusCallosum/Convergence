@@ -45,7 +45,7 @@ void visualSystem::init(int w, int h, int kParticles){
 	for(int i = 0; i < kParticles * 1024; i++) {
 		float x = ofRandom(padding, width - padding);
 		//float y = ofRandom(padding, height - padding);
-        float y = height;
+        float y = ofRandom(height-10, height);
 		Particle particle(x, y);
         
         //color it
@@ -153,6 +153,8 @@ void visualSystem::update(bool touched[36]){
       //  f = (vForceFactor*f) / f;
 		particleSystem.addRepulsionForce(cur, particleNeighborhood, particleRepulsion);
         
+        //particleSystem.addColorAttractionForce(cur, particleNeighborhood, particleRepulsion);
+        
         cur.loopAround(0,0,width,height, pBounce);
 		cur.addDampingForce(pDampening); //slows the particle down
         
@@ -200,16 +202,22 @@ void visualSystem::update(bool touched[36]){
             c.g = ((neighbors[n]->green + cur.green)/2)*255;
             c.b = ((neighbors[n]->blue + cur.blue)/2)*255;
             
-            float r = round(random());
-            
-            /*if(r)
-               neighbors[n]->setColor(cur.color);
-            else
-               cur.setColor(neighbors[n]->color);*/
-            
             neighbors[n]->setColor(c);
         }
         }
+        
+    
+        //Particles of a color stick together?
+      /*  vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood);
+        
+        for(int n = 0; n < neighbors.size(); n++) {
+            float s = u.getColorSimilarity(cur.color, neighbors[n]->color);
+            //slow him down?
+            float f = colorStickiness;
+            neighbors[n]->yv *= 1-s*f;
+            neighbors[n]->xv *= 1-s*f;
+        }*/
+    
         
         //DELETE PARTICLES
         if(cur.remove)

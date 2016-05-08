@@ -108,6 +108,10 @@ void ParticleSystem::addAttractionForce(const Particle& particle, float radius, 
 	addAttractionForce(particle.x, particle.y, radius, scale);
 }
 
+void ParticleSystem::addColorAttractionForce(const Particle& particle, float radius, float scale) {
+    addForce(particle.x, particle.y, radius, -scale, false, particle.color);
+}
+
 void ParticleSystem::addAttractionForce(float x, float y, float radius, float scale) {
 	addForce(x, y, radius, -scale);
 }
@@ -173,6 +177,19 @@ void ParticleSystem::addForce(float targetX, float targetY, float radius, float 
                         //scale *= colorSimilarity;
                     }
                 }
+                
+                
+                /*if(color != NULL){
+                    //do color comparison here...
+                    float beta = curParticle.color.getHueAngle();
+                    float alpha = color.getHueAngle();
+                    int phi = (int)abs(beta - alpha) % 360;       // This is either the distance or 360 - distance
+                    float distance = phi > 180 ? 360 - phi : phi;
+                    //cout<< "color distanc:"<<distance<<endl;
+                    float colorSimilarity = distance/180;
+                    //cout<< "color similarity:"<<colorSimilarity<<endl;
+                    scale *= colorSimilarity*2;
+                }*/
                 
 				xd = curParticle.x - targetX;
 				yd = curParticle.y - targetY;

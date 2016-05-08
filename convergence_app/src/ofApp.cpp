@@ -57,6 +57,7 @@ void ofApp::update(){
     vs.mixColor = gui.colorMixing;
     vs.vacuumRadius = gui.vacuumRadius;
     vs.vacuumPower = gui.vacuumForce;
+    vs.colorStickiness = gui.colorStickiness;
     //vs.vForceFactor = gui.vForceFactor;
     //vs.particleBrightnessShift = gui.particleBrightnessShift;
     

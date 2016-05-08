@@ -45,6 +45,7 @@ void gui::setup(int x){
     particleParams.add(particleNeighborhood.set("p neighborhood",4,0,50));
     particleParams.add(particleRepulsion.set("p repulsion",1,-1,10));
     particleParams.add(colorMixing.set("mix colors", false));
+    particleParams.add(colorStickiness.set("color stickiness", 0, -2, 2));
     
     //vacuum
     vacuumParams.setName("Vacuum");
