@@ -43,7 +43,7 @@ class visualSystem{
 	ParticleSystem particleSystem;
     
     //params
-    float particleNeighborhood, particleRepulsion, pDampening, pStartVel, pBounce;
+    float particleNeighborhood, particleRepulsion, pDampening, pStartVel, pBounce, vacuumRadius, vacuumPower;
     
     float complexity, pollenMass, timeSpeed;
     float phase, hForce, vForce, repForce;

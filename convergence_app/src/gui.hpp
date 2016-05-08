@@ -25,13 +25,17 @@ public:
     void update();
     void draw();
     
-    ofxPanel guiPanel;
-    ofParameterGroup visualSystemParams, dsParams;
+    
     ofParameter<float> flowSpeed, timeSpeed, flowComplexity, horizontalForce, verticalForce, particleNeighborhood, particleRepulsion, pBounce, pStartVel, pDampening, vForceFactor;
-    ofParameter<int> fadeAmt, blur, ledStripHue, ledStripBrightness, ledStripSaturation;
+    ofParameter<int> fadeAmt, blur, ledStripHue, ledStripBrightness, ledStripSaturation, vacuumRadius, vacuumForce;
     ofParameter<ofColor> ledStripsColor;
     
     ofParameter<bool> colorMixing;
     
     string xmlFile;
+
+private:
+    ofxPanel guiPanel;
+    ofParameterGroup visualSystemParams, dsParams, noiseParams, particleParams, vacuumParams;
+
 };

@@ -134,7 +134,7 @@ void visualSystem::update(bool touched[36]){
             //  emitParticle(i, height, -1);
             
             int x = i*rodSpacing+rodMargins;
-            particleSystem.addVacuumForce(x, midline, 200, 3);
+            particleSystem.addVacuumForce(x, midline, vacuumRadius, vacuumPower);
         }
         
     }
@@ -159,6 +159,9 @@ void visualSystem::update(bool touched[36]){
         ofVec2f fieldForce = getField(pos);
         if(cur.y > midline){
             fieldForce.y *= -1;
+            //make it white again?
+            ofColor white;
+            cur.setColor(white);
         }
         else if(cur.prevY > midline){
             //change particle color if previous y position was below midline only
