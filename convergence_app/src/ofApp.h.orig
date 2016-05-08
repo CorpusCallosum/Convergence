@@ -1,0 +1,61 @@
+#pragma once
+
+#include "ofMain.h"
+<<<<<<< HEAD
+#include "ofxArtNet.h"
+#include "serialReceiver.h"
+#include "currentColor.h"
+=======
+#include "visualSystem.h"
+#include "displaySystem.h"
+#include "gui.hpp"
+#include "serialReceiver.h"
+#include "ofxXmlSettings.h"
+
+>>>>>>> 43ce2f67ac3363a72684934471bc532a7c40b408
+
+class ofApp : public ofBaseApp{
+    
+public:
+    void setup();
+    void update();
+    void draw();
+    
+    void keyPressed  (int key);
+    void keyReleased(int key);
+    void mouseMoved(int x, int y );
+    void mouseDragged(int x, int y, int button);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void windowResized(int w, int h);
+    void dragEvent(ofDragInfo dragInfo);
+    void gotMessage(ofMessage msg);
+    
+    ofxArtnet artnet;
+    ofImage testImage;
+    ofFbo fbo;
+    ofColor color_array[ 512 ];
+    
+    serialReceiver serial_receiver;
+    int false_touch_time; //in ms
+    
+    currentColor current_color;
+    
+    bool rainbow;
+<<<<<<< HEAD
+    bool touch_debug;
+=======
+    
+    displaySystem ds;
+    visualSystem  vs;
+    ofFbo * frame;
+    
+    gui gui;
+    ofxXmlSettings settings;
+    
+    int visualSystemWidth, visualSystemHeight, rodSpacing, numRods, rodMargins;
+    
+    serialReceiver serialReceiver;
+
+>>>>>>> 43ce2f67ac3363a72684934471bc532a7c40b408
+};

@@ -12,6 +12,10 @@
 	<dict>
 		<key>3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A</key>
 		<string>https://github.com/hiroyuki/ofxArtnet.git</string>
+		<key>B7CCA6A8C889ED4C803FBF307564FD139754E943</key>
+		<string>https://github.com/patriciogonzalezvivo/ofxFX.git</string>
+		<key>BB48781AAC70C89AED1A649A93F25300AFE948DD</key>
+		<string>https://github.com/toolbits/ofxWatchdog.git</string>
 		<key>FB7385A568A092EDB8FBF061C1757D666DEF5231</key>
 		<string>https://github.com/FloatingPointCollective/Convergence.git</string>
 	</dict>
@@ -21,6 +25,10 @@
 	<dict>
 		<key>3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A</key>
 		<string>../../../../addons/ofxArtnet</string>
+		<key>B7CCA6A8C889ED4C803FBF307564FD139754E943</key>
+		<string>../../../../../addons/ofxFX</string>
+		<key>BB48781AAC70C89AED1A649A93F25300AFE948DD</key>
+		<string>../../../../../addons/ofxWatchdog</string>
 		<key>FB7385A568A092EDB8FBF061C1757D666DEF5231</key>
 		<string>../../..</string>
 	</dict>
@@ -47,6 +55,22 @@
 			<string>3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxArtnet</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B7CCA6A8C889ED4C803FBF307564FD139754E943</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxFX</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BB48781AAC70C89AED1A649A93F25300AFE948DD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxWatchdog</string>
 		</dict>
 	</array>
 </dict>
