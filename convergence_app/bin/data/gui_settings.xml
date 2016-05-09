@@ -24,8 +24,8 @@
 	</Visual_System>
 <GUI/>
 <Perlin_Noise_Wind>
-		<turbulence>0.0928571</turbulence>
-		<density>3.16327</density>
+		<turbulence>0.0795918</turbulence>
+		<density>1.02041</density>
 		<H_force>0</H_force>
 		<V_force>-0.295918</V_force>
 	</Perlin_Noise_Wind>
@@ -34,13 +34,13 @@
 		<p_start_Velocity>-10</p_start_Velocity>
 		<p_bounce>0.5</p_bounce>
 		<p_damp>0.112245</p_damp>
-		<p_neighborhood>4.59184</p_neighborhood>
-		<p_repulsion>3.26531</p_repulsion>
+		<p_neighborhood>4.84694</p_neighborhood>
+		<p_repulsion>2.81633</p_repulsion>
 		<mix_colors>0</mix_colors>
 	<color_stickiness>-0.0408163</color_stickiness>
 	</Particles>
 	<Vacuum>
-		<radius>100</radius>
-		<strength>2</strength>
+		<radius>42</radius>
+		<strength>3.57143</strength>
 	</Vacuum>
 </GUI>

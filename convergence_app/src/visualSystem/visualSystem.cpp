@@ -173,23 +173,33 @@ void visualSystem::update(bool touched[36]){
                 //change particle color if previous y position was below midline only
                 cur.setColor(currentColor.getCurrentColor());
             }
-            numAbove ++;
-            if(numAbove > particleSystem.size()/2){
-                //remove a particle
-                particleSystem.erase(0);
-                
-                //This method creates a new particle
-                Particle particle(0,0); //CREATE NEW PARTICLE
-                
-                ofColor white;
-                particle.setColor(white);
-                particle.x = ofRandom(width);
-                particle.y = height;
-                particleSystem.add(particle);
-            }
+            
+            numAbove++;
+            
         }
         
+        //cout<<"num above: "<<numAbove<<endl;
+        
         cur.applyForce(fieldForce);
+
+        
+        if(lastNumAbove > particleSystem.size()/2){
+            if(cur.y <= 1){
+                //remove a particle
+                /* particleSystem.erase(0);
+                 
+                 //This method creates a new particle
+                 Particle particle(0,0); //CREATE NEW PARTICLE
+                 
+                 ofColor white;
+                 particle.setColor(white);
+                 particle.x = ofRandom(width);
+                 particle.y = height;
+                 particleSystem.add(particle);*/
+                
+                cur.y = height;
+            }
+        }
         
         if(mixColor){
         //particle color mix!
@@ -224,6 +234,9 @@ void visualSystem::update(bool touched[36]){
             particleSystem.erase(i);
         
 	}
+    
+    lastNumAbove = numAbove;
+    
 	glEnd();
 	
 	particleSystem.update();

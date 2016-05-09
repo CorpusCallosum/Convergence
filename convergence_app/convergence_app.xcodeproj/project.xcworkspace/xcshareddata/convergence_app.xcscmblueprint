@@ -5,12 +5,14 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "FB7385A568A092EDB8FBF061C1757D666DEF5231" : 0,
-    "3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A" : 0
+    "3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A" : 0,
+    "BB48781AAC70C89AED1A649A93F25300AFE948DD" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5D6590FB-2461-4BD5-A559-2E10A5295576",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "FB7385A568A092EDB8FBF061C1757D666DEF5231" : "Convergence",
-    "3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A" : "addons\/ofxArtnet"
+    "3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A" : "addons\/ofxArtnet",
+    "BB48781AAC70C89AED1A649A93F25300AFE948DD" : "..\/addons\/ofxWatchdog"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "convergence_app",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -20,6 +22,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/hiroyuki\/ofxArtnet.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/toolbits\/ofxWatchdog.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BB48781AAC70C89AED1A649A93F25300AFE948DD"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/FloatingPointCollective\/Convergence.git",
