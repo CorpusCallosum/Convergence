@@ -133,6 +133,7 @@ void visualSystem::update(bool touched[36]){
             
             int x = i*rodSpacing+rodMargins;
             particleSystem.addVacuumForce(x, midline, vacuumRadius, vacuumPower);
+            
         }
         
     }
@@ -201,7 +202,7 @@ void visualSystem::update(bool touched[36]){
         
         if(mixColor){
         //particle color mix!
-        vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood/10);
+        vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood/2);
         
         for(int n = 0; n < neighbors.size(); n++) {
             //average colors
