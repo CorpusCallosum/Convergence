@@ -26,8 +26,8 @@ public:
     void draw();
     
     
-    ofParameter<float> flowSpeed, timeSpeed, flowComplexity, horizontalForce, verticalForce, particleNeighborhood, particleRepulsion, pBounce, pStartVel, pDampening, vForceFactor;
-    ofParameter<int> fadeAmt, blur, ledStripHue, ledStripBrightness, ledStripSaturation, vacuumRadius, vacuumForce;
+    ofParameter<float> flowSpeed, timeSpeed, flowComplexity, horizontalForce, verticalForce, particleNeighborhood, particleRepulsion, pBounce, pStartVel, pDampening, vForceFactor, colorStickiness, vacuumForce;
+    ofParameter<int> fadeAmt, blur, ledStripHue, ledStripBrightness, ledStripSaturation, vacuumRadius;
     ofParameter<ofColor> ledStripsColor;
     
     ofParameter<bool> colorMixing;

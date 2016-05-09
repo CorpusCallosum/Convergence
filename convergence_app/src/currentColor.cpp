@@ -107,7 +107,6 @@ void currentColor::setup( float minutes, int n ) {
 //--------------------------------------------------------------
 void currentColor::update() {
     
-    
     transSpeed = (float) colorTime / colorDuration;
     currentTime = ofGetSystemTime() - startTime;//how long the sketch has been running in m
     
@@ -160,5 +159,12 @@ void currentColor::draw( int x, int y ){
 vector <ofColor> currentColor::getCurrentColors() {
     
     return currentColors;
+    
+}
+
+//--------------------------------------------------------------
+ofColor currentColor::getCurrentColor() {
+    
+    return currentColors[0];
     
 }

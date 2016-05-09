@@ -21,6 +21,7 @@ public:
     void update();
     void draw( int x, int y );
     vector <ofColor> getCurrentColors();
+    ofColor getCurrentColor();
     
     
     //variables

@@ -133,7 +133,6 @@ void visualSystem::update(bool touched[36]){
             
             int x = i*rodSpacing+rodMargins;
             particleSystem.addVacuumForce(x, midline, vacuumRadius, vacuumPower);
-            
         }
         
     }
@@ -166,6 +165,7 @@ void visualSystem::update(bool touched[36]){
             ofColor white;
             cur.setColor(white);
         }
+<<<<<<< HEAD
         else {
             
             if(cur.prevY > midline){
@@ -175,6 +175,11 @@ void visualSystem::update(bool touched[36]){
             
             numAbove++;
             
+=======
+        else if(cur.prevY > midline){
+            //change particle color if previous y position was below midline only
+            cur.setColor(currentColor.getCurrentColors()[ 0 ]);
+>>>>>>> master
         }
         
         //cout<<"num above: "<<numAbove<<endl;
@@ -202,7 +207,7 @@ void visualSystem::update(bool touched[36]){
         
         if(mixColor){
         //particle color mix!
-        vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood/2);
+        vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood/10);
         
         for(int n = 0; n < neighbors.size(); n++) {
             //average colors

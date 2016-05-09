@@ -10,6 +10,7 @@
 #include "ofMain.h"
 #include "ParticleSystem.h"
 #include "currentColor.h"
+#include "utils.hpp"
 
 class visualSystem{
     
@@ -29,7 +30,7 @@ class visualSystem{
     ofVideoPlayer 		testMovie;
     ofFbo *             display;
     
-    int width, height, midline;
+    int width, height, midline, lastNumAbove;
     
     //noise field
     float t;
@@ -52,9 +53,11 @@ class visualSystem{
     //fx
    //ofxGaussianBlur blur;
     
-    float blurAmount, depthCutoff, depthForce, vForceFactor;
+    float blurAmount, depthCutoff, depthForce, vForceFactor, colorStickiness;
     
     currentColor currentColor;
+    
+    utils u;
     
     
 private:
