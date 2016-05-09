@@ -20,7 +20,7 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3F2DE5DB699805D0DBD2A598DC1E5F4D06AE884A</key>
-		<string>../../../../../addons/ofxArtnet</string>
+		<string>../../../../addons/ofxArtnet</string>
 		<key>FB7385A568A092EDB8FBF061C1757D666DEF5231</key>
 		<string>../../..</string>
 	</dict>

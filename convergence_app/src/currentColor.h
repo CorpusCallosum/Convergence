@@ -16,19 +16,31 @@ class currentColor {
     
 public:
     
-    void setup();
+    //methods
+    void setup( float minutes, int n );
     void update();
+    void draw( int x, int y );
+    vector <ofColor> getCurrentColors();
+    ofColor getCurrentColor();
+    
     
     //variables
     vector<ofColor> colorPalette;
-    ofColor getCurrentColor();
-    ofColor getCurrentColor(float offset);
+    vector <ofMesh> gradientZone;
+    vector <float> zoneSize;
     
-    ofColor fromColor;
-    ofColor toColor;
-    ofColor currentColor;
-    int nextColor;
-    int lastColor;
+    int imgWidth, imgHeight;
+    int nBars;
+    
+    ofImage colorPaletteImage;
+    ofPixels colorPalettePixels;
+    ofFbo fbo;
+    
+    vector <ofColor> currentColors;
+    vector <ofColor> fromColors;
+    vector <ofColor> toColors;
+    vector <int> lastColors;
+    vector <int> nextColors;
     
     float transSpeed; // moves 0 - 1 to transition fromColor toColor
     
@@ -39,6 +51,9 @@ public:
     long colorTime;
     int colorDuration; //how long each color lasts in ms
     int cycles;
+    
+    int cycleDuration;
+    float colorPosition;
     
     
 };

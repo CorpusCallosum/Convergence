@@ -26,11 +26,6 @@ public:
     void gotMessage(ofMessage msg);
     
     ofxArtnet artnet;
-    ofImage testImage;
-    ofFbo fbo;
-    ofColor color_array[ 512 ];
-    
-    bool rainbow;
     
     displaySystem ds;
     visualSystem  vs;
