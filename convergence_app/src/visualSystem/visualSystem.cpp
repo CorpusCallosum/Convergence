@@ -19,7 +19,7 @@ void visualSystem::init(int w, int h, int kParticles){
     pCounter = 0;
     midline = height - 1.828 * 60; //6' from the top
     
-    currentColor.setup( 2, 36 );
+    currentColor.setup( 2, 100 );
 
     
     //blur.allocate(width, height);

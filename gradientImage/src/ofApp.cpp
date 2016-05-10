@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    nBars = 36;
+    nBars = 100;
     currentColor.setup( 2, nBars );
 
 }
