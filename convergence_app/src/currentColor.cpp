@@ -28,32 +28,33 @@ void currentColor::setup( float minutes, int n ) {
     transSpeed = 0;
     cycles = 1;
     
-    colorPalette.resize( 10 );
-    gradientZone.resize( 9 );
-    zoneSize.resize( 10 );
+    colorPalette.resize( 9 );
+    gradientZone.resize( 8 );
+    zoneSize.resize( 9 );
     
     //AWESOME/BORING
-    colorPalette[ 0 ] = ofColor( 237, 237, 237 ); //79, 211, 73 ); // 101, 252, 99 ); //wite
-    colorPalette[ 1 ] = ofColor( 186, 255, 74 );   // 200, 23, 178 );   //
-    colorPalette[ 2 ] = ofColor( 28, 255, 238 ); //14, 229, 184 ); //21, 70, 228 );   //ice blue green
-    colorPalette[ 3 ] = ofColor( 40, 45, 250 ); //64, 52, 95 );    //blue
-    colorPalette[ 4 ] = ofColor( 255, 74, 213 ); // 203, 103, 10 );  //magenta
-    colorPalette[ 5 ] = ofColor( 52, 11, 64 );   // 200, 23, 178 );
-    colorPalette[ 6 ] = ofColor( 101, 252, 99 ); //neon
-    colorPalette[ 7 ] = ofColor( 203, 103, 10 );
-    colorPalette[ 8 ] = ofColor( 14, 229, 184  );
-    colorPalette[ 9 ] = ofColor( 237, 237, 237 ); //79, 211, 73 ); // 101, 252, 99 ); //white
+    colorPalette[ 0 ] = ofColor( 45, 255, 0 );
+    colorPalette[ 1 ] = ofColor( 0, 255, 255 );
+    colorPalette[ 2 ] = ofColor( 16, 0, 255 );
+    colorPalette[ 3 ] = ofColor( 147, 0, 188 );
+    colorPalette[ 4 ] = ofColor( 250, 3, 255 );
+    colorPalette[ 5 ] = ofColor( 255, 0, 0 );
+    colorPalette[ 6 ] = ofColor( 206, 255, 13 );
+    colorPalette[ 7 ] = ofColor( 255, 255, 255 );
+    colorPalette[ 8 ] = ofColor( 45, 255, 0 );
+    
+    
     
     zoneSize[ 0 ] = 0;
     zoneSize[ 1 ] = .216;
-    zoneSize[ 2 ] = .228;//.012;
-    zoneSize[ 3 ] = .264;//.036;
-    zoneSize[ 4 ] = .379;//.115;
-    zoneSize[ 5 ] = .461;//.082;
-    zoneSize[ 6 ] = .977;//.516;
-    zoneSize[ 7 ] = .992;//.015;
-    zoneSize[ 8 ] = .996;//.004;
-    zoneSize[ 9 ] = 1.0;
+    zoneSize[ 2 ] = zoneSize[ 1 ] + .012;
+    zoneSize[ 3 ] = zoneSize[ 2 ] + .036;
+    zoneSize[ 4 ] = zoneSize[ 3 ] + .515;
+    zoneSize[ 5 ] = zoneSize[ 4 ] + .09;
+    zoneSize[ 6 ] = zoneSize[ 5 ] + .015;
+    zoneSize[ 7 ] = zoneSize[ 6 ] + .115;
+    zoneSize[ 8 ] = zoneSize[ 7 ] + .01;
+    //zoneSize[ 9 ] = 1.0 - zoneSize[ 8 ];
     
     
     {

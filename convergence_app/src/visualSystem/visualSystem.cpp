@@ -105,7 +105,7 @@ void visualSystem::update(bool touched[36]){
     
     //fade out BG by drawing a rectangle
     ofSetColor(0, 0, 0, fadeAmt);
-    ofRect( 0, 0, width,height);
+    ofDrawRectangle( 0, 0, width,height);
 
     //PARTICLE SYSTEM DRAWING STARTS HERE
     // if(isOn){
