@@ -168,3 +168,16 @@ ofColor currentColor::getCurrentColor() {
     return currentColors[0];
     
 }
+
+//
+void currentColor::loadGradientImage(string path){
+    gradientImage.allocate(300, 300, OF_IMAGE_COLOR);
+    gradientImage.load("gradient.png");
+    gradientImagePixels = gradientImage.getPixels();
+}
+
+ofColor currentColor::getCurrentColorFromImage(float offset){
+    int p = (offset * gradientImage.getWidth() + currentTime/100);
+    p = p % (int)gradientImage.getWidth();
+    return gradientImage.getColor(p,0);
+}
