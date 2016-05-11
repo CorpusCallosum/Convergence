@@ -19,7 +19,12 @@ void visualSystem::init(int w, int h, int kParticles){
     pCounter = 0;
     midline = height - 1.828 * 60; //6' from the top
     
+<<<<<<< HEAD
+    currentColor.setup( 2, 100 );
+=======
     currentColor.setup( 2, 36 );
+    currentColor.loadGradientImage("gradient.png");
+>>>>>>> dev-jack
 
     
     //blur.allocate(width, height);
@@ -49,7 +54,7 @@ void visualSystem::init(int w, int h, int kParticles){
 		Particle particle(x, y);
         
         //color it
-        int cNum = i % currentColor.colorPalette.size();
+        //int cNum = i % currentColor.colorPalette.size();
         //ofColor c = currentColor.colorPalette[cNum];
         ofColor c; //start color is white
         particle.setColor(c);
@@ -105,7 +110,7 @@ void visualSystem::update(bool touched[36]){
     
     //fade out BG by drawing a rectangle
     ofSetColor(0, 0, 0, fadeAmt);
-    ofRect( 0, 0, width,height);
+    ofDrawRectangle( 0, 0, width,height);
 
     //PARTICLE SYSTEM DRAWING STARTS HERE
     // if(isOn){
@@ -133,6 +138,7 @@ void visualSystem::update(bool touched[36]){
             
             int x = i*rodSpacing+rodMargins;
             particleSystem.addVacuumForce(x, midline, vacuumRadius, vacuumPower);
+            
         }
         
     }
@@ -165,28 +171,20 @@ void visualSystem::update(bool touched[36]){
             ofColor white;
             cur.setColor(white);
         }
-<<<<<<< HEAD
         else {
-            
             if(cur.prevY > midline){
                 //change particle color if previous y position was below midline only
-                cur.setColor(currentColor.getCurrentColor());
+                //cur.setColor(currentColor.getCurrentColor());
+                cur.setColor(currentColor.getCurrentColorFromImage(cur.x/width));
             }
-            
             numAbove++;
-            
-=======
-        else if(cur.prevY > midline){
-            //change particle color if previous y position was below midline only
-            cur.setColor(currentColor.getCurrentColors()[ 0 ]);
->>>>>>> master
         }
         
         //cout<<"num above: "<<numAbove<<endl;
         
         cur.applyForce(fieldForce);
 
-        
+        //move particles back down when top overflows
         if(lastNumAbove > particleSystem.size()/2){
             if(cur.y <= 1){
                 //remove a particle
@@ -207,7 +205,7 @@ void visualSystem::update(bool touched[36]){
         
         if(mixColor){
         //particle color mix!
-        vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood/10);
+        vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood/2);
         
         for(int n = 0; n < neighbors.size(); n++) {
             //average colors

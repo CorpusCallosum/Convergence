@@ -20,6 +20,7 @@ void visualSystem::init(int w, int h, int kParticles){
     midline = height - 1.828 * 60; //6' from the top
     
     currentColor.setup( 2, 100 );
+    currentColor.loadGradientImage("gradient.png");
 
     
     //blur.allocate(width, height);
@@ -49,7 +50,7 @@ void visualSystem::init(int w, int h, int kParticles){
 		Particle particle(x, y);
         
         //color it
-        int cNum = i % currentColor.colorPalette.size();
+        //int cNum = i % currentColor.colorPalette.size();
         //ofColor c = currentColor.colorPalette[cNum];
         ofColor c; //start color is white
         particle.setColor(c);
@@ -167,21 +168,19 @@ void visualSystem::update(bool touched[36]){
             cur.setColor(white);
         }
         else {
-            
             if(cur.prevY > midline){
                 //change particle color if previous y position was below midline only
-                cur.setColor(currentColor.getCurrentColor());
+                //cur.setColor(currentColor.getCurrentColor());
+                cur.setColor(currentColor.getCurrentColorFromImage(cur.x/width));
             }
-            
             numAbove++;
-            
         }
         
         //cout<<"num above: "<<numAbove<<endl;
         
         cur.applyForce(fieldForce);
 
-        
+        //move particles back down when top overflows
         if(lastNumAbove > particleSystem.size()/2){
             if(cur.y <= 1){
                 //remove a particle

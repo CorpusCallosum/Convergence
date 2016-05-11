@@ -22,7 +22,12 @@ public:
     void draw( int x, int y );
     vector <ofColor> getCurrentColors();
     ofColor getCurrentColor();
+    void loadGradientImage(string path);
+    ofColor getCurrentColorFromImage(float offset = 0);
     
+    //
+    ofImage gradientImage;
+    ofPixels gradientImagePixels;
     
     //variables
     vector<ofColor> colorPalette;
