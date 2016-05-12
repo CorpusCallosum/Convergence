@@ -19,7 +19,7 @@ displaySystem::displaySystem(){
 void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargins){
     //at first you must specify the Ip address of this machine
     artnet.setup("192.168.0.1"); //make sure the firewall is deactivated at this point
-    artnet.verbose = false;
+    artnet.verbose = true;
     width = w;
     height = h;
     
@@ -42,21 +42,15 @@ void displaySystem::updateDisplay(ofFbo * frame){
     
     for(int i=0; i< numRodsOuter; i++){
     
-        //crop the LED strip
-        strip.begin();
-            //float x, float y, float w, float h, float sx, float sy
-            _frame->getTexture().drawSubsection(0,0,1,height,i*_rodSpacing + _rodMargins, 0);
-        strip.end();
-        
-        strip.readToPixels(stripImage.getPixels());
+       
         
         //draw to LEDs
         
         ////IP address
         string ipStart = "192.168.0.";
-        int ipEnd = (50+floor(i/16));
+        int ipEnd = (51+floor(i/16));
         
-        if(ipEnd == 50){
+      //  if(ipEnd == 50){
         
         char *ip = new char[12];
         sprintf(ip, "192.168.0.%d", ipEnd);
@@ -68,12 +62,31 @@ void displaySystem::updateDisplay(ofFbo * frame){
         int universe = (i%8)*2;
         //cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
         
-        artnet.sendDmx(ip, subnet, universe, stripImage.getPixels(), 500);
+        //int ofxArtnet::sendDmx( string targetIp, int targetSubnet, int targetUniverse, const unsigned char* data512, int size )
+        //first half
+        //crop the LED strip
+        strip.begin();
+        //float x, float y, float w, float h, float sx, float sy
+        _frame->getTexture().drawSubsection(0,0,1,height/2,i*_rodSpacing + _rodMargins, 0);
+        strip.end();
+        
+        strip.readToPixels(stripImage.getPixels());
+        artnet.sendDmx(ip, subnet, universe, stripImage.getPixels(), 512);
+        
+        //second half
+        //crop the LED strip
+        strip.begin();
+        //float x, float y, float w, float h, float sx, float sy
+        _frame->getTexture().drawSubsection(0,0,1,height/2,i*_rodSpacing + _rodMargins, height/2);
+        strip.end();
+        
+        strip.readToPixels(stripImage.getPixels());
+        artnet.sendDmx(ip, subnet, universe+1, stripImage.getPixels(), 512);
         //strip 1 is universes 0 and 1
         
         //cleanup!
         delete[] ip;
-        }
+       // }
     }
         
 }
