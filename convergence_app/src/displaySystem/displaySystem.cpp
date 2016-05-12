@@ -54,9 +54,9 @@ void displaySystem::updateDisplay(ofFbo * frame){
         
         ////IP address
         string ipStart = "192.168.0.";
-        int ipEnd = (50+floor(i/16));
+        int ipEnd = (51+floor(i/16));
         
-        if(ipEnd == 50){
+      //  if(ipEnd == 50){
         
         char *ip = new char[12];
         sprintf(ip, "192.168.0.%d", ipEnd);
@@ -73,7 +73,7 @@ void displaySystem::updateDisplay(ofFbo * frame){
         
         //cleanup!
         delete[] ip;
-        }
+       // }
     }
         
 }
