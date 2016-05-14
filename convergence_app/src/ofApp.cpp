@@ -10,7 +10,7 @@ void ofApp::setup(){
     
     //calculate rodspacing
     visualSystemWidth = 300;
-    visualSystemHeight = 230;
+    visualSystemHeight = 240;
     
     rodMargins = 10;
     numRods = 36;
@@ -25,8 +25,9 @@ void ofApp::setup(){
     
     ds.init(visualSystemWidth, visualSystemHeight, numRods, rodSpacing, rodMargins);
     gui.setup(visualSystemWidth+20);
-    serialReceiver.setup(10, numRods, rodSpacing);
+    serialReceiver.setup(1, numRods, rodSpacing);
     
+   // ds.loadTestImage("test.png");
 }
 
 //--------------------------------------------------------------

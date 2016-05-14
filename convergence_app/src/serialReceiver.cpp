@@ -17,7 +17,7 @@ void serialReceiver::setup( int t , int numRods, int rodSpacing) {
     serial.listDevices();
     vector <ofSerialDeviceInfo> deviceList = serial.getDeviceList();
      
-    serial.setup("/dev/tty.usbmodem1411", 9600); // serial port of arduino
+    serial.setup("/dev/cu.usbmodem1589091", 9600); // serial port of arduino
     serial.flush( true, true );
 
     boxX = ofGetWindowWidth() / NPINS;
@@ -39,7 +39,7 @@ void serialReceiver::setup( int t , int numRods, int rodSpacing) {
 //--------------------------------------------------------------
 void serialReceiver::update(){
     
-    //serialFunction();
+    serialFunction();
     
     for ( int i = 0; i < _numRods; i ++ ) {
         

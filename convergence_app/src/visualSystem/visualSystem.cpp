@@ -99,6 +99,7 @@ void visualSystem::update(bool touched[36]){
     
     //draw to FBO
     display->begin();
+    //ofClear(0);
 
     //ofEnableAlphaBlending();
     //ofBackground(0,0,0,100);

@@ -19,6 +19,7 @@ class displaySystem{
     void draw(int x, int y);
     void updateDisplay(ofFbo * frame);
     void clear();
+    void loadTestImage(string path);
     
     int width, height, numRodsOuter, numRodsInner;
     
@@ -32,5 +33,7 @@ class displaySystem{
     vector <ofImage> stripImages;
     
     int _rodSpacing, _numRods, _rodMargins;
+    
+    bool test;
 
 };

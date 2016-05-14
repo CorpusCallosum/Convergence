@@ -8,12 +8,12 @@ void ofApp::setup(){
     ofBackground( 0 );
     ofSetLogLevel(OF_LOG_NOTICE);
     
-    /*serial.listDevices();
+    serial.listDevices();
     vector <ofSerialDeviceInfo> deviceList = serial.getDeviceList();
     
     
-    serial.setup("/dev/tty.usbmodem1411", 9600); // serial port of arduino
-    serial.flush( true, true );*/
+    serial.setup("/dev/cu.usbmodem1589091", 9600); // serial port of arduino
+    serial.flush( true, true );
 
     
     boxX = ofGetWindowWidth() / NPINS;
@@ -30,7 +30,7 @@ void ofApp::setup(){
     }
     
     current_time = ofGetElapsedTimeMillis();
-    false_touch_timeout = 10; //in milliseconds
+    false_touch_timeout = 0; //in milliseconds
     
 
 }
@@ -38,13 +38,14 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    //serialFunction();
+    serialFunction();
 
     for ( int i = 0; i < NBOARDS * NPINS; i ++ ) {
         
         if ( pos_touched[ i ] ) {
             if ( current_time - touch_time[ i ] > false_touch_timeout ) {
                 touched[ i ] = true;
+            
             }
         }
         
@@ -61,10 +62,14 @@ void ofApp::update(){
 
             if ( touched[ i ] ) {
                 color[ i ].set( 0, 255, 0 );
+                cout << i << " on" <<endl;
+
                 
             }
             else {
                 color[ i ].set( 255, 0, 0 );
+                cout << i << " off" <<endl;
+
             }
         }
         
