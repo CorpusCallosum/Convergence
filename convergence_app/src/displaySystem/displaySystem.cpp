@@ -29,6 +29,8 @@ void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargi
     numRodsOuter = numRods;
     
     strip.allocate(1, height, GL_RGB);
+    
+    frameCount = 0;
 }
 
 //update the display with a new image
@@ -40,10 +42,10 @@ void displaySystem::updateDisplay(ofFbo * frame){
    // strip.allocate(1,height,GL_RGB);
     ofSetColor(255);
     
-    for(int i=0; i< numRodsOuter; i++){
     
-       
-        
+    //for(int i=0; i< numRodsOuter; i++){
+    //ADDRESS 1 strip per frame?
+    int i = frameCount;
         //draw to LEDs
         
         ////IP address
@@ -87,8 +89,8 @@ void displaySystem::updateDisplay(ofFbo * frame){
         //cleanup!
         delete[] ip;
        // }
-    }
-        
+   // }
+    frameCount++;
 }
 
 //draw to screen
