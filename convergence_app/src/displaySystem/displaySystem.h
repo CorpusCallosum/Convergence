@@ -31,6 +31,6 @@ class displaySystem{
     vector <ofFbo> stripFBOs;
     vector <ofImage> stripImages;
     
-    int _rodSpacing, _numRods, _rodMargins;
+    int _rodSpacing, _numRods, _rodMargins, frameCount;
 
 };
