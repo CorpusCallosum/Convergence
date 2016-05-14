@@ -17,10 +17,9 @@ displaySystem::displaySystem(){
 }
 
 void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargins){
-    test = false;
     //at first you must specify the Ip address of this machine
     artnet.setup("192.168.0.1"); //make sure the firewall is deactivated at this point
-    artnet.verbose = false;
+    artnet.verbose = true;
     width = w;
     height = h;
     
@@ -30,28 +29,43 @@ void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargi
     numRodsOuter = numRods;
     
     strip.allocate(1, height, GL_RGB);
-    stripImage.allocate(1, height, OF_IMAGE_COLOR);
     
-    //clear at start
-    clear();
+    frameCount = 0;
 }
 
 //update the display with a new image
 void displaySystem::updateDisplay(ofFbo * frame){
-    if(!test){
-        _frame = frame;
-    }
-    else{
-       
-    }
-   
-    // _frame->readToPixels(testImage.getPixels());
+    _frame = frame;
     
-    // strip.allocate(1,height,GL_RGB);
+   // _frame->readToPixels(testImage.getPixels());
+    
+   // strip.allocate(1,height,GL_RGB);
     ofSetColor(255);
     
-    for(int i=0; i< _numRods; i++){
+    
+    //for(int i=0; i< numRodsOuter; i++){
+    //ADDRESS 1 strip per frame?
+    int i = frameCount;
+        //draw to LEDs
         
+        ////IP address
+        string ipStart = "192.168.0.";
+        int ipEnd = (51+floor(i/16));
+        
+      //  if(ipEnd == 50){
+        
+        char *ip = new char[12];
+        sprintf(ip, "192.168.0.%d", ipEnd);
+        
+        ////subnet
+        int subnet = (int)floor(i/8)%2;
+        
+        ////universe
+        int universe = (i%8)*2;
+        //cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
+        
+        //int ofxArtnet::sendDmx( string targetIp, int targetSubnet, int targetUniverse, const unsigned char* data512, int size )
+        //first half
         //crop the LED strip
         strip.begin();
         //float x, float y, float w, float h, float sx, float sy
@@ -59,33 +73,24 @@ void displaySystem::updateDisplay(ofFbo * frame){
         strip.end();
         
         strip.readToPixels(stripImage.getPixels());
+        artnet.sendDmx(ip, subnet, universe, stripImage.getPixels(), 512);
         
-        //draw to LEDs
+        //second half
+        //crop the LED strip
+        strip.begin();
+        //float x, float y, float w, float h, float sx, float sy
+        _frame->getTexture().drawSubsection(0,0,1,height/2,i*_rodSpacing + _rodMargins, height/2);
+        strip.end();
         
-        ////IP address
-        string ipStart = "192.168.0.";
-        int ipEnd = (51+floor(i/16));
+        strip.readToPixels(stripImage.getPixels());
+        artnet.sendDmx(ip, subnet, universe+1, stripImage.getPixels(), 512);
+        //strip 1 is universes 0 and 1
         
-        //if(ipEnd == 51){
-            
-            char *ip = new char[12];
-            sprintf(ip, "192.168.0.%d", ipEnd);
-            
-            ////subnet
-            int subnet = (int)floor(i/8)%2;
-            
-            ////universe
-            int universe = (i%8)*2;
-            //cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
-            
-            artnet.sendDmx(ip, subnet, universe, stripImage.getPixels(), (height/2)*3);
-            //strip 1 is universes 0 and 1
-            
-            //cleanup!
-            delete[] ip;
-        //}
-    }
-    
+        //cleanup!
+        delete[] ip;
+       // }
+   // }
+    frameCount++;
 }
 
 //draw to screen
@@ -103,45 +108,7 @@ void displaySystem::draw(int x, int y){
     
 }
 
-
 void displaySystem::clear(){
-    cout<<"CLEAR LEDS"<<endl;
     //send clear signal to LED strips
-    ofColor black;
-    black.r = 0;
-    black.g = 0;
-    black.b = 0;
-    stripImage.setColor(black);
-    artnet.sendDmx("192.168.0.51", 0, 0, stripImage.getPixels(), 512);
-    artnet.sendDmx("192.168.0.51", 0, 2, stripImage.getPixels(), 512);
-    for(int i=0; i< _numRods; i++){
-        //draw to LEDs
-        ////IP address
-        string ipStart = "192.168.0.";
-        int ipEnd = (51+floor(i/16));
-            
-            char *ip = new char[12];
-            sprintf(ip, "192.168.0.%d", ipEnd);
-            
-            ////subnet
-            int subnet = (int)floor(i/8)%2;
-            
-            ////universe
-            int universe = (i%8)*2;
-            cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
-            
-            artnet.sendDmx(ip, subnet, universe, stripImage.getPixels(), 512);
-            //strip 1 is universes 0 and 1
-            
-            //cleanup!
-            delete[] ip;
-    }
-}
-
-void displaySystem::loadTestImage(string path){
-    testImage.load(path);
-    _frame->begin();
-    testImage.draw(0, 0, width, height);
-    _frame->end();
-    test = true;
+    
 }
