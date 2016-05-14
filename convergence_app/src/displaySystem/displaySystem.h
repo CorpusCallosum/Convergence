@@ -32,5 +32,7 @@ class displaySystem{
     vector <ofImage> stripImages;
     
     int _rodSpacing, _numRods, _rodMargins, frameCount;
+    
+    
 
 };
