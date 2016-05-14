@@ -43,9 +43,9 @@ void displaySystem::updateDisplay(ofFbo * frame){
     ofSetColor(255);
     
     
-    //for(int i=0; i< numRodsOuter; i++){
+    for(int i=0; i< _numRods; i++){
     //ADDRESS 1 strip per frame?
-    int i = frameCount;
+    //int i = frameCount;
         //draw to LEDs
         
         ////IP address
@@ -69,11 +69,16 @@ void displaySystem::updateDisplay(ofFbo * frame){
         //crop the LED strip
         strip.begin();
         //float x, float y, float w, float h, float sx, float sy
-        _frame->getTexture().drawSubsection(0,0,1,height/2,i*_rodSpacing + _rodMargins, 0);
+        _frame->getTexture().drawSubsection(0,0,1,height/2,0*_rodSpacing + _rodMargins, 0);
         strip.end();
         
         strip.readToPixels(stripImage.getPixels());
+        
+        if(i==0)
+            stripImage.setColor(0);
+
         artnet.sendDmx(ip, subnet, universe, stripImage.getPixels(), 512);
+        
         
         //second half
         //crop the LED strip
@@ -83,14 +88,21 @@ void displaySystem::updateDisplay(ofFbo * frame){
         strip.end();
         
         strip.readToPixels(stripImage.getPixels());
+        
+        //if(i!=0)
+          //  stripImage.setColor(0);
+
+        
         artnet.sendDmx(ip, subnet, universe+1, stripImage.getPixels(), 512);
         //strip 1 is universes 0 and 1
         
         //cleanup!
         delete[] ip;
        // }
-   // }
+    }
     frameCount++;
+    if(frameCount>=_numRods)
+        frameCount = 0;
 }
 
 //draw to screen
