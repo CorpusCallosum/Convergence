@@ -23,13 +23,13 @@ class displaySystem{
     int width, height, numRodsOuter, numRodsInner;
     
     private:
-    ofFbo * _frame;\
-    ofFbo strip;
+    ofFbo * _frame;
+    ofFbo stripFBO, strip;
     ofxArtnet artnet;
     ofImage testImage, stripImage;
     
-    vector <ofFbo> stripFBOs;
-    vector <ofImage> stripImages;
+    vector <ofFbo*> stripFBOs;
+    vector <ofImage*> stripImages;
     
     int _rodSpacing, _numRods, _rodMargins, frameCount;
     
