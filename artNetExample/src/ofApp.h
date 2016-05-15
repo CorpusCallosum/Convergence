@@ -25,6 +25,8 @@ class ofApp : public ofBaseApp{
         ofFbo fbo;
         ofColor color_array[ 512 ];
     
+        int frame;
+    
         bool rainbow;
 
 		
