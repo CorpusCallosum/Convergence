@@ -42,10 +42,9 @@ void ofApp::update(){
         int subnet = (int)floor(i/8) % 2;
         int universe = (i % 8) * 2;
 
-        if (i < 3) {
-            cout << "send dmx strip #" << i << " to: " << ip << ", " << subnet << ", universes:" << universe << " and " << (universe + 1) << endl;
-            cout << "color: " << currentColor << endl;
-        }
+        cout << "send dmx strip #" << i << " to: " << ip << ", " << subnet << ", universes:" << universe << " and " << (universe + 1) << endl;
+        cout << "color: " << currentColor << endl << endl;
+        
 
         artnet.sendDmx(ip, subnet, universe, testImage.getPixels(), 512);
         artnet.sendDmx(ip, subnet, universe + 1, testImage.getPixels(), 512);
