@@ -37,6 +37,11 @@ void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargi
         ofFbo *newFBO = new ofFbo();
         newFBO->allocate(1, height/2, GL_RGB);
         stripFBOs.push_back(newFBO);
+        
+        stripImages2.push_back(new ofImage);
+        ofFbo *newFBO2 = new ofFbo();
+        newFBO2->allocate(1, height/2, GL_RGB);
+        stripFBOs2.push_back(newFBO2);
     }
     
 }
@@ -44,7 +49,7 @@ void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargi
 //update the display with a new image
 void displaySystem::updateDisplay(ofFbo * frame){
     _frame = frame;
-    
+    //sleep(1);
     // _frame->readToPixels(testImage.getPixels());
     
     // strip.allocate(1,height,GL_RGB);
@@ -76,10 +81,12 @@ void displaySystem::updateDisplay(ofFbo * frame){
         //first half
         //crop the LED strip
         //strip.clear();
+        int numChannels = (height/2)*3;
+        
         stripFBOs.at(i)->begin();
         ofClear(0);
         //float x, float y, float w, float h, float sx, float sy
-        _frame->getTexture().drawSubsection(0,0,1,height/2,i*_rodSpacing + _rodMargins, 0);
+        _frame->getTexture().drawSubsection(0,1,1,height/2,i*_rodSpacing + _rodMargins, 0);
         stripFBOs.at(i)->end();
         
         stripFBOs.at(i)->readToPixels(stripImages.at(i)->getPixels());
@@ -87,24 +94,31 @@ void displaySystem::updateDisplay(ofFbo * frame){
        // if(i==0)
          //   stripImage.setColor(0);
         
-        artnet.sendDmx(ip, subnet, universe, stripImages.at(i)->getPixels(), (height/2)*3);
-        
+        artnet.sendDmx(ip, subnet, universe, stripImages.at(i)->getPixels(), numChannels);
         
         //second half
-        //crop the LED strip
-       /* strip.begin();
+        stripFBOs2.at(i)->begin();
         ofClear(0);
         //float x, float y, float w, float h, float sx, float sy
         _frame->getTexture().drawSubsection(0,0,1,height/2,i*_rodSpacing + _rodMargins, height/2);
+        stripFBOs2.at(i)->end();
+        
+        stripFBOs2.at(i)->readToPixels(stripImages2.at(i)->getPixels());
+        artnet.sendDmx(ip, subnet, universe+1, stripImages2.at(i)->getPixels(), numChannels);
+
+        
+       /* //crop the LED strip
+        stripFB.begin();
+        ofClear(0);
+        //float x, float y, float w, float h, float sx, float sy
         strip.end();
         
-        strip.readToPixels(stripImage.getPixels());
+        strip.readToPixels(stripImage.getPixels());*/
         
         //if(i!=0)
         //  stripImage.setColor(0);
         
         
-        artnet.sendDmx(ip, subnet, universe+1, stripImage.getPixels(), 512);*/
         //strip 1 is universes 0 and 1
         
         //cleanup!
