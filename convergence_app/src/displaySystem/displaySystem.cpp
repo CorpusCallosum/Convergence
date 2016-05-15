@@ -28,6 +28,14 @@ void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargi
     _rodMargins = rodMargins;
     numRodsOuter = numRods;
     
+    //init and allocate all the FBOs
+    for(int i = 0; i<=_numRods; i++)
+    {
+        ofFbo stripFBO = * new ofFbo();
+        stripFBO.allocate(1, height, GL_RGB);
+        stripFBOs.push_back(stripFBO);
+    }
+    
     strip.allocate(1, height, GL_RGB);
     
     frameCount = 0;
