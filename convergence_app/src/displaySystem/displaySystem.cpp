@@ -90,9 +90,6 @@ void displaySystem::updateDisplay(ofFbo * frame){
         stripFBOs.at(i)->end();
         
         stripFBOs.at(i)->readToPixels(stripImages.at(i)->getPixels());
-       //
-       // if(i==0)
-         //   stripImage.setColor(0);
         
         artnet.sendDmx(ip, subnet, universe, stripImages.at(i)->getPixels(), numChannels);
         
@@ -125,9 +122,9 @@ void displaySystem::updateDisplay(ofFbo * frame){
         delete[] ip;
         // }
     }
-    frameCount++;
+    /*frameCount++;
     if(frameCount>=_numRods)
-        frameCount = 0;
+        frameCount = 0;*/
 }
 
 //draw to screen
@@ -143,6 +140,7 @@ void displaySystem::draw(int x, int y){
         strip.draw(x+_rodSpacing*i+_rodMargins, y+10+height);*/
          //stripImages.at(i)->draw(x+_rodSpacing*i+_rodMargins, y+10+height);
         stripFBOs.at(i)->draw(x+_rodSpacing*i+_rodMargins, y+10+height);
+        stripFBOs2.at(i)->draw(x+_rodSpacing*i+_rodMargins, y+15+height*1.5);
     }
     
 }

@@ -113,19 +113,19 @@ void ofApp::serialFunction(){
         int myByte = 0;
         
         myByte = serial.readByte();
-        cout << myByte << endl;
+        //cout << myByte << endl;
         for ( int i = 0; i < NBOARDS * NPINS; i ++ ) {
             if ( myByte == i * 2 ){
                 pos_touched[ i ] = true;
                 touch_time[ i ] = ofGetElapsedTimeMillis();
                 //touched[ i ] = true;
-                //cout << i << "on" <<endl;
+                cout << i << "on" <<endl;
                 
             }
             if ( myByte == i * 2 + 1 ){
                 pos_touched[ i ] = false;
                 //touched[ i ] = false;
-                //cout << i << "off" <<endl;
+                cout << i << "off" <<endl;
             }
         }
        

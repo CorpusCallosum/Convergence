@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/displaySystem/displaySystem.cpp"
-            timestampString = "485039882.414867"
+            timestampString = "485042600.054669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "displaySystem::updateDisplay(ofFbo * frame)"
             landmarkType = "5">
          </BreakpointContent>
