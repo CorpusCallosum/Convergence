@@ -31,6 +31,15 @@ void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargi
     strip.allocate(1, height, GL_RGB);
     
     frameCount = 0;
+    
+    for(int i=0; i<_numRods; i++){
+        ofFbo * newFbo = new ofFbo;
+        newFbo->allocate(1, height, GL_RGB);
+        stripFBOs.push_back(*newFbo);
+        
+        stripImages.push_back(*new ofImage);
+    }
+    
 }
 
 //update the display with a new image
@@ -50,7 +59,7 @@ void displaySystem::updateDisplay(ofFbo * frame){
         
         ////IP address
         string ipStart = "192.168.0.";
-        int ipEnd = (51+floor(i/16));
+        int ipEnd = (51+((int)floor(i/16)%3));
         
       //  if(ipEnd == 50){
         
@@ -62,27 +71,27 @@ void displaySystem::updateDisplay(ofFbo * frame){
         
         ////universe
         int universe = (i%8)*2;
-        //cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
+        cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
         
         //int ofxArtnet::sendDmx( string targetIp, int targetSubnet, int targetUniverse, const unsigned char* data512, int size )
         //first half
         //crop the LED strip
-        strip.begin();
+        stripFBOs.at(i).begin();
         //float x, float y, float w, float h, float sx, float sy
-        _frame->getTexture().drawSubsection(0,0,1,height/2,0*_rodSpacing + _rodMargins, 0);
-        strip.end();
+        _frame->getTexture().drawSubsection(0,0,1,height/2,i*_rodSpacing + _rodMargins, 0);
+        stripFBOs.at(i).end();
         
-        strip.readToPixels(stripImage.getPixels());
+        stripFBOs.at(i).readToPixels(stripImages.at(i));
         
-        if(i==0)
-            stripImage.setColor(0);
+        //if(i==0)
+          //  stripImage.setColor(0);
 
-        artnet.sendDmx(ip, subnet, universe, stripImage.getPixels(), 512);
+        artnet.sendDmx(ip, subnet, universe, stripImages.at(i).getPixels(), 512);
         
         
         //second half
         //crop the LED strip
-        strip.begin();
+       /* strip.begin();
         //float x, float y, float w, float h, float sx, float sy
         _frame->getTexture().drawSubsection(0,0,1,height/2,i*_rodSpacing + _rodMargins, height/2);
         strip.end();
@@ -94,7 +103,7 @@ void displaySystem::updateDisplay(ofFbo * frame){
 
         
         artnet.sendDmx(ip, subnet, universe+1, stripImage.getPixels(), 512);
-        //strip 1 is universes 0 and 1
+        //strip 1 is universes 0 and 1*/
         
         //cleanup!
         delete[] ip;
@@ -112,10 +121,10 @@ void displaySystem::draw(int x, int y){
     _frame->draw(x,y);
     
     for(int i=0; i< numRodsOuter; i++){
-        strip.begin();
-        _frame->getTexture().drawSubsection(0,0,1,height,i*_rodSpacing+_rodMargins,0);
-        strip.end();
-        strip.draw(x+_rodSpacing*i+_rodMargins, y+10+height);
+       // strip.begin();
+       // _frame->getTexture().drawSubsection(0,0,1,height,i*_rodSpacing+_rodMargins,0);
+       // strip.end();
+        stripImages.at(i).draw(x+_rodSpacing*i+_rodMargins, y+10+height);
     }
     
 }

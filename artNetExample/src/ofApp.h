@@ -19,10 +19,14 @@ class ofApp : public ofBaseApp{
         void windowResized(int w, int h);
         void dragEvent(ofDragInfo dragInfo);
         void gotMessage(ofMessage msg);
-        
+    
+    void updateRainbow(int index);
+    
         ofxArtnet artnet;
-        ofImage testImage;
-        ofFbo fbo;
+        vector <ofImage> testImage;
+        ofImage testImageSingle;
+    
+        vector <ofFbo> fbo;
         ofColor color_array[ 512 ];
     
         bool rainbow;
