@@ -164,10 +164,9 @@ vector <ofColor> currentColor::getCurrentColors() {
 }
 
 //--------------------------------------------------------------
-ofColor currentColor::getCurrentColor() {
-    
-    return currentColors[0];
-    
+ofColor currentColor::getCurrentColor(float i) {
+    int colorCount = round(i*100);
+    return currentColors[colorCount];
 }
 
 //

@@ -21,7 +21,7 @@ public:
     void update();
     void draw( int x, int y );
     vector <ofColor> getCurrentColors();
-    ofColor getCurrentColor();
+    ofColor getCurrentColor(float i = 0);
     void loadGradientImage(string path);
     ofColor getCurrentColorFromImage(float offset = 0);
     
