@@ -35,12 +35,12 @@ void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargi
     for(int i=0;i<36;i++){
         stripImages.push_back(new ofImage);
         ofFbo *newFBO = new ofFbo();
-        newFBO->allocate(1, height/2, GL_RGB);
+        newFBO->allocate(1, height, GL_RGB);
         stripFBOs.push_back(newFBO);
         
         stripImages2.push_back(new ofImage);
         ofFbo *newFBO2 = new ofFbo();
-        newFBO2->allocate(1, height/2, GL_RGB);
+        newFBO2->allocate(1, height, GL_RGB);
         stripFBOs2.push_back(newFBO2);
     }
     
@@ -61,7 +61,7 @@ void displaySystem::updateDisplay(ofFbo * frame){
         //fix for A5 -> C9
         int addressCount = i;
         if(i == 4)
-            addressCount = 39;
+            addressCount = 40;
         
         //draw to LEDs
         ////IP address
@@ -76,18 +76,19 @@ void displaySystem::updateDisplay(ofFbo * frame){
         ////universe
         int universe = (addressCount%8)*2;
         
-        //cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
+        cout<<"send dmx strip #"<<i<< " to: ip:"<<ip<<", subnet:"<<subnet<<", universe:"<<universe<<endl;
         
         //int ofxArtnet::sendDmx( string targetIp, int targetSubnet, int targetUniverse, const unsigned char* data512, int size )
         //first half
         //crop the LED strip
         //strip.clear();
-        int numChannels = (height/2)*3;
+        int numChannels = 510;
+        int universeHeight = numChannels/3;
         
         stripFBOs.at(i)->begin();
         ofClear(0);
         //float x, float y, float w, float h, float sx, float sy
-        _frame->getTexture().drawSubsection(0,1,1,height/2,i*_rodSpacing + _rodMargins, 0);
+        _frame->getTexture().drawSubsection(0,1,1,height,i*_rodSpacing + _rodMargins, 0);
         stripFBOs.at(i)->end();
         
         stripFBOs.at(i)->readToPixels(stripImages.at(i)->getPixels());
@@ -98,10 +99,11 @@ void displaySystem::updateDisplay(ofFbo * frame){
         stripFBOs2.at(i)->begin();
         ofClear(0);
         //float x, float y, float w, float h, float sx, float sy
-        _frame->getTexture().drawSubsection(0,0,1,height/2,i*_rodSpacing + _rodMargins, height/2);
+        _frame->getTexture().drawSubsection(0,1,1,height/2,i*_rodSpacing + _rodMargins, universeHeight);
         stripFBOs2.at(i)->end();
         
         stripFBOs2.at(i)->readToPixels(stripImages2.at(i)->getPixels());
+        
         artnet.sendDmx(ip, subnet, universe+1, stripImages2.at(i)->getPixels(), numChannels);
 
         
