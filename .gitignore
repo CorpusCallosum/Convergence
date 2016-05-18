@@ -4,4 +4,6 @@
 *.DS_Store
 convergence_app/build/
 artNetExample/build/
+gradientImage/build/
 serial_read_three_sources/build/
+*.orig

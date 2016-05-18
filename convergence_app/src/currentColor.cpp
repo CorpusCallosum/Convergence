@@ -166,10 +166,9 @@ vector <ofColor> currentColor::getCurrentColors() {
 }
 
 //--------------------------------------------------------------
-ofColor currentColor::getCurrentColor() {
-    
-    return currentColors[0];
-    
+ofColor currentColor::getCurrentColor(float i) {
+    int colorCount = round(i*100);
+    return currentColors[colorCount];
 }
 
 //
@@ -180,7 +179,8 @@ void currentColor::loadGradientImage(string path){
 }
 
 ofColor currentColor::getCurrentColorFromImage(float offset){
-    int p = (offset * gradientImage.getWidth() + currentTime/100);
+    int slowness = 100;//this number affects the rate of change, bigger number makes the colors change more slowly
+    int p = (offset * gradientImage.getWidth() + currentTime/slowness);
     p = p % (int)gradientImage.getWidth();
     return gradientImage.getColor(p,0);
 }
