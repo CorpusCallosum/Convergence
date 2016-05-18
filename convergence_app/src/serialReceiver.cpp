@@ -40,6 +40,14 @@ void serialReceiver::setup( int t , int numRods, int rodSpacing) {
 void serialReceiver::update(){
     
     serialFunction();
+
+    //clear out the inputs after 2 seconds in case 
+    if ( current_time  >= 2000 && current_time < 2200 ) {
+        for ( int i = 0; i < _numRods; i ++ ) {
+            pos_touched[ i ] = false;
+            touched[ i ] = false;
+        }
+    }
     
     for ( int i = 0; i < _numRods; i ++ ) {
         
@@ -393,8 +401,18 @@ void serialReceiver::keyReleased(int key){
             pos_touched[ 35 ] = false;
             break;
             
+        case '/':
+            serial.close();
+            break;
+            
     }
     
     
+}
+
+//--------------------------------------------------------------
+void serialReceiver::exit(){
+    serial.flush( true, true );
+    serial.close();
 }
 

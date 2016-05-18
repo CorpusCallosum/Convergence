@@ -39,10 +39,12 @@ void currentColor::setup( float minutes, int n ) {
     colorPalette[ 3 ] = ofColor( 72, 186, 228 );// 147, 0, 188 );
     colorPalette[ 4 ] = ofColor( 0, 6, 253 );//250, 3, 255 );
     colorPalette[ 5 ] = ofColor( 113, 0, 218 );//255, 0, 0 );
-    colorPalette[ 6 ] = ofColor( 255, 43, 243 );//255, 255, 255 );
-    colorPalette[ 7 ] = ofColor( 238, 0, 0 );//206, 255, 13 ); //RED
+    colorPalette[ 6 ] = ofColor( 169, 55, 201 );//255, 255, 255 );
+    colorPalette[ 7 ] = ofColor( 255, 43, 243 );//255, 255, 255 );
+    //colorPalette[ 7 ] = ofColor( 238, 0, 0 );//206, 255, 13 );
     colorPalette[ 8 ] = ofColor(237, 237, 237 );
     colorPalette[ 9 ] = ofColor( 0, 171, 24 );//237, 237, 237 );
+    
     
     zoneSize[ 0 ] = 0;
     zoneSize[ 1 ] = .21;
