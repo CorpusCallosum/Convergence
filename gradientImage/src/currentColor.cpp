@@ -28,32 +28,34 @@ void currentColor::setup( float minutes, int n ) {
     transSpeed = 0;
     cycles = 1;
     
-    colorPalette.resize( 9 );
-    gradientZone.resize( 8 );
-    zoneSize.resize( 9 );
+    colorPalette.resize( 10 );
+    gradientZone.resize( 9 );
+    zoneSize.resize( 10 );
 
     //AWESOME/BORING
-    colorPalette[ 0 ] = ofColor( 45, 255, 0 );
-    colorPalette[ 1 ] = ofColor( 0, 255, 255 );
-    colorPalette[ 2 ] = ofColor( 16, 0, 255 );
-    colorPalette[ 3 ] = ofColor( 147, 0, 188 );
-    colorPalette[ 4 ] = ofColor( 250, 3, 255 );
-    colorPalette[ 5 ] = ofColor( 255, 0, 0 );
-    colorPalette[ 6 ] = ofColor( 255, 255, 255 );
-    colorPalette[ 7 ] = ofColor( 206, 255, 13 );
-    colorPalette[ 8 ] = ofColor( 45, 255, 0 );
+    colorPalette[ 0 ] = ofColor( 0, 171, 24 );//45, 255, 0 );
+    colorPalette[ 1 ] = ofColor( 74, 252, 141 );//0, 255, 255 );
+    colorPalette[ 2 ] = ofColor( 0, 246, 255 );//16, 0, 255 );
+    colorPalette[ 3 ] = ofColor( 72, 186, 228 );// 147, 0, 188 );
+    colorPalette[ 4 ] = ofColor( 0, 6, 253 );//250, 3, 255 );
+    colorPalette[ 5 ] = ofColor( 113, 0, 218 );//255, 0, 0 );
+    colorPalette[ 6 ] = ofColor( 255, 43, 243 );//255, 255, 255 );
+    colorPalette[ 7 ] = ofColor( 238, 0, 0 );//206, 255, 13 );
+    colorPalette[ 8 ] = ofColor(237, 237, 237 );
+    colorPalette[ 9 ] = ofColor( 0, 171, 24 );//237, 237, 237 );
    
 
     
     zoneSize[ 0 ] = 0;
-    zoneSize[ 1 ] = .216;
-    zoneSize[ 2 ] = zoneSize[ 1 ] + .012;
-    zoneSize[ 3 ] = zoneSize[ 2 ] + .036;
-    zoneSize[ 4 ] = zoneSize[ 3 ] + .515;
+    zoneSize[ 1 ] = .21;
+    zoneSize[ 2 ] = zoneSize[ 1 ] + .02;
+    zoneSize[ 3 ] = zoneSize[ 2 ] + .04;
+    zoneSize[ 4 ] = zoneSize[ 3 ] + .45;
     zoneSize[ 5 ] = zoneSize[ 4 ] + .09;
-    zoneSize[ 6 ] = zoneSize[ 5 ] + .015;
-    zoneSize[ 7 ] = zoneSize[ 6 ] + .115;
-    zoneSize[ 8 ] = zoneSize[ 7 ] + .01;
+    zoneSize[ 6 ] = zoneSize[ 5 ] + .02;
+    zoneSize[ 7 ] = zoneSize[ 6 ] + .12;
+    zoneSize[ 8 ] = zoneSize[ 7 ] + .02;
+    zoneSize[ 9 ] = zoneSize[ 8 ] + .03;
     //zoneSize[ 9 ] = 1.0 - zoneSize[ 8 ];
     
     
