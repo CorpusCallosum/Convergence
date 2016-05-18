@@ -19,7 +19,7 @@ displaySystem::displaySystem(){
 void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargins){
     //at first you must specify the Ip address of this machine
     artnet.setup("192.168.0.1"); //make sure the firewall is deactivated at this point
-    artnet.verbose = true;
+    artnet.verbose = false;
     width = w;
     height = h;
     
@@ -76,7 +76,7 @@ void displaySystem::updateDisplay(ofFbo * frame){
         ////universe
         int universe = (addressCount%8)*2;
         
-        cout<<"send dmx strip #"<<i<< " to: ip:"<<ip<<", subnet:"<<subnet<<", universe:"<<universe<<endl;
+        //cout<<"send dmx strip #"<<i<< " to: ip:"<<ip<<", subnet:"<<subnet<<", universe:"<<universe<<endl;
         
         //int ofxArtnet::sendDmx( string targetIp, int targetSubnet, int targetUniverse, const unsigned char* data512, int size )
         //first half

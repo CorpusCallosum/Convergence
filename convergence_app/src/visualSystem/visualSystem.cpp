@@ -171,8 +171,8 @@ void visualSystem::update(bool touched[36]){
         else {
             if(cur.prevY > midline){
                 //change particle color if previous y position was below midline only
-                //cur.setColor(currentColor.getCurrentColor());
-                cur.setColor(currentColor.getCurrentColorFromImage(cur.x/width));
+                cur.setColor(currentColor.getCurrentColor(cur.x/width));
+                //cur.setColor(currentColor.getCurrentColorFromImage(cur.x/width));
             }
             numAbove++;
         }

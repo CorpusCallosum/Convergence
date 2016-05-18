@@ -34,8 +34,8 @@
 		<p_start_Velocity>-10</p_start_Velocity>
 		<p_bounce>0.5</p_bounce>
 		<p_damp>0.112245</p_damp>
-		<p_neighborhood>4.84694</p_neighborhood>
-		<p_repulsion>2.81633</p_repulsion>
+		<p_neighborhood>6.12245</p_neighborhood>
+		<p_repulsion>2.2551</p_repulsion>
 		<mix_colors>0</mix_colors>
 	<color_stickiness>-0.0408163</color_stickiness>
 	</Particles>
