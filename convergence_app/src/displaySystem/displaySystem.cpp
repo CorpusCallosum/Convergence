@@ -57,24 +57,25 @@ void displaySystem::updateDisplay(ofFbo * frame){
     
     
     for(int i=0; i< _numRods; i++){
-        //ADDRESS 1 strip per frame?
-        //int i = frameCount;
+        
+        //fix for A5 -> C9
+        int addressCount = i;
+        if(i == 4)
+            addressCount = 39;
+        
         //draw to LEDs
-        
         ////IP address
-        string ipStart = "192.168.0.";
-        int ipEnd = (51+(int)floor(i/16)%3);
-        
-        //  if(ipEnd == 50){
-        
+        //string ipStart = "192.168.0.";
+        int ipEnd = (51+(int)floor(addressCount/16)%3);
         char *ip = new char[12];
         sprintf(ip, "192.168.0.%d", ipEnd);
         
         ////subnet
-        int subnet = (int)floor(i/8)%2;
+        int subnet = (int)floor(addressCount/8)%2;
         
         ////universe
-        int universe = (i%8)*2;
+        int universe = (addressCount%8)*2;
+        
         //cout<<"send dmx strip #"<<i<< " to: "<<ip<<", "<<subnet<<", "<<universe<<endl;
         
         //int ofxArtnet::sendDmx( string targetIp, int targetSubnet, int targetUniverse, const unsigned char* data512, int size )
