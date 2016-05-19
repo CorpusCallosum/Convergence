@@ -5,7 +5,7 @@
 // You can have up to 4 on one i2c bus but one is enough for testing!
 Adafruit_MPR121 cap[ NBOARDS ] = Adafruit_MPR121();
 
-bool debug = 1;
+bool debug = 0;
 
 int cap_reading[ NBOARDS * 12 ][ 10 ] = {{ 0 }};
 int cap_total[ NBOARDS * 12 ] = { 0 };
