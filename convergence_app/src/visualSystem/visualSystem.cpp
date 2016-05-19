@@ -166,7 +166,7 @@ void visualSystem::update(bool touched[36]){
             fieldForce.y *= -1;
             //make it white again?
             ofColor white;
-            int brightness = 150;
+            int brightness = 200;
             white.r = brightness;
             white.g = brightness;
             white.b = brightness;

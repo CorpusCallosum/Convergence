@@ -34,17 +34,19 @@ public:
     bool pos_touched[ NBOARDS * NPINS ];
     bool touched[ NBOARDS * NPINS ];
     bool lastTouched[ NBOARDS * NPINS ];
+    int readings[ NBOARDS * NPINS ];
+    bool start;
     
     //int nPins[ NBOARDS ];
     ofColor color[ NBOARDS * NPINS ];
     
-    int boxX, boxY;
+    int boxX, boxY, currentReadingIndex;
     
     int touch_time[ NBOARDS * NPINS ];
     int current_time;
     int false_touch_timeout;
     
-    int _rodSpacing, _numRods;
+    int _rodSpacing, _numRods, place;
 
 };
 

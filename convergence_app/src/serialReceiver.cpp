@@ -29,10 +29,15 @@ void serialReceiver::setup( int t , int numRods, int rodSpacing) {
         lastTouched[ i ] = false;
         color[ i ].set( 255, 0, 0 );
         touch_time[ i ] = ofGetElapsedTimeMillis();
+        readings[i] = 0;
     }
     
     current_time = ofGetElapsedTimeMillis();
     false_touch_timeout = t; //in milliseconds
+    
+    start = false;
+    
+    place = 0;
    
 }
 
@@ -92,16 +97,6 @@ void serialReceiver::draw(int x, int y){
     //ofBackground( 0 );
     
     for ( int i = 0; i < _numRods; i ++ ) {
-       /* int j;
-        if ( i >= 0 && i < 12 ) {
-            j = 0;
-        }
-        if ( i >= 12 && i < 24 ) {
-            j = 1;
-        }
-        if ( i >= 24 && i < 36 ) {
-            j = 2;
-        }*/
         ofSetColor( color[ i ] );
         ofDrawRectangle(( i ) * _rodSpacing + x , y, 5, 10 );
     }
@@ -111,11 +106,29 @@ void serialReceiver::draw(int x, int y){
 //--------------------------------------------------------------
 void serialReceiver::serialFunction() {
     while ( serial.available() > 0 ){
-        int myByte = 0;
+        int byte;
         
-        myByte = serial.readByte();
-        cout << myByte << endl;
-        for ( int i = 0; i < _numRods; i ++ ) {
+        byte = serial.readByte();
+        cout << byte << endl;
+        
+        if(place == 1){
+            //byte is index
+            currentReadingIndex = byte;
+            place = 2;
+        }
+        else if(place == 2){
+            //byte is reading
+            readings[currentReadingIndex] = byte;
+        }
+        
+        if(byte == 0){
+            //got a delimiter
+            //start = true;
+            place = 1;
+        }
+        
+        
+        /*for ( int i = 0; i < _numRods; i ++ ) {
             if ( myByte == i * 2 ){
                 cout<<"rod "<< i << " ON"<< endl;
                 pos_touched[ i ] = true;
@@ -128,7 +141,7 @@ void serialReceiver::serialFunction() {
                 pos_touched[ i ] = false;
                 //cout << i << "off" <<endl;
             }
-        }
+        }*/
         
     }
 }
