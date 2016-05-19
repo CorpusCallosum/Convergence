@@ -30,6 +30,7 @@ void serialReceiver::setup( int t , int numRods, int rodSpacing) {
         color[ i ].set( 255, 0, 0 );
         touch_time[ i ] = ofGetElapsedTimeMillis();
         readings[i] = 0;
+        baselines[i] = 0;
     }
     
     current_time = ofGetElapsedTimeMillis();
@@ -109,7 +110,7 @@ void serialReceiver::serialFunction() {
         int byte;
         
         byte = serial.readByte();
-        cout << byte << endl;
+        cout << "byte: "<<byte << endl;
         
         if(place == 1){
             //byte is index
@@ -118,10 +119,24 @@ void serialReceiver::serialFunction() {
         }
         else if(place == 2){
             //byte is reading
-            readings[currentReadingIndex] = byte;
+            int reading = byte;
+            cout<<"reading at "<< currentReadingIndex <<": "<<reading<<endl;
+            readings[currentReadingIndex] = reading;
+            place = 0;
+            
+            if(ofGetElapsedTimeMillis() < 5000){
+                baselines[currentReadingIndex] = reading;
+                cout<<"baseline: "<<baselines[currentReadingIndex]<<endl;
+            }
+            else{
+                float dif = baselines[currentReadingIndex] - reading;
+                diffs[currentReadingIndex] = dif;
+                cout<<"dif: "<<dif<<endl;
+            }
+            
         }
         
-        if(byte == 0){
+        if(byte == 255){
             //got a delimiter
             //start = true;
             place = 1;

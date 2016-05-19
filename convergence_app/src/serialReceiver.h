@@ -35,6 +35,9 @@ public:
     bool touched[ NBOARDS * NPINS ];
     bool lastTouched[ NBOARDS * NPINS ];
     int readings[ NBOARDS * NPINS ];
+    int baselines[ NBOARDS * NPINS ];
+    float averages[ NBOARDS * NPINS ];
+    float diffs[ NBOARDS * NPINS ];
     bool start;
     
     //int nPins[ NBOARDS ];

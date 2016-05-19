@@ -46,7 +46,8 @@ void ofApp::update(){
     vs.complexity = gui.flowComplexity;
     vs.particleNeighborhood = gui.particleNeighborhood;
     vs.particleRepulsion = gui.particleRepulsion;
-    vs.update(serialReceiver.touched);
+    vs.update(serialReceiver.diffs);
+    
     vs.blurAmount = gui.blur;
     vs.pStartVel = gui.pStartVel;
     vs.pBounce = gui.pBounce;

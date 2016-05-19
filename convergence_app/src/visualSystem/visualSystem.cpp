@@ -88,7 +88,7 @@ void visualSystem::reset(){
     
 }
 
-void visualSystem::update(bool touched[36]){
+void visualSystem::update(float touched[36]){
     
     currentColor.update();
     
@@ -116,7 +116,7 @@ void visualSystem::update(bool touched[36]){
     
     //PARTICLE EMITER*******************************************************
     for(int i=0; i < numRods; i++){
-        if(touched[i] == true){
+        //if(touched[i] == true){
             
             //emit a particle
             //This method takes a partiicle we already have and moves them around, rather than creating new particles
@@ -134,9 +134,9 @@ void visualSystem::update(bool touched[36]){
             //  emitParticle(i, height, -1);
             
             int x = i*rodSpacing+rodMargins;
-            particleSystem.addVacuumForce(x, midline, vacuumRadius, vacuumPower);
+            particleSystem.addVacuumForce(x, midline, vacuumRadius, touched[i]);
             
-        }
+       // }
         
     }
     

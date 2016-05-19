@@ -19,7 +19,7 @@ class visualSystem{
     void reset();
     ofFbo * getFrame();
     void loadTestMovie(string path);
-    void update(bool touched[36]);
+    void update(float touched[36]);
     void mousePressed(int x, int y);
     void mouseReleased(int x, int y, int button);
     void mouseMoved(int x, int y);
