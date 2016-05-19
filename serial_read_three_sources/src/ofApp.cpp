@@ -39,6 +39,14 @@ void ofApp::setup(){
 void ofApp::update(){
     
     serialFunction();
+    
+    //clear out the inputs after 2 seconds in case
+    if ( current_time  >= 2000 && current_time < 2200 ) {
+        for ( int i = 0; i < NBOARDS * NPINS; i ++ ) {
+            pos_touched[ i ] = false;
+            touched[ i ] = false;
+        }
+    }
 
     for ( int i = 0; i < NBOARDS * NPINS; i ++ ) {
         
@@ -451,4 +459,10 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+//--------------------------------------------------------------
+void ofApp::exit(){
+    serial.flush( true, true );
+    serial.close();
 }

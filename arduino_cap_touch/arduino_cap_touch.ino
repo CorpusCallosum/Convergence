@@ -21,6 +21,7 @@ void setup() {
   }
   
   for ( int j = 0; j < NBOARDS; j++ ) {
+    //cap[ j ].setThresholds( 10, 10 );
     lasttouched[ j ] = 0;
     currtouched[ j ] = 0;
   }
@@ -60,34 +61,40 @@ void loop() {
     for (uint8_t i=0; i<12; i++) {
       // it if *is* touched and *wasnt* touched before, alert!
       if ((currtouched[ j ] & _BV(i)) && !(lasttouched[ j ] & _BV(i)) ) {
-        
+
         if(debug){
-        Serial.print("Board : ");
+        /*Serial.print("Board : ");
         Serial.print(j);
         Serial.print(" Pin : ");
         Serial.print(i); 
-        Serial.println(" touched");
+        Serial.println(" touched");*/
+        Serial.print("//////////////////////////////////////////////////////////////////////////////////////////");
+        Serial.println( j * 24 + i * 2 ); //even number to indicate on
         }
 
         
         else{
-        Serial.write( j * 24 + i * 2 ); //even number to indicate on
+          Serial.write( j * 24 + i * 2 ); //even number to indicate on
         //Serial.println( j * 24 + i * 2 ); //even number to indicate on
         }
       }
       // if it *was* touched and now *isnt*, alert!
       if (!(currtouched[ j ] & _BV(i)) && (lasttouched[ j ] & _BV(i)) ) {
+
         
         if(debug){
-        Serial.print("Board : ");
+        /*Serial.print("Board : ");
         Serial.print(j);
         Serial.print(" Pin : ");
         Serial.print(i); 
-        Serial.println(" released");
+        Serial.println(" released");*/
+        Serial.print("************************************************************************************************");
+        Serial.println( j * 24 + i * 2 + 1 ); //odd number to indicate off
+
         }
 
         else{
-        Serial.write( j * 24 + i * 2 + 1 ); //odd number to indicate off
+          Serial.write( j * 24 + i * 2 + 1 ); //odd number to indicate off
         //Serial.println( j * 24 + i * 2 + 1 ); //odd number to indicate off
         }
       }
@@ -99,9 +106,12 @@ void loop() {
   }
 
   // comment out this line for detailed data from the sensor!
-  return;
+  delay(100);
+  //return;
   
-  for ( int j = 0; j < NBOARDS; j ++ ) {
+  for ( int j = 0; j < 1; j ++ ) {
+  //for ( int j = 0; j < NBOARDS; j ++ ) {
+
     // debugging info, what
     Serial.print("\t\t\t\t\t\t\t\t\t\t\t\t\t 0x"); Serial.println(cap[ j ].touched(), HEX);
     Serial.print("Filt: ");

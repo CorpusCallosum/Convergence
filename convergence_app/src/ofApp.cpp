@@ -25,7 +25,7 @@ void ofApp::setup(){
     
     ds.init(visualSystemWidth, visualSystemHeight, numRods, rodSpacing, rodMargins);
     gui.setup(visualSystemWidth+20);
-    serialReceiver.setup(10, numRods, rodSpacing);
+    serialReceiver.setup(0, numRods, rodSpacing);
     
    // ds.loadTestImage("test.png");
 }

@@ -11,6 +11,7 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
         void serialFunction();
+        void exit();
 
 
 		void keyPressed(int key);

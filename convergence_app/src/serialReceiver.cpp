@@ -117,12 +117,14 @@ void serialReceiver::serialFunction() {
         cout << myByte << endl;
         for ( int i = 0; i < _numRods; i ++ ) {
             if ( myByte == i * 2 ){
+                cout<<"rod "<< i << " ON"<< endl;
                 pos_touched[ i ] = true;
                 touch_time[ i ] = ofGetElapsedTimeMillis();
                 //cout << i << "on" <<endl;
                 
             }
             if ( myByte == i * 2 + 1 ){
+                cout<<"rod "<< i << " OFF"<< endl;
                 pos_touched[ i ] = false;
                 //cout << i << "off" <<endl;
             }
