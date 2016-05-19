@@ -162,9 +162,7 @@ void currentColor::draw( int x, int y ){
 
 //--------------------------------------------------------------
 vector <ofColor> currentColor::getCurrentColors() {
-    
     return currentColors;
-    
 }
 
 //--------------------------------------------------------------
