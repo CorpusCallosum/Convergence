@@ -5,7 +5,7 @@
 // You can have up to 4 on one i2c bus but one is enough for testing!
 Adafruit_MPR121 cap[ NBOARDS ] = Adafruit_MPR121();
 
-bool debug = 0;
+bool debug = 1;
 
 // Keeps track of the last pins touched
 // so we know when buttons are 'released'

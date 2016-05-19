@@ -6,19 +6,12 @@
 Adafruit_MPR121 cap[ NBOARDS ] = Adafruit_MPR121();
 
 bool debug = 1;
-/*int false_touch_timeout = 200;
-int current_time = 0;
-int touch_time[ NBOARDS ][ 12 ] = {{ 0 }};
-bool pos_touch[ NBOARDS ][ 12 ] = {{ false }};
-bool touch[ NBOARDS ][ 12 ] = {{ false }};*/
 
 int cap_reading[ NBOARDS * 12 ][ 10 ] = {{ 0 }};
 int cap_total[ NBOARDS * 12 ] = { 0 };
 float cap_avg[ NBOARDS * 12 ] = { 0 };
 int num_readings = 10;
-//int avg_base_difference[ NBOARDS * 12 ] = { 0 };
 
-//int read_index = 0;
 
 // Keeps track of the last pins touched
 // so we know when buttons are 'released'
@@ -66,27 +59,7 @@ void setup() {
 }
 
 void loop() {
-  // Get the currently touched pads
-  /*for ( int j = 0; j < NBOARDS; j ++ ) {
-      //currtouched[ j ] = cap[ j ].touched();
-  
-    for (uint8_t i=0; i<12; i++) {
-      // it if *is* touched and *wasnt* touched before, alert!
-      if ((currtouched[ j ] & _BV(i)) && !(lasttouched[ j ] & _BV(i)) ) {
 
-        touch_time[ j ][ i ] = millis();
-        pos_touch[ j ][ i ] = true;
-        //Serial.println( j * 24 + i * 2 ); //even number to indicate on
-        }
-        
-        // if it *was* touched and now *isnt*, alert!
-        if (!(currtouched[ j ] & _BV(i)) && (lasttouched[ j ] & _BV(i)) ) {
-          pos_touch[ j ][ i ] = false;
-        
-        }*/
-
-
-    
 
   for ( int j = 0; j < NBOARDS; j ++ ) {
     for (uint8_t i=0; i<12; i++) {
@@ -111,10 +84,6 @@ void loop() {
         }
 
         cap_total[ (j + 1) * i ] = 0;
-
-        //avg_base_difference[ (j + 1) * i ] = (int) ( cap_avg[ (j + 1) * i ] - cap[ j ].baselineData( i ));
-        
-
         
         if ( debug ) {
           Serial.print((j + 1 ) * i ); Serial.print("\t");
@@ -136,23 +105,8 @@ void loop() {
         }
      
       
-      //lasttouched[ j ] = currtouched [ j ];
+   
     }
-
-   /*for ( int j = 0; j < NBOARDS; j ++ ) {
-    for (uint8_t i=0; i<12; i++) {
-       cap_avg[ (j + 1) * i ] = cap_total[ (j + 1) * i ] / num_readings;
-    }
-   }*/
- 
-
-  //touch_filter();
-  
-  // reset our state
-  //current_time = millis();
-
-  
-
 
   delay(100);
   }
@@ -196,42 +150,4 @@ void loop() {
    }
 }
 
-/*void touch_filter() {
-
-  for ( int j = 0; j < NBOARDS; j ++ ) {
-    for ( int i = 0; i < 12; i ++ ) {
-      if ( pos_touch[ j ][ i ] ) {
-        if ( current_time - touch_time[ j ][ i ] > false_touch_timeout ) {
-
-          touch[ j ][ i ] = true;
-
-          if(debug){        
-            Serial.println( j * 24 + i * 2 ); //even number to indicate on
-            Serial.print("//////////////////////////////////////////////////////////////////////////////////////////");
-          }
-          else {
-            Serial.write( j * 24 + i * 2 ); //even number to indicate on
-          }
-
-        }
-      }
-
-      else if ( touch[ j ][ i ]) {
-
-        if ( !pos_touch[ j ][ i ] ) {
-
-          if(debug){
-            Serial.print("************************************************************************************************");
-            Serial.println( j * 24 + i * 2 + 1 ); //odd number to indicate off
-          }
-
-          else{
-            Serial.write( j * 24 + i * 2 + 1 ); //odd number to indicate off
-          }
-
-        }
-      }
-    }
-  }
-}*/
 
