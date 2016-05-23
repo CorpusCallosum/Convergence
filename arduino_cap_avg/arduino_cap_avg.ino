@@ -10,6 +10,9 @@ bool debug = 0;
 int cap_reading[ NBOARDS * 12 ][ 10 ] = {{ 0 }};
 int cap_total[ NBOARDS * 12 ] = { 0 };
 float cap_avg[ NBOARDS * 12 ] = { 0 };
+int base_reading[ NBOARDS * 12 ][ 10 ] = {{ 0 }};
+int base_total[ NBOARDS * 12 ] = { 0 };
+float base_avg[ NBOARDS * 12 ] = { 0 };
 int num_readings = 10;
 
 
@@ -62,10 +65,12 @@ void loop() {
 
 
   for ( int j = 0; j < NBOARDS; j ++ ) {
-    for (uint8_t i=0; i<12; i++) {
+    for (uint8_t i=0; i < 12; i++) {
         
         for ( int iter = 1; iter < num_readings; iter ++ ) {
           cap_reading[ (j + 1 ) * i][ iter - 1 ] = cap_reading[ (j + 1 ) * i][ iter ];
+          base_reading[ (j + 1 ) * i][ iter - 1 ] = base_reading[ (j + 1 ) * i][ iter ];
+
         }
 
         if ( cap[ j ].filteredData( i ) > cap[ j ].baselineData( i ) + 15 || cap[ j ].filteredData( i ) > cap[ j ].baselineData( i ) - 15 ) {
@@ -74,46 +79,52 @@ void loop() {
         else {
           cap_reading[ (j + 1 ) * i][ num_readings - 1 ] = cap[ j ].filteredData( i );
         }
+        base_reading[ (j + 1 ) * i][ num_readings - 1 ] = cap[ j ].baselineData( i );
 
         for ( int iter = 0; iter < num_readings; iter ++ ) {
           cap_total[ (j + 1) * i ] += cap_reading[ (j + 1 ) * i][ iter ];
+          base_total[ (j + 1) * i ] += base_reading[ (j + 1 ) * i][ iter ];
+
         }
         cap_avg[ (j + 1) * i ] = cap_total[ (j + 1) * i ] / num_readings;
-        if ( cap_avg[ (j + 1) * i ] == 0 ) {
-          cap_avg[ (j + 1) * i ] = 1;
+        base_avg[ (j + 1) * i ] = base_total[ (j + 1) * i ] / num_readings;
+
+        if ( cap_avg[ (j + 1) * i ] == 255 ) {
+          cap_avg[ (j + 1) * i ] = 254;
+        }
+        if ( base_avg[ (j + 1) * i ] == 255 ) {
+          base_avg[ (j + 1) * i ] = 254;
         }
 
         cap_total[ (j + 1) * i ] = 0;
-        
-        if ( debug ) {
-          Serial.print((j + 1 ) * i ); Serial.print("\t");
-          Serial.print(  cap_avg[ (j + 1) * i ]);  Serial.print("\t");
-          //Serial.print( baselineData( i );
-          Serial.print( 0 );  Serial.print("\t");
-          Serial.println();
-
-          /*Serial.print(0); Serial.print("\t");
-          Serial.print(  avg_base_difference[ 0]);  Serial.print("\t");
-          //Serial.print( baselineData( i );
-          Serial.print( 0 );  Serial.print("\t");
-          Serial.println();*/
-        }
-        else {
-          Serial.write( (j + 1 ) * i );
-          Serial.write( (int) cap_avg[ (j + 1) * i ] );
-          Serial.write( 0 );
-        }
-     
-      
+        base_total[ (j + 1) * i ] = 0;
    
     }
 
-  delay(100);
+  
   }
+
+  for ( int i = 0; i < 36; i ++ ) {
+        if ( debug ) {
+          Serial.print( i ); Serial.print("\t");
+          Serial.print(  (byte) cap_avg[ i ] );  Serial.print("\t");
+          //Serial.print(  (byte) base_avg[ i ] );  Serial.print("\t");
+          Serial.print( 255 );  Serial.print("\t");
+          Serial.println();
+        }
+        else {
+          Serial.write( i );
+          Serial.write( (byte) cap_avg[ i ] );
+          //Serial.write( (byte) base_avg[ i ] );
+          Serial.write( 255 );
+        }
+     
+  }
+  delay(100);
   // comment out this line for detailed data from the sensor!
   return;
   
-  for ( int j = 0; j < 1; j ++ ) {
+  for ( int j = 0; j < NBOARDS; j ++ ) {
     // debugging info, what
     Serial.print("\t\t\t\t\t\t\t\t\t\t\t\t\t 0x"); Serial.println(cap[ j ].touched(), HEX);
     

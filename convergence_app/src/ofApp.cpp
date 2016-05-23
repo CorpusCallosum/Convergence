@@ -18,7 +18,7 @@ void ofApp::setup(){
     
     cout<<"rod spacing"<<rodSpacing<<endl;
     
-    vs.init(visualSystemWidth, visualSystemHeight, 10); //K particles
+    vs.init(visualSystemWidth, visualSystemHeight, 11); //K particles
     vs.numRods = numRods;
     vs.rodSpacing = rodSpacing;
     vs.rodMargins = rodMargins;
@@ -46,7 +46,8 @@ void ofApp::update(){
     vs.complexity = gui.flowComplexity;
     vs.particleNeighborhood = gui.particleNeighborhood;
     vs.particleRepulsion = gui.particleRepulsion;
-    vs.update(serialReceiver.touched);
+    vs.update(serialReceiver.diffs);
+    
     vs.blurAmount = gui.blur;
     vs.pStartVel = gui.pStartVel;
     vs.pBounce = gui.pBounce;
