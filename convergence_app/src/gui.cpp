@@ -10,6 +10,7 @@
 
 gui::gui(){
     xmlFile = "gui_settings.xml";
+    width = 300;
 }
 
 void gui::setup(int x){
@@ -54,7 +55,7 @@ void gui::setup(int x){
     
     //create the gui
     guiPanel.setup("GUI",xmlFile, x, 10);
-    guiPanel.setWidthElements(200);
+    guiPanel.setWidthElements(width);
     
     //add panels
     //guiPanel.add(dsParams);

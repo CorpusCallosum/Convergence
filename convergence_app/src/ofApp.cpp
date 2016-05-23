@@ -7,6 +7,7 @@ void ofApp::setup(){
     //parse the XML
     
     ofSetFrameRate( 40 );
+    maskHeight = 0;
     
     //calculate rodspacing
     visualSystemWidth = 300;
@@ -24,7 +25,7 @@ void ofApp::setup(){
     vs.rodMargins = rodMargins;
     
     ds.init(visualSystemWidth, visualSystemHeight, numRods, rodSpacing, rodMargins);
-    gui.setup(visualSystemWidth+20);
+    gui.setup(visualSystemWidth+50);
     serialReceiver.setup(0, numRods, rodSpacing);
     
    // ds.loadTestImage("test.png");
@@ -74,12 +75,18 @@ void ofApp::draw(){
     gui.draw();
     
     serialReceiver.draw(10, visualSystemHeight);
+    
+    
+    //ofDrawBitmapString("Naughty Pixel Counter - ", 10, ofGetHeight()-10);
+    ofDrawBitmapString(vs.maskHeight, visualSystemWidth+15, vs.maskHeight+15);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
     serialReceiver.keyPressed(key);
+    
+    
 
 }
 
@@ -88,6 +95,10 @@ void ofApp::keyReleased(int key){
     
     serialReceiver.keyReleased(key);
     
+    if(key == OF_KEY_DOWN)
+        vs.maskHeight++;
+    else if(key == OF_KEY_UP)
+        vs.maskHeight--;
 }
 
 //--------------------------------------------------------------

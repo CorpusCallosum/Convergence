@@ -33,6 +33,8 @@ public:
     ofParameter<bool> colorMixing;
     
     string xmlFile;
+    
+    int width;
 
 private:
     ofxPanel guiPanel;
