@@ -156,7 +156,13 @@ void serialReceiver::serialFunction() {
             
             //OLDER METHOD OF SETTING BASELINES AT START 5 SECONDS...
             if(ofGetElapsedTimeMillis() < 5000){
-                averages[currentReadingIndex] = reading;
+                //averages[currentReadingIndex] = reading;
+                for(int c=0; c<numReadingsStored; c++)
+                {
+                    //set
+                    readingsVectors.at(currentReadingIndex).at(c) = reading;
+                    // readingsArrays[i][c]=0;
+                }
                // cout<<"baseline: "<<baselines[currentReadingIndex]<<endl;
             }
             /*else{
