@@ -94,7 +94,7 @@ void ofApp::draw(){
         int yPos = (i*margin)+margin*2;
         ofSetColor(255);
         //rod #
-        ofDrawBitmapString(i, visualSystemWidth+margin, yPos);
+        ofDrawBitmapString(i+1, visualSystemWidth+margin, yPos);
         //baseline
         ofDrawBitmapString(serialReceiver.averages[i], visualSystemWidth+margin+colWidth, yPos);
         //value
@@ -102,14 +102,14 @@ void ofApp::draw(){
         //difference
         float d = serialReceiver.diffs[i];
         
-        int baseC = 100;
+        int baseC = 200;
         
         if(d>0)
-            ofSetColor(baseC,d*10,baseC);
-        else if (d==0)
-            ofSetColor(baseC);
+            ofSetColor(50,255,50);
         else
-            ofSetColor(d*10, baseC, baseC);
+            ofSetColor(baseC);
+        //else
+           // ofSetColor(d*-10, baseC, baseC);
         
         ofDrawBitmapString(serialReceiver.diffs[i], visualSystemWidth+margin+colWidth*3, yPos);
 

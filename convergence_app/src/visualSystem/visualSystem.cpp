@@ -137,7 +137,8 @@ void visualSystem::update(float touched[36]){
             //  emitParticle(i, height, -1);
             
             int x = i*rodSpacing+rodMargins;
-            particleSystem.addVacuumForce(x, midline, vacuumRadius, touched[i]*vacuumPower);
+            if(touched[i]>0)
+                particleSystem.addVacuumForce(x, midline, vacuumRadius, touched[i]*vacuumPower);
             
        // }
         
