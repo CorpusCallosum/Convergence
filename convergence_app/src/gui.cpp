@@ -51,7 +51,7 @@ void gui::setup(int x){
     //vacuum
     vacuumParams.setName("Vacuum");
     vacuumParams.add(vacuumRadius.set("radius",100,0,300));
-    vacuumParams.add(vacuumForce.set("strength",2,0,10));
+    vacuumParams.add(vacuumForce.set("strength",.5,0,1));
     
     //create the gui
     guiPanel.setup("GUI",xmlFile, x, 10);

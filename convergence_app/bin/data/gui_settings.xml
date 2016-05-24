@@ -34,13 +34,13 @@
 		<p_start_Velocity>-10</p_start_Velocity>
 		<p_bounce>0.5</p_bounce>
 		<p_damp>0.112245</p_damp>
-		<p_neighborhood>9.94898</p_neighborhood>
-		<p_repulsion>0.346939</p_repulsion>
+		<p_neighborhood>7.39796</p_neighborhood>
+		<p_repulsion>1.07653</p_repulsion>
 		<mix_colors>0</mix_colors>
 	<color_stickiness>-0.0408163</color_stickiness>
 	</Particles>
 	<Vacuum>
 		<radius>99</radius>
-		<strength>3.57143</strength>
+		<strength>0.357143</strength>
 	</Vacuum>
 </GUI>

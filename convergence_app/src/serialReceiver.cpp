@@ -23,7 +23,7 @@ void serialReceiver::setup( int t , int numRods, int rodSpacing) {
     boxX = ofGetWindowWidth() / NPINS;
     boxY = ofGetWindowHeight() / 3;
     
-    numReadingsStored = 1000;
+    numReadingsStored = 10000;
     
     for( int i = 0; i < numRods; i ++ ) {
         touched[ i ] = false;
