@@ -155,11 +155,11 @@ void serialReceiver::serialFunction() {
             }
             
             //OLDER METHOD OF SETTING BASELINES AT START 5 SECONDS...
-            /*if(ofGetElapsedTimeMillis() < 5000){
-                baselines[currentReadingIndex] = reading;
+            if(ofGetElapsedTimeMillis() < 5000){
+                averages[currentReadingIndex] = reading;
                // cout<<"baseline: "<<baselines[currentReadingIndex]<<endl;
             }
-            else{
+            /*else{
                 float dif = baselines[currentReadingIndex] - reading;
                 diffs[currentReadingIndex] = dif;
                // cout<<"dif: "<<dif<<endl;
