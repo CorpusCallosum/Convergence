@@ -114,11 +114,11 @@ void serialReceiver::draw(int x, int y){
         ofSetColor( color[ i ] );
         float xPos = i * _rodSpacing + x;
         ofDrawRectangle( xPos, y, 5, 10 );
-        ofDrawBitmapString(averages[i], xPos, y-5);
+       /* ofDrawBitmapString(averages[i], xPos, y-5);
         ofDrawBitmapString(readings[i], xPos, y-20);
         
         ofDrawBitmapString(averages[i], xPos, y-5);
-        ofDrawBitmapString(readings[i], xPos, y-20);
+        ofDrawBitmapString(readings[i], xPos, y-20);*/
     }
     
 }
@@ -158,7 +158,11 @@ void serialReceiver::serialFunction() {
                     sum += readingsVectors.at(vCnt).at(rCnt);
                 }
                 float avg = sum/numReadingsStored;
-                avg = ceilf(avg * 100) / 100;
+                avg = ceilf(avg * 10) / 10;
+                
+                if(reading>avg)
+                    avg = reading;
+                
                 averages[vCnt] = avg;
             }
             
