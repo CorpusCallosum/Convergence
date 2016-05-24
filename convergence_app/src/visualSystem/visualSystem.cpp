@@ -17,7 +17,7 @@ void visualSystem::init(int w, int h, int kParticles){
     height=h;
     particleBrightnessShift = 10;
     pCounter = 0;
-    midline = height - 1.828 * 60; //6' from the top
+    midline =  1.828 * 60; //6' from the top
     
     currentColor.setup( 2, 100 );
     currentColor.loadGradientImage("gradient.png");
