@@ -99,7 +99,7 @@ void displaySystem::updateDisplay(ofFbo * frame){
         stripFBOs2.at(i)->begin();
         ofClear(0);
         //float x, float y, float w, float h, float sx, float sy
-        _frame->getTexture().drawSubsection(0,1,1,height/2,i*_rodSpacing + _rodMargins, universeHeight);
+        _frame->getTexture().drawSubsection(0,0,1,height/2,i*_rodSpacing + _rodMargins, universeHeight);
         stripFBOs2.at(i)->end();
         
         stripFBOs2.at(i)->readToPixels(stripImages2.at(i)->getPixels());
