@@ -108,10 +108,15 @@ void serialReceiver::update(){
 void serialReceiver::draw(int x, int y){
     //ofBackground( 0 );
     
+    
+    
     for ( int i = 0; i < _numRods; i ++ ) {
         ofSetColor( color[ i ] );
         float xPos = i * _rodSpacing + x;
         ofDrawRectangle( xPos, y, 5, 10 );
+        ofDrawBitmapString(averages[i], xPos, y-5);
+        ofDrawBitmapString(readings[i], xPos, y-20);
+        
         ofDrawBitmapString(averages[i], xPos, y-5);
         ofDrawBitmapString(readings[i], xPos, y-20);
     }
