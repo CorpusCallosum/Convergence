@@ -15,7 +15,7 @@ void ofApp::setup(){
     
     rodMargins = 10;
     numRods = 36;
-    rodSpacing = (visualSystemWidth-rodMargins*2)/numRods;
+    rodSpacing = (visualSystemWidth-rodMargins)/numRods;
     
     cout<<"rod spacing"<<rodSpacing<<endl;
     
@@ -75,7 +75,6 @@ void ofApp::draw(){
     gui.draw();
     
     serialReceiver.draw(10, visualSystemHeight);
-    
     
     //ofDrawBitmapString("Naughty Pixel Counter - ", 10, ofGetHeight()-10);
     ofDrawBitmapString(vs.maskHeight, visualSystemWidth+15, vs.maskHeight+15);

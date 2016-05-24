@@ -110,7 +110,10 @@ void serialReceiver::draw(int x, int y){
     
     for ( int i = 0; i < _numRods; i ++ ) {
         ofSetColor( color[ i ] );
-        ofDrawRectangle(( i ) * _rodSpacing + x , y, 5, 10 );
+        float xPos = i * _rodSpacing + x;
+        ofDrawRectangle( xPos, y, 5, 10 );
+        ofDrawBitmapString(averages[i], xPos, y-5);
+        ofDrawBitmapString(readings[i], xPos, y-20);
     }
     
 }

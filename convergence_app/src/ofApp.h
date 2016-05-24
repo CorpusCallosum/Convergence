@@ -35,7 +35,8 @@ public:
     gui gui;
     ofxXmlSettings settings;
     
-    int visualSystemWidth, visualSystemHeight, rodSpacing, numRods, rodMargins, maskHeight;
+    int visualSystemWidth, visualSystemHeight, numRods, rodMargins, maskHeight;
+    float rodSpacing;
     
     serialReceiver serialReceiver;
     
