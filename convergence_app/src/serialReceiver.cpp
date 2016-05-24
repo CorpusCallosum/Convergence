@@ -23,6 +23,8 @@ void serialReceiver::setup( int t , int numRods, int rodSpacing) {
     boxX = ofGetWindowWidth() / NPINS;
     boxY = ofGetWindowHeight() / 3;
     
+    numReadingsStored = 1000;
+    
     for( int i = 0; i < numRods; i ++ ) {
         touched[ i ] = false;
         pos_touched[ i ] = false;
@@ -31,6 +33,15 @@ void serialReceiver::setup( int t , int numRods, int rodSpacing) {
         touch_time[ i ] = ofGetElapsedTimeMillis();
         readings[i] = 0;
         baselines[i] = 0;
+        
+        //init all readings at 0
+        readingsVectors.push_back(*new vector <int>);
+        for(int c=0; c<numReadingsStored; c++)
+        {
+            //set
+            readingsVectors.at(i).push_back(0);
+           // readingsArrays[i][c]=0;
+        }
     }
     
     current_time = ofGetElapsedTimeMillis();
@@ -124,7 +135,24 @@ void serialReceiver::serialFunction() {
             readings[currentReadingIndex] = reading;
             place = 0;
             
-            if(ofGetElapsedTimeMillis() < 5000){
+            //readingsArrays[currentReadingIndex].push(reading);
+            readingsVectors.at(currentReadingIndex).push_back(reading);
+            //remove first element
+            readingsVectors.at(currentReadingIndex).erase(readingsVectors.at(currentReadingIndex).begin());
+            
+            //calculate total average
+            for(int vCnt = 0; vCnt< readingsVectors.size(); vCnt++){
+                int sum = 0;
+                for(int rCnt = 0; rCnt< readingsVectors.at(vCnt).size(); rCnt++)
+                {
+                    sum += readingsVectors.at(vCnt).at(rCnt);
+                }
+                float avg = sum/numReadingsStored;
+                averages[vCnt] = avg;
+            }
+            
+            //OLDER METHOD OF SETTING BASELINES AT START 5 SECONDS...
+            /*if(ofGetElapsedTimeMillis() < 5000){
                 baselines[currentReadingIndex] = reading;
                // cout<<"baseline: "<<baselines[currentReadingIndex]<<endl;
             }
@@ -132,13 +160,16 @@ void serialReceiver::serialFunction() {
                 float dif = baselines[currentReadingIndex] - reading;
                 diffs[currentReadingIndex] = dif;
                // cout<<"dif: "<<dif<<endl;
-            }
+            }*/
+            
+            //NEWER METHOD calculates baseline by averaging over long-term
+            float dif = averages[currentReadingIndex] - reading;
+            diffs[currentReadingIndex] = dif;
             
         }
         
         if(byte == 255){
             //got a delimiter
-            //start = true;
             place = 1;
         }
         
