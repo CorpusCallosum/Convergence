@@ -158,6 +158,7 @@ void serialReceiver::serialFunction() {
                     sum += readingsVectors.at(vCnt).at(rCnt);
                 }
                 float avg = sum/numReadingsStored;
+                avg = ceilf(avg * 100) / 100;
                 averages[vCnt] = avg;
             }
             
