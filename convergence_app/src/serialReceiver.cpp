@@ -23,7 +23,7 @@ void serialReceiver::setup( int t , int numRods, int rodSpacing) {
     boxX = ofGetWindowWidth() / NPINS;
     boxY = ofGetWindowHeight() / 3;
     
-    numReadingsStored = 100;
+    numReadingsStored = 50;
     
     for( int i = 0; i < numRods; i ++ ) {
         touched[ i ] = false;
@@ -152,7 +152,7 @@ void serialReceiver::serialFunction() {
             
             //calculate total average
             for(int vCnt = 0; vCnt< readingsVectors.size(); vCnt++){
-                int sum = 0;
+                float sum = 0;
                 for(int rCnt = 0; rCnt< numReadingsStored; rCnt++)
                 {
                     sum += readingsVectors.at(vCnt).at(rCnt);
