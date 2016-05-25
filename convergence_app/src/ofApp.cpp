@@ -128,13 +128,15 @@ void ofApp::keyReleased(int key){
     serialReceiver.keyReleased(key);
     
     if(key == OF_KEY_DOWN)
-        vs.maskHeight++;
+        vs.movePixelBar(1);
     else if(key == OF_KEY_UP)
-        vs.maskHeight--;
+        vs.movePixelBar(-1);
     else if(key == OF_KEY_RIGHT)
         vs.maskX++;
     else if(key == OF_KEY_UP)
         vs.maskX--;
+    else if(key == ' ')
+        vs.showPixelBar = !vs.showPixelBar;
 }
 
 //--------------------------------------------------------------

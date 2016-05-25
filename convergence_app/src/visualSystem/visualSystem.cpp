@@ -20,7 +20,7 @@ void visualSystem::init(int w, int h, int kParticles){
     midline =  1.828 * 60; //6' from the top
     particleEmitterCounter = 0;
     maskX = 0;
-    maskHeight = 19;
+    showPixelBar = false;
     
     currentColor.setup( 2, 100 );
     currentColor.loadGradientImage("gradient.png");
@@ -84,6 +84,12 @@ void visualSystem::init(int w, int h, int kParticles){
     
     //load settings
     xmlSettings.loadFile("settings.xml");
+    
+    //load pixel bar pos from XML
+    xmlSettings.pushTag("PixelPatcher");
+    maskHeight = xmlSettings.getAttribute("PatchBar", "y", 0);
+    xmlSettings.popTag();
+
     
 }
 
@@ -239,8 +245,10 @@ void visualSystem::update(float touched[36]){
 
     
     //draw the mask cover line
-    ofSetColor(0);
-    ofDrawRectangle( maskX, maskHeight, width, 5);
+    if(showPixelBar){
+        ofSetColor(0);
+        ofDrawRectangle( maskX, maskHeight, width, 1);
+    }
     
     display->end();
 
@@ -315,4 +323,14 @@ ofVec2f visualSystem::getField(ofVec2f position) {
 
 int visualSystem::getRodX(int rod){
     return rod*rodSpacing+rodMargins;
+}
+
+void visualSystem::movePixelBar(int dir){
+    maskHeight += dir;
+    //save new pos to XML
+    xmlSettings.pushTag("PixelPatcher");
+   // string s = to_string(maskHeight);
+    xmlSettings.setAttribute("PatchBar", "y", maskHeight, 0);
+    xmlSettings.popTag();
+    xmlSettings.save("settings.xml");
 }

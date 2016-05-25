@@ -26,6 +26,7 @@ class visualSystem{
     void mouseMoved(int x, int y);
     void emitParticle(int rod, int y, float yVel);
     int getRodX(int rod);
+    void movePixelBar(int dir);
 
     
     ofVec2f getField(ofVec2f position);
@@ -51,7 +52,7 @@ class visualSystem{
     
     float complexity, pollenMass, timeSpeed;
     float phase, hForce, vForce, repForce;
-    bool resetB, mixColor;
+    bool resetB, mixColor, showPixelBar;
     
     //fx
    //ofxGaussianBlur blur;
