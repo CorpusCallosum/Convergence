@@ -35,12 +35,12 @@
 		<p_bounce>0.5</p_bounce>
 		<p_damp>0.112245</p_damp>
 		<p_neighborhood>7.39796</p_neighborhood>
-		<p_repulsion>1.07653</p_repulsion>
+		<p_repulsion>1.35714</p_repulsion>
 		<mix_colors>0</mix_colors>
 	<color_stickiness>-0.0408163</color_stickiness>
 	</Particles>
 	<Vacuum>
 		<radius>99</radius>
-		<strength>0.540816</strength>
+		<strength>0.362245</strength>
 	</Vacuum>
 </GUI>

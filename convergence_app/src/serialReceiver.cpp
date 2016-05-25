@@ -151,20 +151,27 @@ void serialReceiver::serialFunction() {
             
             
             //calculate total average
-            for(int vCnt = 0; vCnt< readingsVectors.size(); vCnt++){
+            //for(int vCnt = 0; vCnt< readingsVectors.size(); vCnt++){
                 float sum = 0;
                 for(int rCnt = 0; rCnt< numReadingsStored; rCnt++)
                 {
-                    sum += readingsVectors.at(vCnt).at(rCnt);
+                    sum += readingsVectors.at(currentReadingIndex).at(rCnt);
                 }
                 float avg = sum/numReadingsStored;
                 avg = ceilf(avg * 10) / 10;
-                
-                if(reading>avg)
+            
+            //reset average to current reading if reading is higher than average...
+            
+                /*if(reading>avg){
                     avg = reading;
-                
-                averages[vCnt] = avg;
-            }
+                    for(int rCnt = 0; rCnt< numReadingsStored; rCnt++)
+                    {
+                        readingsVectors.at(currentReadingIndex).at(rCnt) = avg;
+                    }
+                }*/
+            
+                averages[currentReadingIndex] = avg;
+          //  }
             
             //OLDER METHOD OF SETTING BASELINES AT START 5 SECONDS...
             if(ofGetElapsedTimeMillis() < 5000){
