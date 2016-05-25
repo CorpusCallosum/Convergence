@@ -150,5 +150,8 @@ void displaySystem::draw(int x, int y){
 
 void displaySystem::clear(){
     //send clear signal to LED strips
-    
+    _frame->begin();
+    ofClear(0);
+    _frame->end();
+    updateDisplay(_frame);
 }
