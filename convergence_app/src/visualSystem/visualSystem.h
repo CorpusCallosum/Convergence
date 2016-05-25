@@ -30,7 +30,7 @@ class visualSystem{
     ofVideoPlayer 		testMovie;
     ofFbo *             display;
     
-    int width, height, midline, lastNumAbove, maskHeight, particleEmitterCounter;
+    int width, height, midline, lastNumAbove, maskHeight, maskX, particleEmitterCounter;
     
     //noise field
     float t;

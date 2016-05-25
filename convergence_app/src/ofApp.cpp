@@ -7,7 +7,7 @@ void ofApp::setup(){
     //parse the XML
     
     ofSetFrameRate( 40 );
-    maskHeight = 0;
+    //maskHeight = 0;
     
     //calculate rodspacing
     visualSystemWidth = 300;
@@ -131,6 +131,10 @@ void ofApp::keyReleased(int key){
         vs.maskHeight++;
     else if(key == OF_KEY_UP)
         vs.maskHeight--;
+    else if(key == OF_KEY_RIGHT)
+        vs.maskX++;
+    else if(key == OF_KEY_UP)
+        vs.maskX--;
 }
 
 //--------------------------------------------------------------

@@ -19,10 +19,11 @@ void visualSystem::init(int w, int h, int kParticles){
     pCounter = 0;
     midline =  1.828 * 60; //6' from the top
     particleEmitterCounter = 0;
+    maskX = 0;
+    maskHeight = 19;
     
     currentColor.setup( 2, 100 );
     currentColor.loadGradientImage("gradient.png");
-
     
     //blur.allocate(width, height);
     display = new ofFbo();
@@ -109,9 +110,6 @@ void visualSystem::update(float touched[36]){
     //fade out BG by drawing a rectangle
     ofSetColor(0, 0, 0, fadeAmt);
     ofDrawRectangle( 0, 0, width,height);
-    
-    ofSetColor(0);
-    ofDrawRectangle( 0, maskHeight, width, 1);
 
     //PARTICLE SYSTEM DRAWING STARTS HERE
     // if(isOn){
@@ -261,6 +259,10 @@ void visualSystem::update(float touched[36]){
     
     ofSetColor(pointOpacity, pointOpacity, pointOpacity, 255);
     particleSystem.draw();
+    
+    //draw the mask cover line
+    ofSetColor(0);
+    ofDrawRectangle( maskX, maskHeight, width, 5);
     
     display->end();
 
