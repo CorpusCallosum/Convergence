@@ -18,6 +18,7 @@ void visualSystem::init(int w, int h, int kParticles){
     particleBrightnessShift = 10;
     pCounter = 0;
     midline =  1.828 * 60; //6' from the top
+    particleEmitterCounter = 0;
     
     currentColor.setup( 2, 100 );
     currentColor.loadGradientImage("gradient.png");
@@ -131,11 +132,13 @@ void visualSystem::update(float touched[36]){
              }*/
             
             //one goes up
-            // int y  = height - 1.828 * 60; //6' from the top
-            // emitParticle(i, y,  1);
+             //int y  = height - 1.828 * 60; //6' from the top
+        if(touched[i]>2){
+             emitParticle(i, midline,  touched[i]);
             //one comes down
-            //  emitParticle(i, height, -1);
-            
+            //  emitParticle(i, midline, -touched[i]);
+        }
+        
             int x = i*rodSpacing+rodMargins;
             if(touched[i]>0)
                 particleSystem.addVacuumForce(x, midline, vacuumRadius, touched[i]*vacuumPower);
@@ -208,6 +211,12 @@ void visualSystem::update(float touched[36]){
             }
         }
         
+        //remove particles?
+       /* if(particleSystem.size()>kParticles*1024)
+          if(cur.y==0)
+              cur.remove = true;
+        */
+        
         if(mixColor){
         //particle color mix!
         vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood/2);
@@ -223,6 +232,7 @@ void visualSystem::update(float touched[36]){
         }
         }
         
+        
     
         //Particles of a color stick together?
       /*  vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood);
@@ -235,6 +245,7 @@ void visualSystem::update(float touched[36]){
             neighbors[n]->xv *= 1-s*f;
         }*/
     
+        
         
         //DELETE PARTICLES
         if(cur.remove)
@@ -289,17 +300,21 @@ ofFbo * visualSystem::getFrame(){
 
 void visualSystem::emitParticle(int rod, int y, float yVel){
     //remove a particle
-    particleSystem.erase(0);
+    //particleSystem.erase(0);
+    particleEmitterCounter ++;
+    if(particleEmitterCounter>particleSystem.size())
+        particleEmitterCounter = 0;
+    Particle& particle = particleSystem[0];
     
     //This method creates a new particle
-    Particle particle(0,0); //CREATE NEW PARTICLE
+   // Particle particle(0,0); //CREATE NEW PARTICLE
     
-    particle.setColor( currentColor.getCurrentColors()[ rod ] );
     particle.x = rod*rodSpacing+rodMargins;
+    particle.setColor( currentColor.getCurrentColor(particle.x/width ));
     particle.y = y;
     particle.yv = pStartVel*yVel; //initial velocity
     particle.xv = 0;
-    particleSystem.add(particle);
+   // particleSystem.add(particle);
 }
 
 /*
