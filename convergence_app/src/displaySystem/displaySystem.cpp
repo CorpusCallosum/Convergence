@@ -22,6 +22,7 @@ void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargi
     artnet.verbose = false;
     width = w;
     height = h;
+    clearControl = false;
     
     _numRods = numRods;
     _rodSpacing = rodSpacing;
@@ -31,6 +32,7 @@ void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargi
     strip.allocate(1, height, GL_RGB);
     
     frameCount = 0;
+    
     
     for(int i=0;i<36;i++){
         stripImages.push_back(new ofImage);
@@ -48,7 +50,18 @@ void displaySystem::init(int w, int h, int numRods, int rodSpacing, int rodMargi
 
 //update the display with a new image
 void displaySystem::updateDisplay(ofFbo * frame){
-    _frame = frame;
+    
+    if(clearControl){
+        //clear the FBO
+        _frame->begin();
+        ofClear(0);
+        ofSetColor(0);
+        ofDrawRectangle(0, 0, width, height);
+        _frame->end();
+    }
+    else{
+        _frame = frame; 
+    }
     //sleep(1);
     // _frame->readToPixels(testImage.getPixels());
     
@@ -57,7 +70,6 @@ void displaySystem::updateDisplay(ofFbo * frame){
     
     
     for(int i=0; i< _numRods; i++){
-        
         //fix for A5 -> C9
         int addressCount = i;
         if(i == 4)
@@ -150,6 +162,7 @@ void displaySystem::draw(int x, int y){
 
 void displaySystem::clear(){
     //send clear signal to LED strips
+    clearControl = true;
     _frame->begin();
     ofClear(0);
     _frame->end();

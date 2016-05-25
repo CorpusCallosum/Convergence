@@ -176,6 +176,6 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 }
 //--------------------------------------------------------------
 void ofApp::exit() {
-    serialReceiver.exit();
     ds.clear();
+    serialReceiver.exit();
 }
