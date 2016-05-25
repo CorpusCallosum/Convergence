@@ -11,6 +11,7 @@
 #include "ParticleSystem.h"
 #include "currentColor.h"
 #include "utils.hpp"
+#include "ofxXmlSettings.h"
 
 class visualSystem{
     
@@ -24,6 +25,8 @@ class visualSystem{
     void mouseReleased(int x, int y, int button);
     void mouseMoved(int x, int y);
     void emitParticle(int rod, int y, float yVel);
+    int getRodX(int rod);
+
     
     ofVec2f getField(ofVec2f position);
     
@@ -62,5 +65,7 @@ class visualSystem{
     
 private:
     ofPixels displayPixels, textPixels;
+    ofxXmlSettings xmlSettings;
+
 
 };

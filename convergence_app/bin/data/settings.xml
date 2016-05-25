@@ -1,5 +1,13 @@
 <visualSystem width="400" height="400" kparticles="10" />
 
+<!-- Pixel Patcher start -->
+<!-- Pixel Patcher draws black pixels in spots where the LEDs are broken...-->
+<PixelPatcher>
+    <PatchBar y="19"/>
+    <Patch rod="31" pixel="19"/>
+</PixelPatcher
+
+<!--BELOW NOT BEING USED -->
 <rodsOuter>
 	<!-- AlphaPix 1 -->
     <strip length="4" alphaPixSubnet="50" port="1"/>

@@ -82,7 +82,8 @@ void visualSystem::init(int w, int h, int kParticles){
     hForce = .2;
     vForce = .2;
     
-    
+    //load settings
+    xmlSettings.loadFile("settings.xml");
     
 }
 
@@ -97,14 +98,9 @@ void visualSystem::update(float touched[36]){
     particleSystem.setTimeStep(timeStep);
     t = ofGetFrameNum() * timeSpeed;
     
-    // display->readToPixels(displayPixels);
-    
     //draw to FBO
     display->begin();
-    //ofClear(0);
 
-    //ofEnableAlphaBlending();
-    //ofBackground(0,0,0,100);
     ofFill();
     
     //fade out BG by drawing a rectangle
@@ -112,37 +108,20 @@ void visualSystem::update(float touched[36]){
     ofDrawRectangle( 0, 0, width,height);
 
     //PARTICLE SYSTEM DRAWING STARTS HERE
-    // if(isOn){
 	ofSetColor(lineOpacity, lineOpacity, lineOpacity, 255);
 	particleSystem.setupForces();
     
     //PARTICLE EMITER*******************************************************
     for(int i=0; i < numRods; i++){
-        //if(touched[i] == true){
-            
-            //emit a particle
-            //This method takes a partiicle we already have and moves them around, rather than creating new particles
-            /*  Particle& particle = particleSystem[pCounter];
-             //iterate the particle counter
-             pCounter ++;
-             if(pCounter >= particleSystem.size())
-             pCounter = 0;
-             }*/
-            
-            //one goes up
-             //int y  = height - 1.828 * 60; //6' from the top
         if(touched[i]>2){
              emitParticle(i, midline,  touched[i]);
             //one comes down
             //  emitParticle(i, midline, -touched[i]);
         }
-        
-            int x = i*rodSpacing+rodMargins;
-            if(touched[i]>0)
-                particleSystem.addVacuumForce(x, midline, vacuumRadius, touched[i]*vacuumPower);
-            
-       // }
-        
+    
+        int x = i*rodSpacing+rodMargins;
+        if(touched[i]>0)
+            particleSystem.addVacuumForce(x, midline, vacuumRadius, touched[i]*vacuumPower);
     }
     
 	// apply per-particle forces
@@ -229,22 +208,7 @@ void visualSystem::update(float touched[36]){
             neighbors[n]->setColor(c);
         }
         }
-        
-        
     
-        //Particles of a color stick together?
-      /*  vector<Particle*> neighbors = particleSystem.getNeighbors(cur, particleNeighborhood);
-        
-        for(int n = 0; n < neighbors.size(); n++) {
-            float s = u.getColorSimilarity(cur.color, neighbors[n]->color);
-            //slow him down?
-            float f = colorStickiness;
-            neighbors[n]->yv *= 1-s*f;
-            neighbors[n]->xv *= 1-s*f;
-        }*/
-    
-        
-        
         //DELETE PARTICLES
         if(cur.remove)
             particleSystem.erase(i);
@@ -259,6 +223,20 @@ void visualSystem::update(float touched[36]){
     
     ofSetColor(pointOpacity, pointOpacity, pointOpacity, 255);
     particleSystem.draw();
+    
+    //draw the pixel patches...
+    xmlSettings.pushTag("PixelPatcher");
+    for(int i=0; i < xmlSettings.getNumTags("Patch"); i++){
+        int rodNum = xmlSettings.getAttribute("Patch", "rod", 0, i);
+        int pixelNum = xmlSettings.getAttribute("Patch", "pixel", 0, i);
+        int ppX = getRodX(rodNum);
+        int ppY = pixelNum;
+        //draw black box there
+        ofSetColor(0);
+        ofDrawRectangle( ppX, ppY, 1, 1);
+    }
+    xmlSettings.popTag();
+
     
     //draw the mask cover line
     ofSetColor(0);
@@ -275,11 +253,6 @@ void visualSystem::update(float touched[36]){
 
     //Apply blur FX
     display->begin();
-        
-        //need to enable these special blame functions in order to properly blend apha PNGs
-      /*  glPushAttrib(GL_ALL_ATTRIB_BITS);
-        glEnable(GL_BLEND);
-        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);*/
         
         ofClearAlpha();
         ofSetColor(255,255,255,255);
@@ -340,3 +313,6 @@ ofVec2f visualSystem::getField(ofVec2f position) {
 	return ofVec2f(h, v);
 }
 
+int visualSystem::getRodX(int rod){
+    return rod*rodSpacing+rodMargins;
+}
