@@ -233,13 +233,14 @@ void visualSystem::update(float touched[36]){
     //draw the pixel patches...
     xmlSettings.pushTag("PixelPatcher");
     for(int i=0; i < xmlSettings.getNumTags("Patch"); i++){
-        int rodNum = xmlSettings.getAttribute("Patch", "rod", 0, i);
+        int rodNum = xmlSettings.getAttribute("Patch", "rod", 0, i) - 1;
         int pixelNum = xmlSettings.getAttribute("Patch", "pixel", 0, i);
         int ppX = getRodX(rodNum);
         int ppY = pixelNum;
+        int ppS = xmlSettings.getAttribute("Patch", "size", 0, i);
         //draw black box there
         ofSetColor(0);
-        ofDrawRectangle( ppX, ppY, 1, 1);
+        ofDrawRectangle( ppX, ppY, ppS, ppS);
     }
     xmlSettings.popTag();
 
