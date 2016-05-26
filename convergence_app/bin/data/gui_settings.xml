@@ -27,15 +27,15 @@
 		<turbulence>0.0209184</turbulence>
 		<density>1.02041</density>
 		<H_force>0</H_force>
-		<V_force>-1</V_force>
+		<V_force>-0.561224</V_force>
 	</Perlin_Noise_Wind>
 	<Particles>
 		<particle_speed>0.0816326</particle_speed>
 		<p_start_Velocity>-10</p_start_Velocity>
 		<p_bounce>0.5</p_bounce>
 		<p_damp>0.112245</p_damp>
-		<p_neighborhood>13.0102</p_neighborhood>
-		<p_repulsion>2.19898</p_repulsion>
+		<p_neighborhood>8.41837</p_neighborhood>
+		<p_repulsion>1.18878</p_repulsion>
 		<mix_colors>0</mix_colors>
 	<color_stickiness>-0.0408163</color_stickiness>
 	</Particles>

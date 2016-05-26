@@ -104,6 +104,7 @@ void loop() {
   
   }
 
+
   for ( int i = 0; i < 36; i ++ ) {
         if ( debug ) {
           Serial.print( i ); Serial.print("\t");
@@ -114,12 +115,15 @@ void loop() {
         }
         else {
           Serial.write( i );
+          Serial.write( 
           Serial.write( (byte) cap_avg[ i ] );
           //Serial.write( (byte) base_avg[ i ] );
           Serial.write( 255 );
         }
      
   }
+  
+  
   delay(100);
   // comment out this line for detailed data from the sensor!
   return;
@@ -128,6 +132,7 @@ void loop() {
     // debugging info, what
     Serial.print("\t\t\t\t\t\t\t\t\t\t\t\t\t 0x"); Serial.println(cap[ j ].touched(), HEX);
     
+    Serial.println();
     Serial.print("Filt: ");
     for (uint8_t i=0; i<12; i++) {
       Serial.print(cap[ j ].filteredData(i)); Serial.print("\t");

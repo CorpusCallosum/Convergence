@@ -116,7 +116,7 @@ void loop() {
         
 
         
-        if ( debug ) {
+        /*if ( debug ) {
           Serial.print((j + 1 ) * i ); Serial.print("\t");
           Serial.print(  cap_avg[ (j + 1) * i ]);  Serial.print("\t");
           //Serial.print( baselineData( i );
@@ -127,13 +127,13 @@ void loop() {
           Serial.print(  avg_base_difference[ 0]);  Serial.print("\t");
           //Serial.print( baselineData( i );
           Serial.print( 0 );  Serial.print("\t");
-          Serial.println();*/
+          Serial.println();
         }
         else {
           Serial.write( (j + 1 ) * i );
           Serial.write( (int) cap_avg[ (j + 1) * i ] );
           Serial.write( 0 );
-        }
+        }*/
      
       
       //lasttouched[ j ] = currtouched [ j ];
@@ -157,11 +157,12 @@ void loop() {
   delay(100);
   }
   // comment out this line for detailed data from the sensor!
-  return;
+  //return;
   
-  for ( int j = 0; j < 1; j ++ ) {
+  for ( int j = 1; j < 2; j ++ ) {
     // debugging info, what
     Serial.print("\t\t\t\t\t\t\t\t\t\t\t\t\t 0x"); Serial.println(cap[ j ].touched(), HEX);
+    Serial.println();
     
     Serial.print("Filt: ");
     for (uint8_t i=0; i<12; i++) {
