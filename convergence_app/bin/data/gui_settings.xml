@@ -27,7 +27,7 @@
 		<turbulence>0.0209184</turbulence>
 		<density>1.02041</density>
 		<H_force>0</H_force>
-		<V_force>-0.683674</V_force>
+		<V_force>-0.612245</V_force>
 	</Perlin_Noise_Wind>
 	<Particles>
 		<particle_speed>0.0816326</particle_speed>
