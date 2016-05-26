@@ -158,7 +158,7 @@ void serialReceiver::serialFunction() {
                     sum += readingsVectors.at(currentReadingIndex).at(rCnt);
                 }
                 float avg = sum/numReadingsStored;
-                avg = ceilf(avg * 10) / 10;
+                avg = roundf(avg * 10) / 10;
             
             //reset average to current reading if reading is higher than average...
             
@@ -192,6 +192,7 @@ void serialReceiver::serialFunction() {
             
             //NEWER METHOD calculates baseline by averaging over long-term
             float dif = averages[currentReadingIndex] - reading;
+            dif = roundf(dif * 10) / 10;
             diffs[currentReadingIndex] = dif;
             
         }
