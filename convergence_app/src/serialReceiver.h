@@ -35,9 +35,10 @@ public:
     bool touched[ NBOARDS * NPINS ];
     bool lastTouched[ NBOARDS * NPINS ];
     int readings[ NBOARDS * NPINS ];
+    int smoothedReadings[ NBOARDS * NPINS ];
     int readingsArrays[ NBOARDS * NPINS ][1000];
     vector< vector<int> > readingsVectors;
-    int numReadingsStored;
+    int numReadingsStored, numReadingsSmoothed;
     int baselines[ NBOARDS * NPINS ];
     float averages[ NBOARDS * NPINS ];
     float diffs[ NBOARDS * NPINS ];

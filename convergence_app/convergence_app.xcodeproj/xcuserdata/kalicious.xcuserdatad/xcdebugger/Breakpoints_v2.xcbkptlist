@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/serialReceiver.cpp"
-            timestampString = "485800911.76687"
+            timestampString = "485923304.927518"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "serialReceiver::setup( int t , int numRods, int rodSpacing)"
             landmarkType = "5">
          </BreakpointContent>

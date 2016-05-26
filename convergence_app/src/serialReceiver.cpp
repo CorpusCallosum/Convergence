@@ -24,6 +24,7 @@ void serialReceiver::setup( int t , int numRods, int rodSpacing) {
     boxY = ofGetWindowHeight() / 3;
     
     numReadingsStored = 200;
+    numReadingsSmoothed = 10;
     
     for( int i = 0; i < numRods; i ++ ) {
         touched[ i ] = false;
@@ -32,6 +33,7 @@ void serialReceiver::setup( int t , int numRods, int rodSpacing) {
         color[ i ].set( 255, 0, 0 );
         touch_time[ i ] = ofGetElapsedTimeMillis();
         readings[i] = 0;
+        smoothedReadings[i] = 0;
         baselines[i] = 0;
         
         //init all readings at 0
@@ -152,13 +154,22 @@ void serialReceiver::serialFunction() {
             
             //calculate total average
             //for(int vCnt = 0; vCnt< readingsVectors.size(); vCnt++){
-                float sum = 0;
-                for(int rCnt = 0; rCnt< numReadingsStored; rCnt++)
+            float sum = 0;
+            float smoothSum = 0;
+            for(int rCnt = 0; rCnt< numReadingsStored; rCnt++)
                 {
                     sum += readingsVectors.at(currentReadingIndex).at(rCnt);
+                    //do smoothing on subset of these avg values
+                    if(rCnt >= numReadingsStored-numReadingsSmoothed)
+                        smoothSum += readingsVectors.at(currentReadingIndex).at(rCnt);
                 }
-                float avg = sum/numReadingsStored;
-                avg = roundf(avg * 10) / 10;
+            float avg = sum/numReadingsStored;
+            avg = roundf(avg * 10) / 10;
+            
+            float smoothAvg = smoothSum/numReadingsSmoothed;
+            smoothAvg = roundf(avg * 10) / 10;
+            
+            smoothedReadings[currentReadingIndex] = smoothAvg;
             
             //reset average to current reading if reading is higher than average...
             
@@ -191,7 +202,7 @@ void serialReceiver::serialFunction() {
             }*/
             
             //NEWER METHOD calculates baseline by averaging over long-term
-            float dif = averages[currentReadingIndex] - reading;
+            float dif = averages[currentReadingIndex] - smoothAvg;
             dif = roundf(dif * 10) / 10;
             diffs[currentReadingIndex] = dif;
             
