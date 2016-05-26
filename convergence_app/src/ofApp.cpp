@@ -25,7 +25,7 @@ void ofApp::setup(){
     vs.rodMargins = rodMargins;
     
     ds.init(visualSystemWidth, visualSystemHeight, numRods, rodSpacing, rodMargins);
-    gui.setup(visualSystemWidth+200);
+    gui.setup(visualSystemWidth+300);
     serialReceiver.setup(0, numRods, rodSpacing);
     
    // ds.loadTestImage("test.png");
@@ -80,38 +80,46 @@ void ofApp::draw(){
     ofSetColor(255);
     ofDrawBitmapString(vs.maskHeight, 0, vs.maskHeight+15);
     
-    int colWidth = 40;
+    int colWidth = 50;
     int margin = 15;
     
     ofDrawBitmapString("rod#", visualSystemWidth+margin, 10);
-    ofDrawBitmapString("base", visualSystemWidth+margin+colWidth, 10);
-    ofDrawBitmapString("val", visualSystemWidth+margin+colWidth*2, 10);
-    ofDrawBitmapString("diff", visualSystemWidth+margin+colWidth*3, 10);
+    ofDrawBitmapString("diff", visualSystemWidth+margin+colWidth*1, 10);
+    ofDrawBitmapString("smoothy", visualSystemWidth+margin+colWidth*2, 10);
+    ofDrawBitmapString("val", visualSystemWidth+margin+colWidth*3, 10);
+    ofDrawBitmapString("base", visualSystemWidth+margin+colWidth*4, 10);
 
     
     for ( int i = 0; i < numRods; i ++ ) {
         
         int yPos = (i*margin)+margin*2;
         ofSetColor(255);
+        
         //rod #
         ofDrawBitmapString(i+1, visualSystemWidth+margin, yPos);
-        //baseline
-        ofDrawBitmapString(serialReceiver.averages[i], visualSystemWidth+margin+colWidth, yPos);
-        //value
-        ofDrawBitmapString(serialReceiver.readings[i], visualSystemWidth+margin+colWidth*2, yPos);
+        
         //difference
         float d = serialReceiver.diffs[i];
-        
         int baseC = 200;
-        
         if(d>0)
             ofSetColor(50,255,50);
         else
             ofSetColor(baseC);
-        //else
-           // ofSetColor(d*-10, baseC, baseC);
+        ofDrawBitmapString(serialReceiver.diffs[i], visualSystemWidth+margin+colWidth*1, yPos);
         
-        ofDrawBitmapString(serialReceiver.diffs[i], visualSystemWidth+margin+colWidth*3, yPos);
+        ofSetColor(255);
+        //smoothy
+        ofDrawBitmapString(serialReceiver.smoothedReadings[i], visualSystemWidth+margin+colWidth*2, yPos);
+        
+        //value
+        ofDrawBitmapString(serialReceiver.readings[i], visualSystemWidth+margin+colWidth*3, yPos);
+        
+        //baseline
+        ofDrawBitmapString(serialReceiver.averages[i], visualSystemWidth+margin+colWidth*4, yPos);
+        
+        
+        
+      
 
     }
 

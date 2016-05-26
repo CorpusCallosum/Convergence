@@ -167,7 +167,7 @@ void serialReceiver::serialFunction() {
             avg = roundf(avg * 10) / 10;
             
             float smoothAvg = smoothSum/numReadingsSmoothed;
-            smoothAvg = roundf(avg * 10) / 10;
+            smoothAvg = roundf(smoothAvg * 10) / 10;
             
             smoothedReadings[currentReadingIndex] = smoothAvg;
             
