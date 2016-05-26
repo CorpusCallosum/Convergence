@@ -110,7 +110,8 @@ void visualSystem::update(float touched[36]){
     ofFill();
     
     //fade out BG by drawing a rectangle
-    ofSetColor(0, 0, 0, fadeAmt);
+    int brightness = 20;
+    ofSetColor(brightness, brightness, brightness, fadeAmt);
     ofDrawRectangle( 0, 0, width,height);
 
     //PARTICLE SYSTEM DRAWING STARTS HERE
@@ -156,7 +157,7 @@ void visualSystem::update(float touched[36]){
             fieldForce.y *= -1;
             //make it white again?
             ofColor white;
-            int brightness = 200;
+            int brightness = 255;
             white.r = brightness;
             white.g = brightness;
             white.b = brightness;
