@@ -110,7 +110,7 @@ void visualSystem::update(float touched[36]){
     ofFill();
     
     //fade out BG by drawing a rectangle
-    int brightness = 20;
+    int brightness = 30;
     ofSetColor(brightness, brightness, brightness, fadeAmt);
     ofDrawRectangle( 0, 0, width,height);
 
