@@ -240,7 +240,7 @@ void visualSystem::update(float touched[36]){
         int ppS = xmlSettings.getAttribute("Patch", "size", 0, i);
         //draw black box there
         ofSetColor(0);
-        ofDrawRectangle( ppX, ppY, ppS, ppS);
+        ofDrawRectangle( ppX-1, ppY, 3, ppS);
     }
     xmlSettings.popTag();
 

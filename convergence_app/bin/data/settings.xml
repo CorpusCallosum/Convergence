@@ -2,11 +2,11 @@
 <!-- Pixel Patcher start -->
 <!-- Pixel Patcher draws black pixels in spots where the LEDs are broken...-->
 <PixelPatcher>
-    <PatchBar y="84" />
+    <PatchBar y="20" />
+    <Patch rod="15" pixel="0" size="300" />
     <Patch rod="17" pixel="186" size="8" />
     <Patch rod="22" pixel="8" size="3" />
     <Patch rod="25" pixel="197" size="2" />
-    <Patch rod="31" pixel="20" size="3" />
-    <Patch rod="31" pixel="56" size="10" />
+    <Patch rod="31" pixel="20" size="300" />
     <Patch rod="35" pixel="157" size="5" />
 </PixelPatcher>
