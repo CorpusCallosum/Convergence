@@ -80,19 +80,20 @@ void ofApp::draw(){
     ofSetColor(255);
     ofDrawBitmapString(vs.maskHeight, 0, vs.maskHeight+15);
     
-    int colWidth = 50;
+    int colWidth = 60;
     int margin = 15;
+    int yOffset = 15;
     
-    ofDrawBitmapString("rod#", visualSystemWidth+margin, 10);
-    ofDrawBitmapString("diff", visualSystemWidth+margin+colWidth*1, 10);
-    ofDrawBitmapString("smoothy", visualSystemWidth+margin+colWidth*2, 10);
-    ofDrawBitmapString("val", visualSystemWidth+margin+colWidth*3, 10);
-    ofDrawBitmapString("base", visualSystemWidth+margin+colWidth*4, 10);
-
+    ofDrawBitmapString("CAP TOUCH READINGS", visualSystemWidth+margin, yOffset);
+    yOffset+=15;
+    ofDrawBitmapString("rod#", visualSystemWidth+margin, yOffset);
+    ofDrawBitmapString("diff", visualSystemWidth+margin+colWidth*1, yOffset);
+    ofDrawBitmapString("smooth", visualSystemWidth+margin+colWidth*2, yOffset);
+    ofDrawBitmapString("val", visualSystemWidth+margin+colWidth*3, yOffset);
+    ofDrawBitmapString("base", visualSystemWidth+margin+colWidth*4, yOffset);
     
     for ( int i = 0; i < numRods; i ++ ) {
-        
-        int yPos = (i*margin)+margin*2;
+        int yPos = (i*margin)+margin+yOffset;
         ofSetColor(255);
         
         //rod #
