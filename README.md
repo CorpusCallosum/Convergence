@@ -1,5 +1,5 @@
-# flamp
-an audio-responsive led light object
+# flamp!
+flamp is an audio-responsive led light object created by Floating Point Art Collective (Jack Kalish and Mark Kleback).
 
 ## AlphaPix Setup
 
