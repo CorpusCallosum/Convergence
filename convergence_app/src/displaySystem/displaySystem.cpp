@@ -105,10 +105,10 @@ void displaySystem::updateDisplay(ofFbo * frame){
         
         stripFBOs.at(i)->readToPixels(stripImages.at(i)->getPixels());
         
-        artnet.sendDmx(ip, subnet, universe, stripImages.at(i)->getPixels(), numChannels);
+        artnet.sendDmx(ip, subnet, universe, stripImages.at(i)->getPixels().getData(), numChannels);
         
         //second half
-        stripFBOs2.at(i)->begin();
+      /*  stripFBOs2.at(i)->begin();
         ofClear(0);
         //float x, float y, float w, float h, float sx, float sy
         _frame->getTexture().drawSubsection(0,0,1,height/2,i*_rodSpacing + _rodMargins, universeHeight);
@@ -118,7 +118,7 @@ void displaySystem::updateDisplay(ofFbo * frame){
         
         artnet.sendDmx(ip, subnet, universe+1, stripImages2.at(i)->getPixels(), numChannels);
 
-        
+        */
        /* //crop the LED strip
         stripFB.begin();
         ofClear(0);
