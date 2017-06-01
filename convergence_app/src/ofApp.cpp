@@ -29,6 +29,10 @@ void ofApp::setup(){
     serialReceiver.setup(0, numRods, rodSpacing);
     
    // ds.loadTestImage("test.png");
+    
+    //audio input
+    ofSoundStreamSetup(0, 2, 44100, 256, 4);
+
 }
 
 //--------------------------------------------------------------
@@ -124,6 +128,11 @@ void ofApp::draw(){
 
     }
 
+}
+
+void ofApp::audioIn(float * input, int bufferSize, int nChannels){
+    //pass the audio input to the visual system for processing...
+    vs.audioIn(input, bufferSize, nChannels);
 }
 
 //--------------------------------------------------------------

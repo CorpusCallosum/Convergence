@@ -63,6 +63,23 @@ class visualSystem{
     
     utils u;
     
+    //audio stuff
+    void audioIn(float * input, int bufferSize, int nChannels);
+    void drawAudio();
+
+    
+    vector <float> left;
+    vector <float> right;
+    vector <float> volHistory;
+    
+    int 	bufferCounter;
+    int 	drawCounter;
+    
+    float smoothedVol;
+    float scaledVol;
+    
+    ofSoundStream soundStream;
+    
     
 private:
     ofPixels displayPixels, textPixels;

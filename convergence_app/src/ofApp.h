@@ -26,6 +26,8 @@ public:
     void gotMessage(ofMessage msg);
     void exit();
     
+    void audioIn(float * input, int bufferSize, int nChannels);
+    
     ofxArtnet artnet;
     
     displaySystem ds;
