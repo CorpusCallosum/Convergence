@@ -10,22 +10,22 @@ void ofApp::setup(){
     //maskHeight = 0;
     
     //calculate rodspacing
-    visualSystemWidth = 300;
+    visualSystemWidth = 256;
     visualSystemHeight = 240;
     
     rodMargins = 10;
-    numRods = 36;
+    numRods = 16;
     rodSpacing = (visualSystemWidth-rodMargins)/numRods;
     
     cout<<"rod spacing"<<rodSpacing<<endl;
     
-    vs.init(visualSystemWidth, visualSystemHeight, 10); //K particles
+    vs.init(visualSystemWidth, visualSystemHeight, 5); //K particles
     vs.numRods = numRods;
     vs.rodSpacing = rodSpacing;
     vs.rodMargins = rodMargins;
     
     ds.init(visualSystemWidth, visualSystemHeight, numRods, rodSpacing, rodMargins);
-    gui.setup(visualSystemWidth+10);
+    gui.setup(visualSystemWidth+20);
     serialReceiver.setup(0, numRods, rodSpacing);
     
    // ds.loadTestImage("test.png");
@@ -78,7 +78,7 @@ void ofApp::draw(){
     
     gui.draw();
     
-    serialReceiver.draw(10, visualSystemHeight);
+    //serialReceiver.draw(10, visualSystemHeight);
     
     //ofDrawBitmapString("Naughty Pixel Counter - ", 10, ofGetHeight()-10);
     ofSetColor(255);

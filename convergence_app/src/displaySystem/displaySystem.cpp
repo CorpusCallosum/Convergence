@@ -155,7 +155,7 @@ void displaySystem::draw(int x, int y){
         strip.draw(x+_rodSpacing*i+_rodMargins, y+10+height);*/
          //stripImages.at(i)->draw(x+_rodSpacing*i+_rodMargins, y+10+height);
         stripFBOs.at(i)->draw(x+_rodSpacing*i+_rodMargins, y+10+height);
-        stripFBOs2.at(i)->draw(x+_rodSpacing*i+_rodMargins, y+15+height*1.5);
+        //stripFBOs2.at(i)->draw(x+_rodSpacing*i+_rodMargins, y+15+height*1.5);
     }
     
 }

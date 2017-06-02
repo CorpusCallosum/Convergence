@@ -16,7 +16,7 @@
             startingLineNumber = "45"
             endingLineNumber = "45"
             landmarkName = "serialReceiver::setup( int t , int numRods, int rodSpacing)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

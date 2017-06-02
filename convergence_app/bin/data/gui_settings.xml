@@ -55,7 +55,7 @@
 			<V_force>-0.142857</V_force>
 		</Perlin_Noise_Wind>
 		<Particles>
-			<particle_speed>0.2</particle_speed>
+			<particle_speed>0.0306122</particle_speed>
 			<p_start_Velocity>-10</p_start_Velocity>
 			<p_bounce>0.5</p_bounce>
 			<p_damp>0.1</p_damp>

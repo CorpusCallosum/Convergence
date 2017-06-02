@@ -254,9 +254,10 @@ void visualSystem::update(float touched[36]){
     
 	glEnd();
     
+    //AUDIO(**********************************
     //apply audio forces tp particles
     for (unsigned int i = 0; i < left.size(); i++){
-        int x = i*2;
+        int x = i;
         int y = left[i]*180.0f;
         //ofVertex(x, y);
         //add forces
@@ -388,7 +389,7 @@ void visualSystem::drawAudio(){
     //DRAW THE AUDIO WAVE
     ofVertex(0, 0);
     for (unsigned int i = 0; i < left.size(); i++){
-        int x = i*2;
+        int x = i;
         int y = left[i]*180.0f;
         ofVertex(x, y);
         //add forces
