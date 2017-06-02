@@ -30,8 +30,15 @@ void ofApp::setup(){
     
    // ds.loadTestImage("test.png");
     
+    
+    
     //audio input
-    ofSoundStreamSetup(0, 2, 44100, 256, 4);
+    //ofSoundStreamSetup(0, 2, 44100, 256, 4);
+    soundStream.setup( this, 0, 2, 44100, 256, 4);
+    
+    //fft setup
+    fft.setup();
+    
 
 }
 
@@ -39,10 +46,16 @@ void ofApp::setup(){
 void ofApp::update(){
     ofSetWindowTitle(ofToString(ofGetFrameRate(), 2));
     
-    serialReceiver.update();
+    //serialReceiver.update();
     
     //UPDATE GUI
     gui.update();
+    
+    //update fft
+    fft.update();
+    
+    //update visual system
+    vs.averageFrequency = fft.averageFrequency;
     vs.timeSpeed = gui.flowSpeed;
     vs.timeStep = gui.timeSpeed;
     vs.hForce = gui.horizontalForce;
@@ -64,8 +77,10 @@ void ofApp::update(){
     //vs.vForceFactor = gui.vForceFactor;
     //vs.particleBrightnessShift = gui.particleBrightnessShift;
     
+    //update display sustem
     frame = vs.getFrame();
     ds.updateDisplay(frame);
+    
     
 }
 
@@ -77,58 +92,20 @@ void ofApp::draw(){
     ds.draw(10,10);
     
     gui.draw();
-    
-    //serialReceiver.draw(10, visualSystemHeight);
-    
-    //ofDrawBitmapString("Naughty Pixel Counter - ", 10, ofGetHeight()-10);
+        
     ofSetColor(255);
     ofDrawBitmapString(vs.maskHeight, 0, vs.maskHeight+15);
     
-    int colWidth = 60;
-    int margin = 15;
-    int yOffset = 15;
-    
-   /* ofDrawBitmapString("CAP TOUCH READINGS", visualSystemWidth+margin, yOffset);
-    yOffset+=15;
-    ofDrawBitmapString("rod#", visualSystemWidth+margin, yOffset);
-    ofDrawBitmapString("diff", visualSystemWidth+margin+colWidth*1, yOffset);
-    ofDrawBitmapString("smooth", visualSystemWidth+margin+colWidth*2, yOffset);
-    ofDrawBitmapString("val", visualSystemWidth+margin+colWidth*3, yOffset);
-    ofDrawBitmapString("base", visualSystemWidth+margin+colWidth*4, yOffset);
-    
-    for ( int i = 0; i < numRods; i ++ ) {
-        int yPos = (i*margin)+margin+yOffset;
-        ofSetColor(255);
-        
-        //rod #
-        ofDrawBitmapString(i+1, visualSystemWidth+margin, yPos);
-        
-        //difference
-        float d = serialReceiver.diffs[i];
-        int baseC = 200;
-        if(d>0)
-            ofSetColor(50,255,50);
-        else
-            ofSetColor(baseC);
-        ofDrawBitmapString(serialReceiver.diffs[i], visualSystemWidth+margin+colWidth*1, yPos);
-        
-        ofSetColor(255);
-        //smoothy
-        ofDrawBitmapString(serialReceiver.smoothedReadings[i], visualSystemWidth+margin+colWidth*2, yPos);
-        
-        //value
-        ofDrawBitmapString(serialReceiver.readings[i], visualSystemWidth+margin+colWidth*3, yPos);
-        
-        //baseline
-        ofDrawBitmapString(serialReceiver.averages[i], visualSystemWidth+margin+colWidth*4, yPos);
-    
-    }*/
-
+    fft.draw(10, visualSystemHeight*2);
+  
 }
 
 void ofApp::audioIn(float * input, int bufferSize, int nChannels){
     //pass the audio input to the visual system for processing...
     vs.audioIn(input, bufferSize, nChannels);
+    
+    //sedn audio to fft analyser
+    fft.fft.audioReceived(input, bufferSize, nChannels);
 }
 
 //--------------------------------------------------------------

@@ -118,7 +118,7 @@ void visualSystem::init(int w, int h, int kParticles){
     smoothedVol     = 0.0;
     scaledVol		= 0.0;
     
-   // soundStream.setup(this, 0, 2, 44100, bufferSize, 4);
+    //soundStream.setup( 0, 2, 44100, bufferSize, 4);
 //    ofSoundStreamSetup(0, 2, 44100, bufferSize, 4);
 }
 
@@ -381,7 +381,8 @@ void visualSystem::drawAudio(){
     ofPushStyle();
     ofPushMatrix();
     
-    ofSetColor(0, 255, 0); //pink line
+    float colorTween = averageFrequency/2;
+    ofSetColor(0, colorTween, 255-colorTween); //line color
     ofSetLineWidth(3);
     
     ofBeginShape();
@@ -392,8 +393,6 @@ void visualSystem::drawAudio(){
         int x = i;
         int y = left[i]*180.0f;
         ofVertex(x, y);
-        //add forces
-       // particleSystem.addRepulsionForce(x, 0, 5, y);
     }
     ofVertex(left.size()*2, 0);
     

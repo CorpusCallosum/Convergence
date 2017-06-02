@@ -76,7 +76,7 @@ class visualSystem{
     int 	drawCounter;
     
     float smoothedVol;
-    float scaledVol;
+    float scaledVol, averageFrequency;
     
     ofSoundStream soundStream;
     

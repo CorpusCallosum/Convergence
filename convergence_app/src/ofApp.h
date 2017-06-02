@@ -6,7 +6,7 @@
 #include "gui.hpp"
 #include "serialReceiver.h"
 #include "ofxXmlSettings.h"
-
+#include "fftAnalyzer.hpp"
 
 class ofApp : public ofBaseApp{
     
@@ -36,6 +36,10 @@ public:
     
     gui gui;
     ofxXmlSettings settings;
+    
+    ofSoundStream soundStream;
+    fftAnalyzer fft;
+    
     
     int visualSystemWidth, visualSystemHeight, numRods, rodMargins, maskHeight;
     float rodSpacing;

@@ -35,17 +35,24 @@ void ofApp::plot(vector<float>& buffer, float scale) {
     
     
     float af = 0;
+    float aSum = 0; //sum of all amplitudes
 	for (int i = 0; i < n; i++) {
 		ofVertex(i, buffer[i]);
         af += i*buffer[i];
+        aSum += buffer[i];
 	}
     
 	ofEndShape();
 	ofPopMatrix();
     
     //calculate average frequency...
-    af = af/n;
+    af = af/aSum;
     af = af;
+    ofSetColor(100, 255, 255);
     string msg = "average frequency: " + ofToString(af);
     ofDrawBitmapString(msg, ofGetWidth() - 300, 20);
+    
+    //draw line for average...
+    ofDrawLine(af, 0, af, 100);
+    ofSetColor(255);
 }
