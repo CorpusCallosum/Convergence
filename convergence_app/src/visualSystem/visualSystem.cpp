@@ -381,8 +381,14 @@ void visualSystem::drawAudio(){
     ofPushStyle();
     ofPushMatrix();
     
+    //define colors
+   // ofColor colorA, colorB, colorX;
+    //colorA.set(0, 0, 255);
+    //colorB.set(0, 255, 0);
+    
     float colorTween = averageFrequency/2;
-    ofSetColor(0, colorTween, 255-colorTween); //line color
+    int brightness = 100;
+    ofSetColor(0, colorTween+brightness, 255-colorTween+brightness); //line color
     ofSetLineWidth(3);
     
     ofBeginShape();

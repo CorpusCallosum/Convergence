@@ -9,7 +9,7 @@
 #include "fftAnalyzer.hpp"
 
 void fftAnalyzer::setup() {
-    cout<< "fftAnalyzer.setup" <<endl;
+   // cout<< "fftAnalyzer.setup" <<endl;
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
     fft.setup(16384);
@@ -17,13 +17,13 @@ void fftAnalyzer::setup() {
 }
 
 void fftAnalyzer::update() {
-    cout<< "fftAnalyzer.update" <<endl;
+   // cout<< "fftAnalyzer.update" <<endl;
     fft.update();
 }
 
 void fftAnalyzer::draw(int x, int y) {
     //ofBackground(0, 0, 0);
-    cout<< "fftAnalyzer.draw" <<endl;
+   // cout<< "fftAnalyzer.draw" <<endl;
     ofPushMatrix();
     ofTranslate(x, y);
     ofSetColor(255);
@@ -36,7 +36,7 @@ void fftAnalyzer::draw(int x, int y) {
 }
 
 void fftAnalyzer::plot(vector<float>& buffer, float scale) {
-    cout<< "fftAnalyzer.plot" <<endl;
+   // cout<< "fftAnalyzer.plot" <<endl;
     ofNoFill();
     int n = MIN(1024, buffer.size());
     ofDrawRectangle(0, 0, n, scale);
