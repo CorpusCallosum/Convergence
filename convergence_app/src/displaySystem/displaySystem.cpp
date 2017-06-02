@@ -105,7 +105,7 @@ void displaySystem::updateDisplay(ofFbo * frame){
         
         stripFBOs.at(i)->readToPixels(stripImages.at(i)->getPixels());
         
-        artnet.sendDmx(ip, subnet, universe, stripImages.at(i)->getPixels().getData(), numChannels);
+        artnet.sendDmx("192.168.0.50", subnet, universe, stripImages.at(i)->getPixels().getData(), numChannels);
         
         //second half
       /*  stripFBOs2.at(i)->begin();

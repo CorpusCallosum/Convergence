@@ -25,7 +25,7 @@ void ofApp::setup(){
     vs.rodMargins = rodMargins;
     
     ds.init(visualSystemWidth, visualSystemHeight, numRods, rodSpacing, rodMargins);
-    gui.setup(visualSystemWidth+300);
+    gui.setup(visualSystemWidth+10);
     serialReceiver.setup(0, numRods, rodSpacing);
     
    // ds.loadTestImage("test.png");
@@ -88,7 +88,7 @@ void ofApp::draw(){
     int margin = 15;
     int yOffset = 15;
     
-    ofDrawBitmapString("CAP TOUCH READINGS", visualSystemWidth+margin, yOffset);
+   /* ofDrawBitmapString("CAP TOUCH READINGS", visualSystemWidth+margin, yOffset);
     yOffset+=15;
     ofDrawBitmapString("rod#", visualSystemWidth+margin, yOffset);
     ofDrawBitmapString("diff", visualSystemWidth+margin+colWidth*1, yOffset);
@@ -121,12 +121,8 @@ void ofApp::draw(){
         
         //baseline
         ofDrawBitmapString(serialReceiver.averages[i], visualSystemWidth+margin+colWidth*4, yPos);
-        
-        
-        
-      
-
-    }
+    
+    }*/
 
 }
 

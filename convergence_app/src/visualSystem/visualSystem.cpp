@@ -17,7 +17,8 @@ void visualSystem::init(int w, int h, int kParticles){
     height=h;
     particleBrightnessShift = 10;
     pCounter = 0;
-    midline =  1.828 * 60; //6' from the top
+   // midline =  1.828 * 60; //6' from the top
+    midline = 0;
     particleEmitterCounter = 0;
     maskX = 0;
     showPixelBar = false;
@@ -93,7 +94,7 @@ void visualSystem::init(int w, int h, int kParticles){
     //audio stuff
     ofSetVerticalSync(true);
     ofSetCircleResolution(80);
-    ofBackground(54, 54, 54);
+    ofBackground(0, 0, 0);
     
     // 0 output channels,
     // 2 input channels
@@ -151,12 +152,10 @@ void visualSystem::update(float touched[36]){
     ofFill();
     
     //fade out BG by drawing a rectangle
-    int brightness = 30;
+    int brightness = 0; //bg color
     ofSetColor(brightness, brightness, brightness, fadeAmt);
     ofDrawRectangle( 0, 0, width,height);
     
-    drawAudio();
-
     //PARTICLE SYSTEM DRAWING STARTS HERE
 	ofSetColor(lineOpacity, lineOpacity, lineOpacity, 255);
 	particleSystem.setupForces();
@@ -198,16 +197,16 @@ void visualSystem::update(float touched[36]){
         //apply noise field force to the particle
         pos.set(cur.x,cur.y);
         ofVec2f fieldForce = getField(pos);
-        if(cur.y > midline){
+        //if(cur.y > midline){
             fieldForce.y *= -1;
             //make it white again?
             ofColor white;
-            int brightness = 255;
+            int brightness = 10 + round(cur.yv);
             white.r = brightness;
             white.g = brightness;
             white.b = brightness;
             cur.setColor(white);
-        }
+        /*}
         else {
             if(cur.prevY > midline){
                 //change particle color if previous y position was below midline only
@@ -215,36 +214,20 @@ void visualSystem::update(float touched[36]){
                 //cur.setColor(currentColor.getCurrentColorFromImage(cur.x/width));
             }
             numAbove++;
-        }
+        }*/
         
         //cout<<"num above: "<<numAbove<<endl;
         
         cur.applyForce(fieldForce);
 
         //move particles back down when top overflows
-        if(lastNumAbove > particleSystem.size()/2){
+       /* if(lastNumAbove > particleSystem.size()/2){
             if(cur.y <= 1){
-                //remove a particle
-                /* particleSystem.erase(0);
-                 
-                 //This method creates a new particle
-                 Particle particle(0,0); //CREATE NEW PARTICLE
-                 
-                 ofColor white;
-                 particle.setColor(white);
-                 particle.x = ofRandom(width);
-                 particle.y = height;
-                 particleSystem.add(particle);*/
-                
+     
                 cur.y = height;
             }
-        }
+        }*/
         
-        //remove particles?
-       /* if(particleSystem.size()>kParticles*1024)
-          if(cur.y==0)
-              cur.remove = true;
-        */
         
         if(mixColor){
         //particle color mix!
@@ -270,6 +253,15 @@ void visualSystem::update(float touched[36]){
     lastNumAbove = numAbove;
     
 	glEnd();
+    
+    //apply audio forces tp particles
+    for (unsigned int i = 0; i < left.size(); i++){
+        int x = i*2;
+        int y = left[i]*180.0f;
+        //ofVertex(x, y);
+        //add forces
+         particleSystem.addRepulsionForce(x, 0, 50, y);
+    }
 	
 	particleSystem.update();
     
@@ -296,6 +288,8 @@ void visualSystem::update(float touched[36]){
         ofSetColor(0);
         ofDrawRectangle( maskX, maskHeight, width, 1);
     }
+    
+    drawAudio();
     
     display->end();
 
@@ -380,88 +374,33 @@ void visualSystem::movePixelBar(int dir){
 //SOUND STUFF
 void visualSystem::drawAudio(){
     //DRAW sound stuff
-    ofSetColor(225);
-    
-    ofNoFill();
+    ofFill();
     
     // draw the left channel:
     ofPushStyle();
     ofPushMatrix();
-    ofTranslate(0, 0, 0);
     
-    ofSetColor(225);
-    
-    ofSetLineWidth(1);
-    ofDrawRectangle(0, 0, 512, 200);
-    
-    ofSetColor(245, 58, 135);
+    ofSetColor(0, 255, 0); //pink line
     ofSetLineWidth(3);
     
     ofBeginShape();
+    
+    //DRAW THE AUDIO WAVE
+    ofVertex(0, 0);
     for (unsigned int i = 0; i < left.size(); i++){
-        ofVertex(i*2, 10 -left[i]*180.0f);
+        int x = i*2;
+        int y = left[i]*180.0f;
+        ofVertex(x, y);
+        //add forces
+       // particleSystem.addRepulsionForce(x, 0, 5, y);
     }
+    ofVertex(left.size()*2, 0);
+    
     ofEndShape(false);
     
     ofPopMatrix();
     ofPopStyle();
     
-    // draw the right channel:
-    /*ofPushStyle();
-    ofPushMatrix();
-    ofTranslate(32, 370, 0);
-    
-    ofSetColor(225);
-    ofDrawBitmapString("Right Channel", 4, 18);
-    
-    ofSetLineWidth(1);
-    ofDrawRectangle(0, 0, 512, 200);
-    
-    ofSetColor(245, 58, 135);
-    ofSetLineWidth(3);
-    
-    ofBeginShape();
-    for (unsigned int i = 0; i < right.size(); i++){
-        ofVertex(i*2, 100 -right[i]*180.0f);
-    }
-    ofEndShape(false);
-    
-    ofPopMatrix();
-    ofPopStyle();
-    
-    // draw the average volume:
-    ofPushStyle();
-    ofPushMatrix();
-    ofTranslate(565, 170, 0);
-    
-    ofSetColor(225);
-    ofDrawBitmapString("Scaled average vol (0-100): " + ofToString(scaledVol * 100.0, 0), 4, 18);
-    ofDrawRectangle(0, 0, 400, 400);
-    
-    ofSetColor(245, 58, 135);
-    ofFill();
-    ofDrawCircle(200, 200, scaledVol * 190.0f);
-    
-    //lets draw the volume history as a graph
-    ofBeginShape();
-    for (unsigned int i = 0; i < volHistory.size(); i++){
-        if( i == 0 ) ofVertex(i, 400);
-        
-        ofVertex(i, 400 - volHistory[i] * 70);
-        
-        if( i == volHistory.size() -1 ) ofVertex(i, 400);
-    }
-    ofEndShape(false);
-    
-    ofPopMatrix();
-    ofPopStyle();
-    
-    drawCounter++;
-    
-    ofSetColor(225);
-    string reportString = "buffers received: "+ofToString(bufferCounter)+"\ndraw routines called: "+ofToString(drawCounter)+"\nticks: " + ofToString(soundStream.getTickCount());
-    ofDrawBitmapString(reportString, 32, 589);*/
-    //****************************
 
 }
 //--------------------------------------------------------------

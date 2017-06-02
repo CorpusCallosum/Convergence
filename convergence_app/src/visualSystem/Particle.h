@@ -42,32 +42,33 @@ public:
     //when particle reaches edge of particle field, loop is around to the other side
     void loopAround(float left, float top, float right, float bottom, float bounce = .3) {
         
-        bool rando = false;
+       // bool rando = false;
         
 		if (x > right){
-            xv *= -bounce;
-			x = right-1;
+           // xv *= -bounce;
+			x = left;
             
-            rando = true;
+           // rando = true;
             
 		} else if (x < left){
-			x = left+1;
-            xv *= -bounce;
-            rando = true;
+			x = right;
+            //xv *= -bounce;
+            //rando = true;
 		}
         
 		if (y > bottom){
             //BOTTOM
             y=bottom;
-            yv *= -.9;
-            rando = true;
+            y = top;
+            //yv *= -.9;
+          //  rando = true;
 		} else if (y < top){
             //TOP
             //loop around
 			y = top+1;
             //bounce off top?
             yv *= -bounce;
-            rando = true;
+            //rando = true;
             
            /* if(ofGetFrameRate()<30)
                 remove = true;*/
@@ -75,10 +76,10 @@ public:
             //delete this;
 		}
         
-        if(rando){
+       // if(rando){
           //  x = ofRandom(right);
            // y = ofRandom(bottom);
-        }
+        //}
         
 	}
     
