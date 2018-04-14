@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4621B9AF-E8D2-4FED-9CF6-C7E8F9FA3CCC</string>
+	<key>IDESourceControlProjectName</key>
+	<string>convergence_app</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FB7385A568A092EDB8FBF061C1757D666DEF5231</key>
+		<string>https://github.com/CorpusCallosum/flamp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>convergence_app/convergence_app.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FB7385A568A092EDB8FBF061C1757D666DEF5231</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/CorpusCallosum/flamp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FB7385A568A092EDB8FBF061C1757D666DEF5231</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FB7385A568A092EDB8FBF061C1757D666DEF5231</string>
+			<key>IDESourceControlWCCName</key>
+			<string>flamp</string>
+		</dict>
+	</array>
+</dict>
+</plist>

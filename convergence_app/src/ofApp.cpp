@@ -10,7 +10,7 @@ void ofApp::setup(){
     //maskHeight = 0;
     
     //calculate rodspacing
-    visualSystemWidth = 256;
+    visualSystemWidth = 150;
     visualSystemHeight = 240;
     
     rodMargins = 10;
@@ -19,7 +19,7 @@ void ofApp::setup(){
     
     cout<<"rod spacing"<<rodSpacing<<endl;
     
-    vs.init(visualSystemWidth, visualSystemHeight, 5); //K particles
+    vs.init(visualSystemWidth, visualSystemHeight, 2); //K particles
     vs.numRods = numRods;
     vs.rodSpacing = rodSpacing;
     vs.rodMargins = rodMargins;
